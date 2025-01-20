@@ -2,7 +2,7 @@ const gameEngine = new GameEngine();
 
 const ASSET_MANAGER = new AssetManager();
 
-ASSET_MANAGER.queueDownload("./EmptyShop1.png")
+ASSET_MANAGER.queueDownload("./backgrounds/EmptyShop.png")
 
 ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");

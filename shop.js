@@ -8,6 +8,6 @@ class Shop {
 	};
 
 	draw(ctx) {
-		ctx.drawImage(ASSET_MANAGER.getAsset("./EmptyShop1.png"), 0, 0, ctx.canvas.width, ctx.canvas.height);
+		ctx.drawImage(ASSET_MANAGER.getAsset("./backgrounds/EmptyShop.png"), 0, 0, 672, 672);
 	};
 }

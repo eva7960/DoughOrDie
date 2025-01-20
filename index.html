@@ -1,5 +1,6 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8">
     <title>Game Project Title Goes Here</title>
@@ -8,33 +9,11 @@
     <script type="text/javascript" src="./timer.js"></script>
     <script type="text/javascript" src="./gameengine.js"></script>
     <script type="text/javascript" src="./util.js"></script>
-    <script type="text/javascript" src="shop.js"></script>
+    <script type="text/javascript" src="./animator.js"></script>
+    <script type="text/javascript" src="./shop.js"></script>
     <script type="text/javascript" src="./main.js"></script>
-
-    <style>
-        body, html {
-            margin: 0;
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-        }
-        canvas {
-            display: block;
-        }
-    </style>
 </head>
 <body>
-<canvas id="gameWorld" tabindex="0" autofocus></canvas>
-
-<script>
-    function resizeCanvas() {
-        const canvas = document.getElementById("gameWorld");
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-
-    window.addEventListener("resize", resizeCanvas);
-    window.addEventListener("load", resizeCanvas);
-</script>
+<canvas id="gameWorld" width="672" height="672" style="background: white; border: 1px solid black" tabindex="0" autofocus></canvas>
 </body>
 </html>
