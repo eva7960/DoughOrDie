@@ -6,13 +6,11 @@ class Player {
         this.spritesheet = ASSET_MANAGER.getAsset("./sprites/player.png")
 
         //player states
-        this.facing = 0; //0 = left, 1 = right
+        this.facing = 0; //0 = left, 1 = right. 2 = up, 3 = down
         this.state = 0; //0 = idle, 1 = walking
         this.dead = false;
 
         this.velocity = {x: 0, y: 0};
-
-        this.updateBB();
 
         //animations
         this.animations = [];
@@ -20,8 +18,15 @@ class Player {
 	};
 
 	loadAnimation() {
-	    for(var i = 0; i < )
-	}
+	    for(var i = 0; i < 2; i++) { //2 states
+	        this.animations.push([]);
+	        for(j = 0; 4; j++) { //4 directions
+	            this.animations[i].push([]);
+	        }
+	    }
+	    //idle + 4 sates
+	    this.animations[0][0] = new Animator(this.spritesheet, 210, 0, 16, 16, 1, 0.33, 14, false, true);
+	};
 
 
 	update() {
