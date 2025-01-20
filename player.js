@@ -25,6 +25,7 @@ class Player {
 	        }
 	    }
 	    //idle + 4 sates
+	    //
 	    this.animations[0][0] = new Animator(this.spritesheet, 210, 0, 16, 16, 1, 0.33, 14, false, true);
 	};
 
