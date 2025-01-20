@@ -1,13 +1,17 @@
 class Customer {
-	constructor() {
-
+	constructor(game) {
+		this.game = game;
+		this.animator = new this.animator(ASSET_MANAGER.getAsset("./sprites/customer1.png"));
+		this.speed = 50;
+		this.x = 0;
+		this.y = 0;
 	};
 
 	update() {
-
+		this.x += this.speed * this.game.clockTick;
 	};
 
 	draw(ctx) {
-		ctx.drawImage(ASSET_MANAGER.getAsset(shop.customers[0]), 0, 0, 672, 672);
+		this.animator.drawFrame(this.game.clockTick,ctx,this.x,this.y);
 	};
 }

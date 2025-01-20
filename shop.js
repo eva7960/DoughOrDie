@@ -1,6 +1,5 @@
 class Shop {
 	constructor() {
-	    const customers = new Array("./sprites/customer1.png");
 	};
 
 	update() {
