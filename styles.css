@@ -12,4 +12,13 @@ body {
     margin: 0 auto;
     marin-top: 20px;
     outline: 1 px solid #fff;
+
+    /* scales game container by 2x and then shifts it
+    down 50% of game container height*/
+    transform: scale(3.5) translateY(55%) translateX(35%);
+}
+
+/* evenly multiplies pixels so graphics are enhanced*/
+.game-container canvas {
+    image-render: pixelated;
 }
