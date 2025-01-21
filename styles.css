@@ -9,5 +9,8 @@ body {
     position: relative;
     width: 582px;
     height: 440px;
+    margin: 0 auto;
+    marin-top: 20px;
+    outline: 1 px solid #fff;
 
 }
