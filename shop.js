@@ -1,6 +1,5 @@
 class Shop {
 	constructor() {
-
 	};
 
 	update() {
