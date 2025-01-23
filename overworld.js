@@ -14,6 +14,19 @@ class Overworld {
         };
         background.src = "./backgrounds/EmptyShop.png";
 
+    //shadow sprite
+    const x = 5;
+    const y = 6;
+    const shadow = new Image();
+    shadow.onload = () => {
+        this.ctx.drawImage(
+            shadow, 0, 0,
+            32, 32,
+            x * 16 - 8,
+            y * 16 - 18,
+            32, 32)
+    };
+    shadow.src = "./sprites/shadow.png");
     //player sprite
         const x = 1;
         const y = 4;
