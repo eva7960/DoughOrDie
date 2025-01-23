@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="working on animating main character">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer.js" beforeDir="false" afterPath="$PROJECT_DIR$/customer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sceneManager.js" beforeDir="false" afterPath="$PROJECT_DIR$/sceneManager.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
-    </list>
+    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="merging with andrews code and working on animating" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,7 +118,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737489558965</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="merging with andrews code and working on animating">
+      <option name="closed" value="true" />
+      <created>1737660043159</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1737660043159</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -135,6 +136,7 @@
     <MESSAGE value="empty shop pic now takes up full screen." />
     <MESSAGE value="undid full screen so shop scales correctly" />
     <MESSAGE value="working on animating main character" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on animating main character" />
+    <MESSAGE value="merging with andrews code and working on animating" />
+    <option name="LAST_COMMIT_MESSAGE" value="merging with andrews code and working on animating" />
   </component>
 </project>
