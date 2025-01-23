@@ -1,9 +1,9 @@
 class Customer {
 	constructor() {
 		//this.game = game;
-		this.speed = 50;
-		this.x = 0;
-		this.y = 0;
+		//this.speed = 50;
+		//this.x = 0;
+		//this.y = 0;
 	};
 
 	update() {

@@ -12,6 +12,8 @@ ASSET_MANAGER.queueDownload("./backgrounds/over.png")
 ASSET_MANAGER.queueDownload("./sprites/cheese.png");
 // load in player sprite
 ASSET_MANAGER.queueDownload("./sprites/player.png");
+//load in customer
+ASSET_MANAGER.queueDownload("./sprites/customer1.png");
 
 ASSET_MANAGER.downloadAll(() => {
 	const canvas = document.getElementById("gameWorld");
@@ -23,6 +25,7 @@ ASSET_MANAGER.downloadAll(() => {
 
 	// start game on shop level 
     gameEngine.addEntity(new Shop());
+
 
 	gameEngine.start();
 });
