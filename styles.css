@@ -5,7 +5,7 @@ body {
     overflow: hidden;
 }
 
-.game-container {
+.game-container {  /*centers the game screen*/
     position: relative;
     width: 582px;
     height: 440px;

@@ -3,7 +3,8 @@ class SceneManager {
         this.game = game;
         this.game.camera = this;
         this.x = 0;
-        
+
+       // this.player = new Player(); creates the player in the game
         this.battle = false;
         this.gameOver = false;
 
@@ -31,7 +32,7 @@ class SceneManager {
             this.battle = true;
         } else {
             gameEngine.addEntity(new Shop());
-            //gameEngine.addEntity(new Player()); add the player back 
+            //gameEngine.addEntity(new Player()); add the player back
             this.battle = false;
         }
     };
