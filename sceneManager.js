@@ -36,7 +36,7 @@ class SceneManager {
         }
     };
 
-    finish() { //logic works, image not loading for some reason 
+    finish() { 
         this.gameOver = true;
         console.log("game over " + this.gameOver);
         this.clearEntities();
