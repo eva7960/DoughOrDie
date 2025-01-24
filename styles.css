@@ -1,3 +1,6 @@
+* {
+  box-sizing:border-box;
+}
 body {
     background: #f5c397;
     padding: 0;
@@ -8,13 +11,12 @@ body {
 .game-container {
     position: relative;
     width: 582px;
-    height: 440px;
+    height: 540px;
     margin: 0 auto;
-    marin-top: 20px;
     outline: 1 px solid #fff;
     /* scales game container by 2x and then shifts it
     down 50% of game container height*/
-    transform: scale(3.5) translateY(55%) translateX(35%);
+    transform: scale(3.5) translateY(50%) translateX(35%);
 }
 /* evenly multiplies pixels so graphics are enhanced*/
 .game-container canvas {
