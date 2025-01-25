@@ -4,17 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="made and started scene manager.">
-      <change afterPath="$PROJECT_DIR$/DirectionInput.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Person.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/GameObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Overworld.js" beforeDir="false" afterPath="$PROJECT_DIR$/Overworld.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OverworldMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/OverworldMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sprite.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sprite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-    </list>
+    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="fixed upper layer image for shop" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -181,7 +171,23 @@
       <option name="project" value="LOCAL" />
       <updated>1737789387516</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="player can move with WSAD!!!">
+      <option name="closed" value="true" />
+      <created>1737794526537</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1737794526537</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fixed upper layer image for shop">
+      <option name="closed" value="true" />
+      <created>1737795111041</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1737795111041</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -207,6 +213,8 @@
     <MESSAGE value="following tutorial, sprite and background are on canvas" />
     <MESSAGE value="working on getting sprite moving on screen" />
     <MESSAGE value="made and started scene manager." />
-    <option name="LAST_COMMIT_MESSAGE" value="made and started scene manager." />
+    <MESSAGE value="player can move with WSAD!!!" />
+    <MESSAGE value="fixed upper layer image for shop" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed upper layer image for shop" />
   </component>
 </project>
