@@ -1,14 +1,14 @@
 class Sprite {
   constructor(config) {
 
-    //Set up the image
+    //creates new image and loads
     this.image = new Image();
     this.image.src = config.src;
     this.image.onload = () => {
       this.isLoaded = true;
     }
 
-    //Shadow
+    //Creates and loads shadow
     this.shadow = new Image();
     this.useShadow = true; //config.useShadow || false
     if (this.useShadow) {
@@ -31,6 +31,7 @@ class Sprite {
     this.gameObject = config.gameObject;
   }
 
+  //draws image to screen
   draw(ctx) {
     const x = this.gameObject.x * 16 - 8;
     const y = this.gameObject.y * 16 - 18;
