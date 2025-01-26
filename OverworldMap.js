@@ -8,6 +8,7 @@ class OverworldMap {
 
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
+    this.isCutscenePlaying = false;
   }
 
   drawLowerImage(ctx, camera) {
@@ -25,8 +26,10 @@ class OverworldMap {
   }
 
   mountObjects() {
-    Object.values(this.gameObjects).forEach(o => {
-      o.mount(this);
+    Object.keys(this.gameObjects).forEach(key => {
+      let object = this.gameObjects[key];
+      object.id = key;
+      object.mount(this);
     })
   }
 
@@ -53,11 +56,17 @@ window.OverworldMaps = {
           x: utils.withGrid(5),
           y: utils.withGrid(5),
       }),
-      npc1: new Person({
-          x: utils.withGrid(7),
-          y: utils.withGrid(9),
-          src: "./sprites/customer1.png"
-      })
+      npc: new Person({
+          x: utils.withGrid(3),
+          y: utils.withGrid(6),
+          src: "./sprites/customer1.png",
+          behaviorLoop: [
+            {type: "walk", direction: "up"},
+            //{type: "stand", direction: "up", time: 800},
+            {type: "walk", direction: "right"},
+            {type: "walk", direction: "down"}
+          ]
+      }),
     },
     walls: {
       //side counter 
