@@ -23,15 +23,15 @@ class Overworld {
     })
 
       //Draw Lower layer
-      this.map.drawLowerImage(this.ctx, camera);
+      this.map.drawLowerImage(this.ctx); //REMEMBER TO ADD CAMERA BACK
 
       //Draw Game Objects
       Object.values(this.map.gameObjects).forEach(object => {
-        object.sprite.draw(this.ctx, camera);
+        object.sprite.draw(this.ctx); //REMEMBER TO ADD CAMERA BACK
       })
 
       //Draw Upper layer
-      this.map.drawUpperImage(this.ctx, camera);
+      this.map.drawUpperImage(this.ctx); //REMEMBER TO ADD CAMERA BACK
 
       requestAnimationFrame(() => {
         step();

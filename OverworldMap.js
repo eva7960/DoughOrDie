@@ -10,14 +10,15 @@ class OverworldMap {
     this.upperImage.src = config.upperSrc;
   }
 
-  drawLowerImage(ctx, camera) {
-    ctx.drawImage(this.lowerImage, utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y)
-
+  drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA
+    ctx.drawImage(this.lowerImage, 0,0)
+    // replace 0, 0 utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y
   }
 
-  drawUpperImage(ctx, camera) {
-    ctx.drawImage(this.upperImage, utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y)
+  drawUpperImage(ctx) { //REMEMBER TO ADD CAMERA
+    ctx.drawImage(this.upperImage, 0,0)
   }
+  // replace 0, 0 utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y
 
   isSpaceTaken(currentX, currentY, direction) {
     const {x,y} = utils.nextPosition(currentX,currentY,direction);
@@ -105,7 +106,8 @@ window.OverworldMaps = {
       [utils.asGridCoord(9,11)] : true,
       [utils.asGridCoord(10,11)] : true,
       [utils.asGridCoord(11,11)] : true,
-      //left wall 
+      //left wall
+      [utils.asGridCoord(-1,3)] : true,
       [utils.asGridCoord(-1,5)] : true, //hole in the wall so player can go behind counter for now
       [utils.asGridCoord(-1,6)] : true,
       [utils.asGridCoord(-1,7)] : true,
