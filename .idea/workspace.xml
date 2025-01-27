@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="player is behind counter, all collisions work, NPC is in front of register.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Overworld.js" beforeDir="false" afterPath="$PROJECT_DIR$/Overworld.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OverworldMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/OverworldMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sprite.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sprite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
-    </list>
+    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="got rid of camera so I can see and work on customer" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -219,7 +213,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737997920768</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="got rid of camera so I can see and work on customer">
+      <option name="closed" value="true" />
+      <created>1738019303145</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1738019303145</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -260,6 +262,7 @@
     <MESSAGE value="player can move with WSAD!!!" />
     <MESSAGE value="fixed upper layer image for shop" />
     <MESSAGE value="working on laptop now, corrected scale in style.css" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on laptop now, corrected scale in style.css" />
+    <MESSAGE value="got rid of camera so I can see and work on customer" />
+    <option name="LAST_COMMIT_MESSAGE" value="got rid of camera so I can see and work on customer" />
   </component>
 </project>
