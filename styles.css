@@ -13,7 +13,6 @@ body {
     width: 582px;
     height: 540px;
     margin: 0 auto;
-    outline: 5 px solid black;
     /* scales game container by 2x and then shifts it
     down 50% of game container height*/
     transform: scale(3.5) translateY(%) translateX(35%);
