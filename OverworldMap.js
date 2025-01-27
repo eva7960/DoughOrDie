@@ -55,6 +55,7 @@ window.OverworldMaps = {
           isPlayerControlled: true,
           x: utils.withGrid(5),
           y: utils.withGrid(5),
+          behaviorLoop: []
       }),
       npc: new Person({
           x: utils.withGrid(3),
