@@ -16,7 +16,7 @@ body {
     outline: 1 px solid #fff;
     /* scales game container by 2x and then shifts it
     down 50% of game container height*/
-    transform: scale(3) translateY(40%) translateX(35%);
+    transform: scale(3) translateY(30%) translateX(35%);
 }
 /* evenly multiplies pixels so graphics are enhanced*/
 .game-container canvas {

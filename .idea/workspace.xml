@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="fixed upper layer image for shop" />
+    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="working on laptop now, corrected scale in style.css">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OverworldMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/OverworldMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Sprite.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sprite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sceneManager.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,6 +43,9 @@
     &quot;accountId&quot;: &quot;debd78fd-0f6d-460b-8b04-b4182dafcbd9&quot;
   }
 }</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -202,7 +211,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737795111041</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="working on laptop now, corrected scale in style.css">
+      <option name="closed" value="true" />
+      <created>1737997920767</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1737997920768</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -230,6 +247,7 @@
     <MESSAGE value="made and started scene manager." />
     <MESSAGE value="player can move with WSAD!!!" />
     <MESSAGE value="fixed upper layer image for shop" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed upper layer image for shop" />
+    <MESSAGE value="working on laptop now, corrected scale in style.css" />
+    <option name="LAST_COMMIT_MESSAGE" value="working on laptop now, corrected scale in style.css" />
   </component>
 </project>
