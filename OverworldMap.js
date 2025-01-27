@@ -11,13 +11,13 @@ class OverworldMap {
     this.isCutscenePlaying = false;
   }
 
-  drawLowerImage(ctx, camera) {
-    ctx.drawImage(this.lowerImage, utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y)
+  drawLowerImage(ctx) {
+    ctx.drawImage(this.lowerImage, utils.withGrid(5), utils.withGrid(5))
 
   }
 
-  drawUpperImage(ctx, camera) {
-    ctx.drawImage(this.upperImage, utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y)
+  drawUpperImage(ctx) {
+    ctx.drawImage(this.upperImage, utils.withGrid(5), utils.withGrid(5))
   }
 
   isSpaceTaken(currentX, currentY, direction) {
@@ -63,7 +63,7 @@ window.OverworldMaps = {
           src: "./sprites/customer1.png",
           behaviorLoop: [
             {type: "walk", direction: "up"},
-            //{type: "stand", direction: "up", time: 800},
+            {type: "stand", direction: "up", time: 800},
             {type: "walk", direction: "right"},
             {type: "walk", direction: "down"}
           ]

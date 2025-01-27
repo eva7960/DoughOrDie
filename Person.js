@@ -30,7 +30,7 @@ class Person extends GameObject {
   startBehavior(state, behavior) {
     this.direction = behavior.direction;
 
-    if(behavior.type == "walk") {
+    if(behavior.type === "walk") {
     console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
     if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
       return;
@@ -57,7 +57,7 @@ class Person extends GameObject {
 
       if (this.movingProgressRemaining === 0) {
         utils.emitEvent("PersonWalkingComplete", {
-            whoId = this.id
+            whoId: this.id
         })
       }
     

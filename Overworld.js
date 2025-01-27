@@ -12,7 +12,7 @@ class Overworld {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       //make camera
-      const camera = this.map.gameObjects.hero;
+      //const camera = this.map.gameObjects.hero;
 
       //update objects relative to camera before drawing 
       Object.values(this.map.gameObjects).forEach(object => {
@@ -23,15 +23,15 @@ class Overworld {
     })
 
       //Draw Lower layer
-      this.map.drawLowerImage(this.ctx, camera);
+      this.map.drawLowerImage(this.ctx);
 
       //Draw Game Objects
       Object.values(this.map.gameObjects).forEach(object => {
-        object.sprite.draw(this.ctx, camera);
+        object.sprite.draw(this.ctx);
       })
 
       //Draw Upper layer
-      this.map.drawUpperImage(this.ctx, camera);
+      this.map.drawUpperImage(this.ctx);
 
       requestAnimationFrame(() => {
         step();
