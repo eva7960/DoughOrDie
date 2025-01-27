@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="fixed upper layer image for shop">
+    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="NPC WALLKKKKKKS!!!!">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/GameObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Overworld.js" beforeDir="false" afterPath="$PROJECT_DIR$/Overworld.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OverworldMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/OverworldMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Person.js" beforeDir="false" afterPath="$PROJECT_DIR$/Person.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Sprite.js" beforeDir="false" afterPath="$PROJECT_DIR$/Sprite.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -212,7 +207,23 @@
       <option name="project" value="LOCAL" />
       <updated>1737795111041</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="NPC WALLKKKKKKS!!!!">
+      <option name="closed" value="true" />
+      <created>1738020408189</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1738020408189</updated>
+    </task>
+    <task id="LOCAL-00016" summary="NPC WALLKKKKKKS!!!!">
+      <option name="closed" value="true" />
+      <created>1738020440126</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1738020440126</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,6 +254,7 @@
     <MESSAGE value="made and started scene manager." />
     <MESSAGE value="player can move with WSAD!!!" />
     <MESSAGE value="fixed upper layer image for shop" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed upper layer image for shop" />
+    <MESSAGE value="NPC WALLKKKKKKS!!!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="NPC WALLKKKKKKS!!!!" />
   </component>
 </project>

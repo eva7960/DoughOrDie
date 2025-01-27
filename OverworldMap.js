@@ -12,12 +12,12 @@ class OverworldMap {
   }
 
   drawLowerImage(ctx) {
-    ctx.drawImage(this.lowerImage, utils.withGrid(5), utils.withGrid(5))
+    ctx.drawImage(this.lowerImage,0,0)
 
   }
 
   drawUpperImage(ctx) {
-    ctx.drawImage(this.upperImage, utils.withGrid(5), utils.withGrid(5))
+    ctx.drawImage(this.upperImage,0,0)
   }
 
   isSpaceTaken(currentX, currentY, direction) {
@@ -53,13 +53,13 @@ window.OverworldMaps = {
     gameObjects: {
       hero: new Person({
           isPlayerControlled: true,
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
+          x: utils.withGrid(3),
+          y: utils.withGrid(3),
           behaviorLoop: []
       }),
       npc: new Person({
-          x: utils.withGrid(3),
-          y: utils.withGrid(6),
+          x: utils.withGrid(2),
+          y: utils.withGrid(7),
           src: "./sprites/customer1.png",
           behaviorLoop: [
             {type: "walk", direction: "up"},
