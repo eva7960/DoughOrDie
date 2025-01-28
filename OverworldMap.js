@@ -8,17 +8,17 @@ class OverworldMap {
 
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
-    this.isCutscenePlaying = false;
   }
 
-  drawLowerImage(ctx) {
-    ctx.drawImage(this.lowerImage,0,0)
-
+  drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA
+    ctx.drawImage(this.lowerImage, 0,0)
+    // replace 0, 0 utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y
   }
 
-  drawUpperImage(ctx) {
-    ctx.drawImage(this.upperImage,0,0)
+  drawUpperImage(ctx) { //REMEMBER TO ADD CAMERA
+    ctx.drawImage(this.upperImage, 0,0)
   }
+  // replace 0, 0 utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y
 
   isSpaceTaken(currentX, currentY, direction) {
     const {x,y} = utils.nextPosition(currentX,currentY,direction);
@@ -26,10 +26,8 @@ class OverworldMap {
   }
 
   mountObjects() {
-    Object.keys(this.gameObjects).forEach(key => {
-      let object = this.gameObjects[key];
-      object.id = key;
-      object.mount(this);
+    Object.values(this.gameObjects).forEach(o => {
+      o.mount(this);
     })
   }
 
@@ -54,22 +52,16 @@ window.OverworldMaps = {
       hero: new Person({
           isPlayerControlled: true,
           x: utils.withGrid(3),
-          y: utils.withGrid(3)
+          y: utils.withGrid(3),
       }),
-      npc: new Person({
-          x: utils.withGrid(3),
-          y: utils.withGrid(7),
-          src: "./sprites/customer1.png",
-          behaviorLoop: [
-            {type: "walk", direction: "up"},
-            {type: "stand", direction: "up", time: 800},
-            {type: "walk", direction: "right"},
-            {type: "walk", direction: "down"}
-          ]
-      }),
+      npc1: new Person({
+          x: utils.withGrid(2),
+          y: utils.withGrid(5),
+          src: "./sprites/customer1.png"
+      })
     },
     walls: {
-      //side counter
+      //side counter 
       [utils.asGridCoord(5,4)] : true,
       [utils.asGridCoord(5,3)] : true,
 
@@ -106,7 +98,7 @@ window.OverworldMaps = {
       //bottom middle wall
       [utils.asGridCoord(3,11)] : true,
 
-      //bottom right wall
+      //bottom right wall 
       [utils.asGridCoord(5,11)] : true,
       [utils.asGridCoord(6,11)] : true,
       [utils.asGridCoord(7,11)] : true,
@@ -123,7 +115,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(-1,9)] : true,
       [utils.asGridCoord(-1,10)] : true,
 
-      //wall behind counter
+      //wall behind counter 
       [utils.asGridCoord(5,2)] : true,
       [utils.asGridCoord(4,2)] : true,
       [utils.asGridCoord(3,2)] : true,

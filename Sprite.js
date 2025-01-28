@@ -71,9 +71,9 @@ class Sprite {
   }
 
 
-  draw(ctx) {
-    const x = this.gameObject.x - 8 + utils.withGrid(5);
-    const y = this.gameObject.y - 18 + utils.withGrid(5);
+  draw(ctx) { //REMEMBER TO ADD CAMERA BACK
+    const x = this.gameObject.x - 8; // + utils.withGrid(5) - camera.x
+    const y = this.gameObject.y - 18; //+ utils.withGrid(5) - camera.y
 
     this.isShadowLoaded && ctx.drawImage(this.shadow, x, y);
 

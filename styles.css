@@ -2,7 +2,7 @@
   box-sizing:border-box;
 }
 body {
-    background: #e6ca8a;
+    background: #f5c397;
     padding: 0;
     margin: 0;
     overflow: hidden;
@@ -10,14 +10,13 @@ body {
 
 .game-container {
     position: relative;
-    width: 194px;
-    height: 180px;
+    width: 352px;
+    height: 198px;
     margin: 0 auto;
-    outline: solid 1px #fff;
-
-    /* scales game container by 3x and then shifts it
+    outline: 1 px solid #fff;
+    /* scales game container by 2x and then shifts it
     down 50% of game container height*/
-    transform: scale(3) translateY(40%) translateX(5%);
+    transform: scale(3) translateY(50%) translateX(30%);
 }
 /* evenly multiplies pixels so graphics are enhanced*/
 .game-container canvas {
