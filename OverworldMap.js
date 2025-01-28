@@ -26,8 +26,10 @@ class OverworldMap {
   }
 
   mountObjects() {
-    Object.values(this.gameObjects).forEach(o => {
-      o.mount(this);
+    Object.keys(this.gameObjects).forEach(key => {
+      let object = this.gameObjects[key];
+      object.id = key;
+      object.mount(this);
     })
   }
 
@@ -51,13 +53,32 @@ window.OverworldMaps = {
     gameObjects: {
       hero: new Person({
           isPlayerControlled: true,
-          x: utils.withGrid(3),
+          x: utils.withGrid(0),
           y: utils.withGrid(3),
       }),
       npc1: new Person({
           x: utils.withGrid(2),
-          y: utils.withGrid(5),
-          src: "./sprites/customer1.png"
+          y: utils.withGrid(10),
+          src: "./sprites/customer1.png",
+          behaviorLoop:[
+              {type:"walk", direction:"up"},
+              {type:"walk", direction:"up"},
+              {type:"walk", direction:"up"},
+              {type:"walk", direction:"up"},
+              {type:"walk", direction:"up"},
+              {type:"stand",direction:"up",time:1000},
+              {type:"walk", direction:"right"},
+              {type:"walk", direction:"right"},
+              {type:"walk", direction:"down"},
+              {type:"walk", direction:"down"},
+              {type:"walk", direction:"down"},
+              {type:"walk", direction:"down"},
+              {type:"walk", direction:"down"},
+              {type:"walk", direction:"down"},
+              {type:"walk", direction:"down"},
+              {type:"walk", direction:"down"},
+
+          ]
       })
     },
     walls: {

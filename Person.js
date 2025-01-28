@@ -33,6 +33,9 @@ class Person extends GameObject {
     if(behavior.type === "walk") {
     console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
     if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+      behavior.retry && setTimeout(() => {
+          this.startBehavior(state, behavior)
+      },10)
       return;
     }
     state.map.moveWall(this.x, this.y, this.direction);
