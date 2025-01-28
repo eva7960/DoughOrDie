@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="Got the character to enter, walk up to counter, and then walk down! Making progress" />
+    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="Got the character to enter, walk up to counter, and then walk down! Making progress">
+      <change afterPath="$PROJECT_DIR$/KeyPressListener.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TextMessage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/styles/TextMessage.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DirectionInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/DirectionInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GameObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/GameObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Overworld.js" beforeDir="false" afterPath="$PROJECT_DIR$/Overworld.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OverworldEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/OverworldEvent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OverworldMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/OverworldMap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Person.js" beforeDir="false" afterPath="$PROJECT_DIR$/Person.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/styles.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +64,7 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Abby",
+    "git-widget-placeholder": "Eva",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/DoughOrDie",
@@ -64,6 +78,7 @@
       <recent name="C:\PizzaGame" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\DoughOrDie\styles" />
       <recent name="C:\DoughOrDie\backgrounds" />
     </key>
   </component>

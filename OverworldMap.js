@@ -1,6 +1,8 @@
 class OverworldMap {
   constructor(config) {
+    this.overworld = null;
     this.gameObjects = config.gameObjects;
+    this.cutsceneSpaces = config.cutsceneSpaces || {};
     this.walls = config.walls || {};
 
     this.lowerImage = new Image();
@@ -8,7 +10,8 @@ class OverworldMap {
 
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
-  }
+
+    this.isCutscenePlaying = false;
 
   drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
     ctx.drawImage(this.lowerImage, 0,0)
@@ -66,7 +69,7 @@ window.OverworldMaps = {
               {type:"walk", direction:"up"},
               {type:"walk", direction:"up"},
               {type:"walk", direction:"up"},
-              {type:"stand",direction:"up",time:1000},
+              {type:"textMessage", text:"hello"},
               {type:"walk", direction:"right"},
               {type:"walk", direction:"right"},
               {type:"walk", direction:"down"},
@@ -77,7 +80,7 @@ window.OverworldMaps = {
               {type:"walk", direction:"down"},
               {type:"walk", direction:"down"},
               {type:"walk", direction:"down"},
-
+              {type:"stand",direction: "up"},
           ]
       })
     },
