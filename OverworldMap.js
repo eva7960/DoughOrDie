@@ -10,7 +10,7 @@ class OverworldMap {
     this.upperImage.src = config.upperSrc;
   }
 
-  drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA
+  drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
     ctx.drawImage(this.lowerImage, 0,0)
     // replace 0, 0 utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y
   }
