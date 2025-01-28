@@ -54,11 +54,10 @@ window.OverworldMaps = {
       hero: new Person({
           isPlayerControlled: true,
           x: utils.withGrid(3),
-          y: utils.withGrid(3),
-          behaviorLoop: []
+          y: utils.withGrid(3)
       }),
       npc: new Person({
-          x: utils.withGrid(2),
+          x: utils.withGrid(3),
           y: utils.withGrid(7),
           src: "./sprites/customer1.png",
           behaviorLoop: [
@@ -70,15 +69,17 @@ window.OverworldMaps = {
       }),
     },
     walls: {
-      //side counter 
+      //side counter
       [utils.asGridCoord(5,4)] : true,
       [utils.asGridCoord(5,3)] : true,
+
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,
       [utils.asGridCoord(2,4)] : true,
       [utils.asGridCoord(3,4)] : true,
       [utils.asGridCoord(4,4)] : true,
+
       //back wall
       [utils.asGridCoord(6,2)] : true,
       [utils.asGridCoord(7,2)] : true,
@@ -87,6 +88,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(10,2)] : true,
       [utils.asGridCoord(11,2)] : true,
       [utils.asGridCoord(12,2)] : true,
+
       //right edge
       [utils.asGridCoord(12,3)] : true,
       [utils.asGridCoord(12,4)] : true,
@@ -96,12 +98,15 @@ window.OverworldMaps = {
       [utils.asGridCoord(12,8)] : true,
       [utils.asGridCoord(12,9)] : true,
       [utils.asGridCoord(12,10)] : true,
+
       //bottom left walls
       [utils.asGridCoord(0,11)] : true,
       [utils.asGridCoord(1,11)] : true,
+
       //bottom middle wall
       [utils.asGridCoord(3,11)] : true,
-      //bottom right wall 
+
+      //bottom right wall
       [utils.asGridCoord(5,11)] : true,
       [utils.asGridCoord(6,11)] : true,
       [utils.asGridCoord(7,11)] : true,
@@ -109,14 +114,16 @@ window.OverworldMaps = {
       [utils.asGridCoord(9,11)] : true,
       [utils.asGridCoord(10,11)] : true,
       [utils.asGridCoord(11,11)] : true,
-      //left wall 
-      //[utils.asGridCoord(-1,5)] : true, hole in the wall so player can go behind counter for now 
+      //left wall
+      [utils.asGridCoord(-1,3)] : true,
+      [utils.asGridCoord(-1,5)] : true, //hole in the wall so player can go behind counter for now
       [utils.asGridCoord(-1,6)] : true,
       [utils.asGridCoord(-1,7)] : true,
       [utils.asGridCoord(-1,8)] : true,
       [utils.asGridCoord(-1,9)] : true,
       [utils.asGridCoord(-1,10)] : true,
-      //wall behind counter 
+
+      //wall behind counter
       [utils.asGridCoord(5,2)] : true,
       [utils.asGridCoord(4,2)] : true,
       [utils.asGridCoord(3,2)] : true,

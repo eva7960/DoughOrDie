@@ -16,12 +16,11 @@ class GameObject {
   }
 
   mount(map) {
-    console.log("mounting");
     this.isMounted = true;
     map.addWall(this.x, this.y);
 
     setTimeout(() => {
-        this.doBehaviorEvent(map);
+        this.doBehaviorEvent(map).then(r => {});
     }, 10)
   }
 
@@ -44,7 +43,7 @@ class GameObject {
         this.behaviorLoopIndex = 0;
     }
 
-    this.doBehaviorEvent(map);
+    await this.doBehaviorEvent(map);
   }
 
 }
