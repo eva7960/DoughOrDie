@@ -8,6 +8,8 @@ class OverworldMap {
 
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
+
+    this.isCutScenePlaying = false; 
   }
 
   drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
@@ -33,6 +35,21 @@ class OverworldMap {
     })
   }
 
+  async startCutScene(events) {
+    this.isCutScenePlaying = true;
+    for (let i = 0; i < events.length; i++) {
+      const eventHandler = new OverworldEvent({
+        event: events[i],
+        map: this,
+      })
+      await eventHandler.init();
+    }
+    this.isCutScenePlaying = false; 
+
+    //cutscene done NPC go back to idle 
+    Object.value(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
+  }
+
   addWall(x,y) {
     this.walls[`${x},${y}`] = true;
   }
@@ -53,32 +70,31 @@ window.OverworldMaps = {
     gameObjects: {
       hero: new Person({
           isPlayerControlled: true,
-          x: utils.withGrid(0),
-          y: utils.withGrid(3),
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
       }),
       npc1: new Person({
           x: utils.withGrid(2),
           y: utils.withGrid(10),
           src: "./sprites/customer1.png",
-          behaviorLoop:[
-              {type:"walk", direction:"up"},
-              {type:"walk", direction:"up"},
-              {type:"walk", direction:"up"},
-              {type:"walk", direction:"up"},
-              {type:"walk", direction:"up"},
-              {type:"stand",direction:"up",time:1000},
-              {type:"walk", direction:"right"},
-              {type:"walk", direction:"right"},
-              {type:"walk", direction:"down"},
-              {type:"walk", direction:"down"},
-              {type:"walk", direction:"down"},
-              {type:"walk", direction:"down"},
-              {type:"walk", direction:"down"},
-              {type:"walk", direction:"down"},
-              {type:"walk", direction:"down"},
-              {type:"walk", direction:"down"},
-
-          ]
+          //behaviorLoop:[
+              //{type:"walk", direction:"up"},
+              //{type:"walk", direction:"up"},
+              //{type:"walk", direction:"up"},
+              //{type:"walk", direction:"up"},
+              //{type:"walk", direction:"up"},
+              //{type:"stand",direction:"up",time:1000},
+              //{type:"walk", direction:"right"},
+              //{type:"walk", direction:"right"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+          //]
       })
     },
     walls: {

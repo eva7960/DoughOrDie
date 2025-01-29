@@ -48,5 +48,12 @@ class Overworld {
   this.directionInput.init();
 
   this.startGameLoop();
+  this.map.startCutScene([
+    {who: "npc1", type: "walk", direction: "up"},
+    {who: "npc1", type: "walk", direction: "up"},
+    {who: "npc1", type: "walk", direction: "up"},
+    {who: "npc1", type: "walk", direction: "up"},
+    {who: "npc1", type: "walk", direction: "up"},
+  ]);
  }
 }
