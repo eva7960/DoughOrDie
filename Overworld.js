@@ -40,20 +40,39 @@ class Overworld {
     step();
  }
 
+ bindActionInput() {
+  new KeyPressListener("Enter", () => {
+    this.map.checkForActionCutScene()
+  })
+ }
+
+  bindHeroPositionCheck() {
+    document.addEventListener("PersonWalkingComplete", e => {
+      if (e.detail.whoId == "hero") {
+        this.map.checkForFootstepCutscene();
+      }
+    })
+  }
+
  init() {
   this.map = new OverworldMap(window.OverworldMaps.Shop);
   this.map.mountObjects();
+
+  this.bindActionInput();
+  this.bindHeroPositionCheck();
 
   this.directionInput = new DirectionInput();
   this.directionInput.init();
 
   this.startGameLoop();
+
   this.map.startCutScene([
+    {type: "textMessage", text: "Get ready for your first day on the job!"},
     {who: "npc1", type: "walk", direction: "up"},
     {who: "npc1", type: "walk", direction: "up"},
     {who: "npc1", type: "walk", direction: "up"},
     {who: "npc1", type: "walk", direction: "up"},
     {who: "npc1", type: "walk", direction: "up"},
-  ]);
+  ])
  }
 }
