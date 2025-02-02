@@ -18,13 +18,7 @@ class Person extends GameObject {
     if (this.movingProgressRemaining > 0) {
       this.updatePosition();
     } else {
-
-      //More cases for starting to walk will come here
-      //
-      //
-
-      //Case: We're keyboard ready and have an arrow pressed
-      if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
+      if (!state.map.isCutScenePlaying && this.isPlayerControlled && state.arrow) {
         this.startBehavior(state, {
           type: "walk",
           direction: state.arrow
@@ -35,21 +29,16 @@ class Person extends GameObject {
   }
 
   startBehavior(state, behavior) {
-    //Set character direction to whatever behavior has
     this.direction = behavior.direction;
-    
-    if (behavior.type === "walk") {
-      //Stop here if space is not free
-      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
 
+    if(behavior.type === "walk") {
+      console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
+      if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
         behavior.retry && setTimeout(() => {
           this.startBehavior(state, behavior)
-        }, 10);
-
+        },10)
         return;
       }
-
-      //Ready to walk!
       state.map.moveWall(this.x, this.y, this.direction);
       this.movingProgressRemaining = 16;
       this.updateSprite(state);
@@ -68,17 +57,16 @@ class Person extends GameObject {
   }
 
   updatePosition() {
-      const [property, change] = this.directionUpdate[this.direction];
-      this[property] += change;
-      this.movingProgressRemaining -= 1;
+    const [property, change] = this.directionUpdate[this.direction];
+    this[property] += change;
+    this.movingProgressRemaining -= 1;
 
-      if (this.movingProgressRemaining === 0) {
-        //We finished the walk!
-        utils.emitEvent("PersonWalkingComplete", {
-          whoId: this.id
-        })
+    if (this.movingProgressRemaining === 0) {
+      utils.emitEvent("PersonWalkingComplete", {
+        whoId: this.id
+      })
+    }
 
-      }
   }
 
   updateSprite() {
@@ -86,7 +74,7 @@ class Person extends GameObject {
       this.sprite.setAnimation("walk-"+this.direction);
       return;
     }
-    this.sprite.setAnimation("idle-"+this.direction);    
+    this.sprite.setAnimation("idle-"+this.direction);
   }
 
 }
