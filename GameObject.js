@@ -12,15 +12,18 @@ class GameObject {
 
     this.behaviorLoop = config.behaviorLoop || [];
     this.behaviorLoopIndex = 0;
+    this.talking = config.talking || [];
 
   }
 
   mount(map) {
+    console.log("mounting!")
     this.isMounted = true;
     map.addWall(this.x, this.y);
 
+    //If we have a behavior, kick off after a short delay
     setTimeout(() => {
-        this.doBehaviorEvent(map).then(r => {});
+      this.doBehaviorEvent(map);
     }, 10)
   }
 
@@ -29,21 +32,31 @@ class GameObject {
 
   async doBehaviorEvent(map) {
 
-    if(map.isCutScenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
-        return;
+    //Don't do anything if there is a more important cutscene or I don't have config to do anything
+    //anyway.
+    if (map.isCutscenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
+      return;
     }
+
+    //Setting up our event with relevant info
     let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
     eventConfig.who = this.id;
 
-    const eventHandler = new OverworldEvent({map, event: eventConfig});
+    //Create an event instance out of our next event config
+    const eventHandler = new OverworldEvent({ map, event: eventConfig });
     await eventHandler.init();
 
+    //Setting the next event to fire
     this.behaviorLoopIndex += 1;
-    if(this.behaviorLoopIndex === this.behaviorLoop.length) {
-        this.behaviorLoopIndex = 0;
+    if (this.behaviorLoopIndex === this.behaviorLoop.length) {
+      this.behaviorLoopIndex = 0;
     }
 
-    await this.doBehaviorEvent(map);
+    //Do it again!
+    this.doBehaviorEvent(map);
+
+
   }
+
 
 }

@@ -3,6 +3,7 @@ class Person extends GameObject {
     super(config);
     this.movingProgressRemaining = 0;
     this.isStanding = false;
+
     this.isPlayerControlled = config.isPlayerControlled || false;
 
     this.directionUpdate = {
@@ -17,29 +18,40 @@ class Person extends GameObject {
     if (this.movingProgressRemaining > 0) {
       this.updatePosition();
     } else {
-      if (!state.map.isCutScenePlaying && this.isPlayerControlled && state.arrow) {
+
+      //More cases for starting to walk will come here
+      //
+      //
+
+      //Case: We're keyboard ready and have an arrow pressed
+      if (!state.map.isCutscenePlaying && this.isPlayerControlled && state.arrow) {
         this.startBehavior(state, {
           type: "walk",
           direction: state.arrow
         })
       }
-    this.updateSprite(state);
+      this.updateSprite(state);
     }
   }
 
   startBehavior(state, behavior) {
+    //Set character direction to whatever behavior has
     this.direction = behavior.direction;
 
-    if(behavior.type === "walk") {
-    console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
-    if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-      behavior.retry && setTimeout(() => {
+    if (behavior.type === "walk") {
+      //Stop here if space is not free
+      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+
+        behavior.retry && setTimeout(() => {
           this.startBehavior(state, behavior)
-      },10)
-      return;
-    }
-    state.map.moveWall(this.x, this.y, this.direction);
-    this.movingProgressRemaining = 16;
+        }, 10);
+
+        return;
+      }
+
+      //Ready to walk!
+      state.map.moveWall(this.x, this.y, this.direction);
+      this.movingProgressRemaining = 16;
       this.updateSprite(state);
     }
 
@@ -56,16 +68,17 @@ class Person extends GameObject {
   }
 
   updatePosition() {
-      const [property, change] = this.directionUpdate[this.direction];
-      this[property] += change;
-      this.movingProgressRemaining -= 1;
+    const [property, change] = this.directionUpdate[this.direction];
+    this[property] += change;
+    this.movingProgressRemaining -= 1;
 
-      if (this.movingProgressRemaining === 0) {
-        utils.emitEvent("PersonWalkingComplete", {
-            whoId: this.id
-        })
-      }
-    
+    if (this.movingProgressRemaining === 0) {
+      //We finished the walk!
+      utils.emitEvent("PersonWalkingComplete", {
+        whoId: this.id
+      })
+
+    }
   }
 
   updateSprite() {

@@ -49,6 +49,24 @@ class OverworldMap {
     //cutscene done NPC go back to idle 
     Object.value(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
   }
+  checkForActionCutscene() {
+    const hero = this.gameObjects["hero"];
+    const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
+    const match = Object.values(this.gameObjects).find(object => {
+      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
+    });
+    if (!this.isCutscenePlaying && match && match.talking.length) {
+      this.startCutscene(match.talking[0].events)
+    }
+  }
+
+  checkForFootstepCutscene() {
+    const hero = this.gameObjects["hero"];
+    const match = this.cutsceneSpaces[ `${hero.x},${hero.y}` ];
+    if (!this.isCutscenePlaying && match) {
+      this.startCutscene( match[0].events )
+    }
+  }
 
   addWall(x,y) {
     this.walls[`${x},${y}`] = true;
@@ -158,20 +176,25 @@ window.OverworldMaps = {
       [utils.asGridCoord(3,2)] : true,
       [utils.asGridCoord(2,2)] : true,
       [utils.asGridCoord(1,2)] : true,
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(0,2)]: [
+        {
+          events: [
+            { type: "changeMap", map: "Outside" }
+          ]
+        }
+      ]
     }
   },
   Outside: {
     lowerSrc: "./backgrounds/grass.png",
-    upperSrc: "./backgrounds/grass.png",
+    upperSrc: "./backgrounds/hall.png",
     gameObjects: {
-      hero: new GameObject({
-        x: 3,
-        y: 5,
-      }),
-      cheese: new GameObject({
-          x: 7,
-          y: 9,
-          src: "./sprites/cheese.png"
+      hero: new Person({
+        isPlayerControlled: true,
+        x: utils.withGrid(1),
+        y: utils.withGrid(3),
       })
     }
   },
