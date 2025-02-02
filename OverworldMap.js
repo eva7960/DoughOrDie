@@ -129,25 +129,70 @@ window.OverworldMaps = {
       }),
     },
     walls: {
-      [utils.asGridCoord(7,6)] : true,
-      [utils.asGridCoord(8,6)] : true,
-      [utils.asGridCoord(7,7)] : true,
-      [utils.asGridCoord(8,7)] : true,
-    },
+      //side counter
+      [utils.asGridCoord(5,4)] : true,
+      [utils.asGridCoord(5,3)] : true,
+
+      //front counter
+      [utils.asGridCoord(0,4)] : true,
+      [utils.asGridCoord(1,4)] : true,
+      [utils.asGridCoord(2,4)] : true,
+      [utils.asGridCoord(3,4)] : true,
+      [utils.asGridCoord(4,4)] : true,
+
+      //back wall
+      [utils.asGridCoord(6,2)] : true,
+      [utils.asGridCoord(7,2)] : true,
+      [utils.asGridCoord(8,2)] : true,
+      [utils.asGridCoord(9,2)] : true,
+      [utils.asGridCoord(10,2)] : true,
+      [utils.asGridCoord(11,2)] : true,
+      [utils.asGridCoord(12,2)] : true,
+
+      //right edge
+      [utils.asGridCoord(12,3)] : true,
+      [utils.asGridCoord(12,4)] : true,
+      [utils.asGridCoord(12,5)] : true,
+      [utils.asGridCoord(12,6)] : true,
+      [utils.asGridCoord(12,7)] : true,
+      [utils.asGridCoord(12,8)] : true,
+      [utils.asGridCoord(12,9)] : true,
+      [utils.asGridCoord(12,10)] : true,
+
+      //bottom left walls
+      [utils.asGridCoord(0,11)] : true,
+      [utils.asGridCoord(1,11)] : true,
+
+      //bottom middle wall
+      [utils.asGridCoord(3,11)] : true,
+
+      //bottom right wall
+      [utils.asGridCoord(5,11)] : true,
+      [utils.asGridCoord(6,11)] : true,
+      [utils.asGridCoord(7,11)] : true,
+      [utils.asGridCoord(8,11)] : true,
+      [utils.asGridCoord(9,11)] : true,
+      [utils.asGridCoord(10,11)] : true,
+      [utils.asGridCoord(11,11)] : true,
+      //left wall
+      [utils.asGridCoord(-1,3)] : true,
+      [utils.asGridCoord(-1,5)] : true, //hole in the wall so player can go behind counter for now
+      [utils.asGridCoord(-1,6)] : true,
+      [utils.asGridCoord(-1,7)] : true,
+      [utils.asGridCoord(-1,8)] : true,
+      [utils.asGridCoord(-1,9)] : true,
+      [utils.asGridCoord(-1,10)] : true,
+
+      //wall behind counter
+      [utils.asGridCoord(5,2)] : true,
+      [utils.asGridCoord(4,2)] : true,
+      [utils.asGridCoord(3,2)] : true,
+      [utils.asGridCoord(2,2)] : true,
+      [utils.asGridCoord(1,2)] : true,
+
+  },
     cutsceneSpaces: {
-      [utils.asGridCoord(7,4)]: [
-        {
-          events: [
-            { who: "npcB", type: "walk",  direction: "left" },
-            { who: "npcB", type: "stand",  direction: "up", time: 500 },
-            { type: "textMessage", text:"You can't be in there!"},
-            { who: "npcB", type: "walk",  direction: "right" },
-            { who: "hero", type: "walk",  direction: "down" },
-            { who: "hero", type: "walk",  direction: "left" },
-          ]
-        }
-      ],
-      [utils.asGridCoord(5,10)]: [
+      [utils.asGridCoord(0,2)]: [
         {
           events: [
             { type: "changeMap", map: "Kitchen" }
@@ -158,8 +203,8 @@ window.OverworldMaps = {
     
   },
   Kitchen: {
-    lowerSrc: "/images/maps/KitchenLower.png",
-    upperSrc: "/images/maps/KitchenUpper.png",
+    lowerSrc: "/backgrounds/grass.png",
+    upperSrc: "/backgrounds/hall.png",
     gameObjects: {
       hero: new Person({
         isPlayerControlled: true,
