@@ -1,6 +1,8 @@
 class OverworldMap {
   constructor(config) {
+    this.overworld = null;
     this.gameObjects = config.gameObjects;
+    this.cutsceneSpaces = config.cutsceneSpaces || {};
     this.walls = config.walls || {};
 
     this.lowerImage = new Image();
@@ -9,46 +11,59 @@ class OverworldMap {
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
 
-    this.isCutScenePlaying = false; 
+    this.isCutscenePlaying = false;
   }
 
-  drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
-    ctx.drawImage(this.lowerImage, 0,0)
-    // replace 0, 0 utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y
+  drawLowerImage(ctx, cameraPerson) {
+    ctx.drawImage(
+        this.lowerImage,
+        utils.withGrid(10.5) - cameraPerson.x,
+        utils.withGrid(6) - cameraPerson.y
+    )
   }
 
-  drawUpperImage(ctx) { //REMEMBER TO ADD CAMERA
-    ctx.drawImage(this.upperImage, 0,0)
+  drawUpperImage(ctx, cameraPerson) {
+    ctx.drawImage(
+        this.upperImage,
+        utils.withGrid(10.5) - cameraPerson.x,
+        utils.withGrid(6) - cameraPerson.y
+    )
   }
-  // replace 0, 0 utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y
 
   isSpaceTaken(currentX, currentY, direction) {
-    const {x,y} = utils.nextPosition(currentX,currentY,direction);
+    const {x,y} = utils.nextPosition(currentX, currentY, direction);
     return this.walls[`${x},${y}`] || false;
   }
 
   mountObjects() {
     Object.keys(this.gameObjects).forEach(key => {
+
       let object = this.gameObjects[key];
       object.id = key;
+
+      //TODO: determine if this object should actually mount
       object.mount(this);
+
     })
   }
 
-  async startCutScene(events) {
-    this.isCutScenePlaying = true;
-    for (let i = 0; i < events.length; i++) {
+  async startCutscene(events) {
+    this.isCutscenePlaying = true;
+
+    for (let i=0; i<events.length; i++) {
       const eventHandler = new OverworldEvent({
         event: events[i],
         map: this,
       })
       await eventHandler.init();
     }
-    this.isCutScenePlaying = false; 
 
-    //cutscene done NPC go back to idle 
-    Object.value(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
+    this.isCutscenePlaying = false;
+
+    //Reset NPCs to do their idle behavior
+    Object.values(this.gameObjects).forEach(object => object.doBehaviorEvent(this))
   }
+
   checkForActionCutscene() {
     const hero = this.gameObjects["hero"];
     const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
@@ -71,52 +86,35 @@ class OverworldMap {
   addWall(x,y) {
     this.walls[`${x},${y}`] = true;
   }
-  deleteWall(x,y) {
-    this.walls[`${x},${y}`] = false;
+  removeWall(x,y) {
+    delete this.walls[`${x},${y}`]
   }
-  moveWall(oldX, oldY, direction) {
-    this.deleteWall(oldX, oldY);
-    const {x,y} = utils.nextPosition(oldX, oldY, direction);
-    this.addWall(x,y)
+  moveWall(wasX, wasY, direction) {
+    this.removeWall(wasX, wasY);
+    const {x,y} = utils.nextPosition(wasX, wasY, direction);
+    this.addWall(x,y);
   }
+
 }
 
 window.OverworldMaps = {
-  Shop: {
-    lowerSrc: "./backgrounds/shop.png",
-    upperSrc: "./backgrounds/hall.png",
+  DemoRoom: {
+    lowerSrc: "/backgrounds/shop.png",
+    upperSrc: "/backgrounds/hall.png",
     gameObjects: {
       hero: new Person({
-          isPlayerControlled: true,
-          x: utils.withGrid(1),
-          y: utils.withGrid(3),
+        isPlayerControlled: true,
+        x: utils.withGrid(1),
+        y: utils.withGrid(3),
       }),
-      npc1: new Person({
-          x: utils.withGrid(2),
-          y: utils.withGrid(10),
-          src: "./sprites/customer1.png",
-          //behaviorLoop:[
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"stand",direction:"up",time:1000},
-              //{type:"walk", direction:"right"},
-              //{type:"walk", direction:"right"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-          //]
+      npcA: new Person({
+        x: utils.withGrid(5),
+        y: utils.withGrid(5),
+        src: "/images/characters/people/npc1.png"
       })
     },
     walls: {
-      //side counter 
+      //side counter
       [utils.asGridCoord(5,4)] : true,
       [utils.asGridCoord(5,3)] : true,
 
@@ -153,7 +151,7 @@ window.OverworldMaps = {
       //bottom middle wall
       [utils.asGridCoord(3,11)] : true,
 
-      //bottom right wall 
+      //bottom right wall
       [utils.asGridCoord(5,11)] : true,
       [utils.asGridCoord(6,11)] : true,
       [utils.asGridCoord(7,11)] : true,
@@ -170,7 +168,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(-1,9)] : true,
       [utils.asGridCoord(-1,10)] : true,
 
-      //wall behind counter 
+      //wall behind counter
       [utils.asGridCoord(5,2)] : true,
       [utils.asGridCoord(4,2)] : true,
       [utils.asGridCoord(3,2)] : true,
@@ -181,20 +179,26 @@ window.OverworldMaps = {
       [utils.asGridCoord(0,2)]: [
         {
           events: [
-            { type: "changeMap", map: "Outside" }
+            { type: "changeMap", map: "Kitchen" }
           ]
         }
       ]
     }
+
   },
-  Outside: {
-    lowerSrc: "./backgrounds/grass.png",
-    upperSrc: "./backgrounds/hall.png",
+  Kitchen: {
+    lowerSrc: "/backgrounds/grass.png",
+    upperSrc: "/backgrounds/hall.png",
     gameObjects: {
       hero: new Person({
         isPlayerControlled: true,
-        x: utils.withGrid(1),
+        x: utils.withGrid(3),
         y: utils.withGrid(3),
+      }),
+      npcB: new Person({
+        x: utils.withGrid(5),
+        y: utils.withGrid(5),
+        src: "/images/characters/people/cheese.png",
       })
     }
   },

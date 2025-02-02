@@ -4,17 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="working on order">
+    <list default="true" id="161f4489-19c8-44d2-bc91-5a94c5ed3652" name="Changes" comment="code should work? trying to create transition to Outside screen">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GameObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/GameObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Overworld.js" beforeDir="false" afterPath="$PROJECT_DIR$/Overworld.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OverworldEvent.js" beforeDir="false" afterPath="$PROJECT_DIR$/OverworldEvent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OverworldMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/OverworldMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Person.js" beforeDir="false" afterPath="$PROJECT_DIR$/Person.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TextMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/TextMessage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/door.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/init.js" beforeDir="false" afterPath="$PROJECT_DIR$/init.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/utils.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,12 +33,12 @@
     &quot;assignee&quot;: &quot;eva7960&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/eva7960/DoughOrDie.git&quot;,
-    &quot;accountId&quot;: &quot;debd78fd-0f6d-460b-8b04-b4182dafcbd9&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/eva7960/DoughOrDie.git",
+    "accountId": "8351a446-b6fd-44bd-91ca-c18fccc7ffe2"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -99,6 +90,7 @@
       <option name="presentableId" value="Default" />
       <updated>1737008141102</updated>
       <workItem from="1738290245608" duration="1323000" />
+      <workItem from="1738473338522" duration="725000" />
     </task>
     <task id="LOCAL-00001" summary="adding assignment 1 files">
       <option name="closed" value="true" />
