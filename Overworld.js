@@ -40,26 +40,39 @@ class Overworld {
     step();
  }
 
+ bindActionInput() {
+  new KeyPressListener("Enter", () => {
+    this.map.checkForActionCutScene()
+  })
+ }
+
+  bindHeroPositionCheck() {
+    document.addEventListener("PersonWalkingComplete", e => {
+      if (e.detail.whoId == "hero") {
+        this.map.checkForFootstepCutscene();
+      }
+    })
+  }
+
  init() {
   this.map = new OverworldMap(window.OverworldMaps.Shop);
   this.map.mountObjects();
+
+  this.bindActionInput();
+  this.bindHeroPositionCheck();
 
   this.directionInput = new DirectionInput();
   this.directionInput.init();
 
   this.startGameLoop();
 
-   this.map.startCutscene([
-    {type: "textMessage", text: "HELLO"}
-    //   { who: "hero", type: "walk",  direction: "down" },
-    //   { who: "hero", type: "walk",  direction: "down" },
-    //   { who: "npcA", type: "walk",  direction: "up" },
-    //   { who: "npcA", type: "walk",  direction: "left" },
-    //   { who: "hero", type: "stand",  direction: "right", time: 200 },
-    //   { type: "textMessage", text: "WHY HELLO THERE!"}
-    //   // { who: "npcA", type: "walk",  direction: "left" },
-    //   // { who: "npcA", type: "walk",  direction: "left" },
-    //   // { who: "npcA", type: "stand",  direction: "up", time: 800 },
-    // ])
+  this.map.startCutScene([
+    {type: "textMessage", text: "Get ready for your first day on the job!"},
+    {who: "npc1", type: "walk", direction: "up"},
+    {who: "npc1", type: "walk", direction: "up"},
+    {who: "npc1", type: "walk", direction: "up"},
+    {who: "npc1", type: "walk", direction: "up"},
+    {who: "npc1", type: "walk", direction: "up"},
+  ])
  }
 }
