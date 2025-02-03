@@ -105,7 +105,7 @@ window.OverworldMaps = {
           x: utils.withGrid(2),
           y: utils.withGrid(10),
           src: "./sprites/customer1.png",
-          behaviorLoop:[
+          behaviorLoop: [
               //{type:"walk", direction:"up"},
               //{type:"walk", direction:"up"},
               //{type:"walk", direction:"up"},
@@ -236,12 +236,115 @@ window.OverworldMaps = {
         isPlayerControlled: true,
         x: utils.withGrid(5),
         y: utils.withGrid(5),
+        src: "./sprites/playerGun.png",
       }),
       cheese: new Person({
-          x: utils.withGrid(7),
+          x: utils.withGrid(2),
           y: utils.withGrid(9),
-          src: "./sprites/player.png"
+          src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
       }),
+      cheese1: new Person({
+        x: utils.withGrid(10),
+        y: utils.withGrid(6),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese2: new Person({
+        x: utils.withGrid(6),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese3: new Person({
+        x: utils.withGrid(9),
+        y: utils.withGrid(5),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese4: new Person({
+        x: utils.withGrid(1),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese5: new Person({
+        x: utils.withGrid(6),
+        y: utils.withGrid(7),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+    },
+    walls: {
+      //north wall
+      [utils.asGridCoord(1, -1)]: true,
+      [utils.asGridCoord(2, -1)]: true,
+      [utils.asGridCoord(3, -1)]: true,
+      [utils.asGridCoord(4, -1)]: true,
+      [utils.asGridCoord(5, -1)]: true,
+      [utils.asGridCoord(6, -1)]: true,
+      [utils.asGridCoord(7, -1)]: true,
+      [utils.asGridCoord(8, -1)]: true,
+      [utils.asGridCoord(9, -1)]: true,
+      [utils.asGridCoord(10, -1)]: true,
+      [utils.asGridCoord(11, -1)]: true,
+      [utils.asGridCoord(12, -1)]: true,
+      [utils.asGridCoord(13, -1)]: true,
+      [utils.asGridCoord(14, -1)]: true,
+      [utils.asGridCoord(15, -1)]: true,
+
+      //east wall
+      [utils.asGridCoord(16, 0)]: true,
+      [utils.asGridCoord(16, 1)]: true,
+      [utils.asGridCoord(16, 2)]: true,
+      [utils.asGridCoord(16, 3)]: true,
+      [utils.asGridCoord(16, 4)]: true,
+      [utils.asGridCoord(16, 5)]: true,
+      [utils.asGridCoord(16, 6)]: true,
+      [utils.asGridCoord(16, 7)]: true,
+      [utils.asGridCoord(16, 8)]: true,
+      [utils.asGridCoord(16, 9)]: true,
+      [utils.asGridCoord(16, 10)]: true,
+      [utils.asGridCoord(16, 11)]: true,
+      [utils.asGridCoord(16, 12)]: true,
+      [utils.asGridCoord(16, 13)]: true,
+      [utils.asGridCoord(16, 14)]: true,
+
+      //south wall
+      [utils.asGridCoord(0, 13)]: true,
+      [utils.asGridCoord(1, 13)]: true,
+      [utils.asGridCoord(2, 13)]: true,
+      [utils.asGridCoord(3, 13)]: true,
+      [utils.asGridCoord(4, 13)]: true,
+      [utils.asGridCoord(5, 13)]: true,
+      [utils.asGridCoord(6, 13)]: true,
+      [utils.asGridCoord(7, 13)]: true,
+      [utils.asGridCoord(8, 13)]: true,
+      [utils.asGridCoord(9, 13)]: true,
+      [utils.asGridCoord(10, 13)]: true,
+      [utils.asGridCoord(11, 13)]: true,
+      [utils.asGridCoord(12, 13)]: true,
+      [utils.asGridCoord(13, 13)]: true,
+      [utils.asGridCoord(13, 13)]: true,
+      [utils.asGridCoord(15, 13)]: true,
+
+      //west wall
+      [utils.asGridCoord(-1, 0)]: true,
+      [utils.asGridCoord(-1, 1)]: true,
+      [utils.asGridCoord(-1, 2)]: true,
+      [utils.asGridCoord(-1, 3)]: true,
+      [utils.asGridCoord(-1, 4)]: true,
+      [utils.asGridCoord(-1, 5)]: true,
+      [utils.asGridCoord(-1, 6)]: true,
+      [utils.asGridCoord(-1, 7)]: true,
+      [utils.asGridCoord(-1, 8)]: true,
+      [utils.asGridCoord(-1, 9)]: true,
+      [utils.asGridCoord(-1, 10)]: true,
+      [utils.asGridCoord(-1, 11)]: true,
+      [utils.asGridCoord(-1, 12)]: true,
+      [utils.asGridCoord(-1, 13)]: true,
+      [utils.asGridCoord(-1, 14)]: true,
+
     },
     cutsceneSpaces: {
       [utils.asGridCoord(0,2)] : [
@@ -254,4 +357,17 @@ window.OverworldMaps = {
       ],
     }
   },
+}
+function generateRandomBehaviorLoop(steps) {
+  const directions = ["up", "down", "left", "right"];
+  let loop = [];
+
+  for (let i = 0; i < steps; i++) {
+    let randomDirection = directions[Math.floor(Math.random() * directions.length)];
+    loop.push({ type: "walk", direction: randomDirection });
+    loop.push({ type: "walk", direction: randomDirection });
+    loop.push({ type: "walk", direction: randomDirection });
+  }
+
+  return loop;
 }
