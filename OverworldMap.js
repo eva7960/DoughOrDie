@@ -240,7 +240,25 @@ window.OverworldMaps = {
       cheese: new Person({
           x: utils.withGrid(7),
           y: utils.withGrid(9),
-          src: "./sprites/player.png"
+          src: "./sprites/cheese.png",
+        behaviorLoop:[
+          {type:"walk", direction:"up"},
+          {type:"walk", direction:"up"},
+          {type:"walk", direction:"up"},
+          {type:"walk", direction:"up"},
+          {type:"walk", direction:"up"},
+          {type:"stand",direction:"up",time:1000},
+          {type:"walk", direction:"right"},
+          {type:"walk", direction:"right"},
+          {type:"walk", direction:"down"},
+          {type:"walk", direction:"down"},
+          {type:"walk", direction:"down"},
+          {type:"walk", direction:"down"},
+          {type:"walk", direction:"down"},
+          {type:"walk", direction:"down"},
+          {type:"walk", direction:"down"},
+          {type:"walk", direction:"down"},
+        ],
       }),
     },
     cutsceneSpaces: {
