@@ -154,7 +154,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(0,1)] : true,
       //side counter 
       [utils.asGridCoord(5,4)] : true,
-      //[utils.asGridCoord(5,3)] : true,
+      [utils.asGridCoord(5,3)] : true,
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,
