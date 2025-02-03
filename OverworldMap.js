@@ -105,7 +105,7 @@ window.OverworldMaps = {
           x: utils.withGrid(2),
           y: utils.withGrid(10),
           src: "./sprites/customer1.png",
-          behaviorLoop:[
+          behaviorLoop: [
               //{type:"walk", direction:"up"},
               //{type:"walk", direction:"up"},
               //{type:"walk", direction:"up"},
@@ -238,27 +238,34 @@ window.OverworldMaps = {
         y: utils.withGrid(5),
       }),
       cheese: new Person({
-          x: utils.withGrid(7),
+          x: utils.withGrid(2),
           y: utils.withGrid(9),
           src: "./sprites/cheese.png",
-        behaviorLoop:[
-          {type:"walk", direction:"up"},
-          {type:"walk", direction:"up"},
-          {type:"walk", direction:"up"},
-          {type:"walk", direction:"up"},
-          {type:"walk", direction:"up"},
-          {type:"stand",direction:"up",time:1000},
-          {type:"walk", direction:"right"},
-          {type:"walk", direction:"right"},
-          {type:"walk", direction:"down"},
-          {type:"walk", direction:"down"},
-          {type:"walk", direction:"down"},
-          {type:"walk", direction:"down"},
-          {type:"walk", direction:"down"},
-          {type:"walk", direction:"down"},
-          {type:"walk", direction:"down"},
-          {type:"walk", direction:"down"},
-        ],
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese1: new Person({
+        x: utils.withGrid(10),
+        y: utils.withGrid(6),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese2: new Person({
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese3: new Person({
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese4: new Person({
+        x: utils.withGrid(5),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
       }),
     },
     cutsceneSpaces: {
@@ -272,4 +279,17 @@ window.OverworldMaps = {
       ],
     }
   },
+}
+function generateRandomBehaviorLoop(steps) {
+  const directions = ["up", "down", "left", "right"];
+  let loop = [];
+
+  for (let i = 0; i < steps; i++) {
+    let randomDirection = directions[Math.floor(Math.random() * directions.length)];
+    loop.push({ type: "walk", direction: randomDirection });
+    loop.push({ type: "walk", direction: randomDirection });
+    loop.push({ type: "walk", direction: randomDirection });
+  }
+
+  return loop;
 }
