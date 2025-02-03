@@ -2,7 +2,7 @@ class Person extends GameObject {
   constructor(config) {
     super(config);
     this.movingProgressRemaining = 0;
-    this.isStanding = false;
+    this.isStanding = false; 
 
     this.isPlayerControlled = config.isPlayerControlled || false;
 
@@ -24,7 +24,7 @@ class Person extends GameObject {
           direction: state.arrow
         })
       }
-      this.updateSprite(state);
+    this.updateSprite(state);
     }
   }
 
@@ -32,15 +32,15 @@ class Person extends GameObject {
     this.direction = behavior.direction;
 
     if(behavior.type === "walk") {
-      console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
-      if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-        behavior.retry && setTimeout(() => {
+    console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
+    if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+      behavior.retry && setTimeout(() => {
           this.startBehavior(state, behavior)
-        },10)
-        return;
-      }
-      state.map.moveWall(this.x, this.y, this.direction);
-      this.movingProgressRemaining = 16;
+      },10)
+      return;
+    }
+    state.map.moveWall(this.x, this.y, this.direction);
+    this.movingProgressRemaining = 16;
       this.updateSprite(state);
     }
 
@@ -57,16 +57,16 @@ class Person extends GameObject {
   }
 
   updatePosition() {
-    const [property, change] = this.directionUpdate[this.direction];
-    this[property] += change;
-    this.movingProgressRemaining -= 1;
+      const [property, change] = this.directionUpdate[this.direction];
+      this[property] += change;
+      this.movingProgressRemaining -= 1;
 
-    if (this.movingProgressRemaining === 0) {
-      utils.emitEvent("PersonWalkingComplete", {
-        whoId: this.id
-      })
-    }
-
+      if (this.movingProgressRemaining === 0) {
+        utils.emitEvent("PersonWalkingComplete", {
+            whoId: this.id
+        })
+      }
+    
   }
 
   updateSprite() {

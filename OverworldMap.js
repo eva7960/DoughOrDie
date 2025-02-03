@@ -11,7 +11,7 @@ class OverworldMap {
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
 
-    this.isCutScenePlaying = false;
+    this.isCutScenePlaying = false; 
   }
 
   drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
@@ -46,7 +46,7 @@ class OverworldMap {
       })
       await eventHandler.init();
     }
-    this.isCutScenePlaying = false;
+    this.isCutScenePlaying = false; 
   }
 
   checkForActionCutScene() {
@@ -90,46 +90,46 @@ window.OverworldMaps = {
     upperSrc: "./backgrounds/hall.png",
     gameObjects: {
       hero: new Person({
-        isPlayerControlled: true,
-        //in shop
-        // x: utils.withGrid(5),
-        // y: utils.withGrid(5),
-        //behind counter
-        x: utils.withGrid(2),
-        y: utils.withGrid(3),
-        //door way
-        // x: utils.withGrid(0),
-        // y: utils.withGrid(2),
+          isPlayerControlled: true,
+             //in shop
+          // x: utils.withGrid(5),
+          // y: utils.withGrid(5),
+            //behind counter
+          x: utils.withGrid(2),
+          y: utils.withGrid(3),
+            //door way
+          // x: utils.withGrid(0),
+          // y: utils.withGrid(2),
       }),
       npc1: new Person({
-        x: utils.withGrid(2),
-        y: utils.withGrid(10),
-        src: "./sprites/customer1.png",
-        behaviorLoop:[
-          //{type:"walk", direction:"up"},
-          //{type:"walk", direction:"up"},
-          //{type:"walk", direction:"up"},
-          //{type:"walk", direction:"up"},
-          //{type:"walk", direction:"up"},
-          //{type:"stand",direction:"up",time:1000},
-          //{type:"walk", direction:"right"},
-          //{type:"walk", direction:"right"},
-          //{type:"walk", direction:"down"},
-          //{type:"walk", direction:"down"},
-          //{type:"walk", direction:"down"},
-          //{type:"walk", direction:"down"},
-          //{type:"walk", direction:"down"},
-          //{type:"walk", direction:"down"},
-          //{type:"walk", direction:"down"},
-          //{type:"walk", direction:"down"},
-        ],
-        talking: [
-          {
-            events : [
-              {type: "textMessage", text: "Hello, can I have a Cheese Pizza.", faceHero: "npc1"},
-            ]
-          },
-        ]
+          x: utils.withGrid(2),
+          y: utils.withGrid(10),
+          src: "./sprites/customer1.png",
+          behaviorLoop:[
+              //{type:"walk", direction:"up"},
+              //{type:"walk", direction:"up"},
+              //{type:"walk", direction:"up"},
+              //{type:"walk", direction:"up"},
+              //{type:"walk", direction:"up"},
+              //{type:"stand",direction:"up",time:1000},
+              //{type:"walk", direction:"right"},
+              //{type:"walk", direction:"right"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+              //{type:"walk", direction:"down"},
+          ],
+          talking: [
+            {
+              events : [
+                {type: "textMessage", text: "Hello, can I have a Cheese Pizza.", faceHero: "npc1"},
+              ]
+            },
+          ]
       }),
       npc2: new Person({
         x: utils.withGrid(11),
@@ -145,7 +145,7 @@ window.OverworldMaps = {
             ]
           },
         ]
-      }),
+    }),
     },
     walls: {
       //right side of door way
@@ -194,7 +194,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(11,11)] : true,
       //left wall
       [utils.asGridCoord(-1,3)] : true,
-      [utils.asGridCoord(-1,5)] : true,
+      [utils.asGridCoord(-1,5)] : true, 
       [utils.asGridCoord(-1,6)] : true,
       [utils.asGridCoord(-1,7)] : true,
       [utils.asGridCoord(-1,8)] : true,
@@ -238,9 +238,9 @@ window.OverworldMaps = {
         y: utils.withGrid(5),
       }),
       cheese: new Person({
-        x: utils.withGrid(7),
-        y: utils.withGrid(9),
-        src: "./sprites/player.png"
+          x: utils.withGrid(7),
+          y: utils.withGrid(9),
+          src: "./sprites/player.png"
       }),
     },
     cutsceneSpaces: {

@@ -12,7 +12,7 @@ class Sprite {
     this.shadow = new Image();
     this.useShadow = true; //config.useShadow || false
     if (this.useShadow) {
-      this.shadow.src = "/images/characters/shadow.png";
+      this.shadow.src = "./sprites/shadow.png";
     }
     this.shadow.onload = () => {
       this.isShadowLoaded = true;
@@ -34,7 +34,7 @@ class Sprite {
 
     this.animationFrameLimit = config.animationFrameLimit || 8;
     this.animationFrameProgress = this.animationFrameLimit;
-    
+
 
     //Reference the game object
     this.gameObject = config.gameObject;
@@ -69,11 +69,11 @@ class Sprite {
 
 
   }
-  
 
-  draw(ctx, cameraPerson) {
-    const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraPerson.x;
-    const y = this.gameObject.y - 18 + utils.withGrid(6) - cameraPerson.y;
+
+  draw(ctx) { //REMEMBER TO ADD CAMERA BACK
+    const x = this.gameObject.x - 8; // + utils.withGrid(5) - camera.x
+    const y = this.gameObject.y - 18; //+ utils.withGrid(5) - camera.y
 
     this.isShadowLoaded && ctx.drawImage(this.shadow, x, y);
 

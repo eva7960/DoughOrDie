@@ -2,36 +2,53 @@ const utils = {
   withGrid(n) {
     return n * 16;
   },
+
   asGridCoord(x,y) {
     return `${x*16},${y*16}`
   },
-  nextPosition(initialX, initialY, direction) {
-    let x = initialX;
-    let y = initialY;
+
+  nextPosition(initalX, initalY, direction) {
+    let x = initalX;
+    let y = initalY;
     const size = 16;
-    if (direction === "left") { 
+    if(direction == "left") {
       x -= size;
-    } else if (direction === "right") {
+    }
+    if(direction == "right") {
       x += size;
-    } else if (direction === "up") {
+    }
+    if(direction == "up") {
       y -= size;
-    } else if (direction === "down") {
+    }
+    if(direction == "down") {
       y += size;
     }
     return {x,y};
   },
+
+  currentPosition (initalX, initalY, direction) {
+    return {x,y};
+  },
+
   oppositeDirection(direction) {
-    if (direction === "left") { return "right" }
-    if (direction === "right") { return "left" }
-    if (direction === "up") { return "down" }
-    return "up"
+    if(direction == "right") {
+      return "left";
+    }
+    if(direction == "left") {
+      return "right";
+    }
+    if(direction == "up") {
+      return "down";
+    }
+    if(direction == "down") {
+      return "up";
+    }
   },
 
   emitEvent(name, detail) {
     const event = new CustomEvent(name, {
-      detail
+       detail
     });
     document.dispatchEvent(event);
   }
-  
 }
