@@ -9,7 +9,7 @@ const utils = {
     let x = initialX;
     let y = initialY;
     const size = 16;
-    if (direction === "left") {
+    if (direction === "left") { 
       x -= size;
     } else if (direction === "right") {
       x += size;
@@ -33,5 +33,5 @@ const utils = {
     });
     document.dispatchEvent(event);
   }
-
+  
 }

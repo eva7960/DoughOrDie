@@ -34,7 +34,7 @@ class Sprite {
 
     this.animationFrameLimit = config.animationFrameLimit || 8;
     this.animationFrameProgress = this.animationFrameLimit;
-
+    
 
     //Reference the game object
     this.gameObject = config.gameObject;
@@ -69,7 +69,7 @@ class Sprite {
 
 
   }
-
+  
 
   draw(ctx, cameraPerson) {
     const x = this.gameObject.x - 8 + utils.withGrid(10.5) - cameraPerson.x;
@@ -81,10 +81,10 @@ class Sprite {
     const [frameX, frameY] = this.frame;
 
     this.isLoaded && ctx.drawImage(this.image,
-        frameX * 32, frameY * 32,
-        32,32,
-        x,y,
-        32,32
+      frameX * 32, frameY * 32,
+      32,32,
+      x,y,
+      32,32
     )
 
     this.updateAnimationProgress();

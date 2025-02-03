@@ -11,10 +11,10 @@ class Overworld {
             //Clear off the canvas
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-            //Establish the camera person
-            const cameraPerson = this.map.gameObjects.hero;
+            //make camera
+            const camera = this.map.gameObjects.hero;
 
-            //Update all objects
+            //update objects relative to camera before drawing
             Object.values(this.map.gameObjects).forEach(object => {
                 object.update({
                     arrow: this.directionInput.direction,
@@ -23,17 +23,15 @@ class Overworld {
             })
 
             //Draw Lower layer
-            this.map.drawLowerImage(this.ctx, cameraPerson);
+            this.map.drawLowerImage(this.ctx); //REMEMBER TO ADD CAMERA BACK
 
             //Draw Game Objects
-            Object.values(this.map.gameObjects).sort((a,b) => {
-                return a.y - b.y;
-            }).forEach(object => {
-                object.sprite.draw(this.ctx, cameraPerson);
+            Object.values(this.map.gameObjects).forEach(object => {
+                object.sprite.draw(this.ctx); //REMEMBER TO ADD CAMERA BACK
             })
 
             //Draw Upper layer
-            this.map.drawUpperImage(this.ctx, cameraPerson);
+            this.map.drawUpperImage(this.ctx); //REMEMBER TO ADD CAMERA BACK
 
             requestAnimationFrame(() => {
                 step();
@@ -44,16 +42,14 @@ class Overworld {
 
     bindActionInput() {
         new KeyPressListener("Enter", () => {
-            //Is there a person here to talk to?
-            this.map.checkForActionCutscene()
+            this.map.checkForActionCutScene()
         })
     }
 
     bindHeroPositionCheck() {
         document.addEventListener("PersonWalkingComplete", e => {
-            if (e.detail.whoId === "hero") {
-                //Hero's position has changed
-                this.map.checkForFootstepCutscene()
+            if (e.detail.whoId == "hero") {
+                this.map.checkForFootstepCutscene();
             }
         })
     }
@@ -65,8 +61,9 @@ class Overworld {
     }
 
     init() {
-        this.startMap(window.OverworldMaps.DemoRoom);
-
+        // this.map = new OverworldMap(window.OverworldMaps.Shop);
+        // this.map.mountObjects();
+        this.startMap(window.OverworldMaps.Shop);
 
         this.bindActionInput();
         this.bindHeroPositionCheck();
@@ -76,18 +73,13 @@ class Overworld {
 
         this.startGameLoop();
 
-
-        // this.map.startCutscene([
-        //   { who: "hero", type: "walk",  direction: "down" },
-        //   { who: "hero", type: "walk",  direction: "down" },
-        //   { who: "npcA", type: "walk",  direction: "up" },
-        //   { who: "npcA", type: "walk",  direction: "left" },
-        //   { who: "hero", type: "stand",  direction: "right", time: 200 },
-        //   { type: "textMessage", text: "WHY HELLO THERE!"}
-        //   // { who: "npcA", type: "walk",  direction: "left" },
-        //   // { who: "npcA", type: "walk",  direction: "left" },
-        //   // { who: "npcA", type: "stand",  direction: "up", time: 800 },
-        // ])
-
+        this.map.startCutScene([
+            {type: "textMessage", text: "Get ready for your first day on the job!"},
+            {who: "npc1", type: "walk", direction: "up"},
+            {who: "npc1", type: "walk", direction: "up"},
+            {who: "npc1", type: "walk", direction: "up"},
+            {who: "npc1", type: "walk", direction: "up"},
+            {who: "npc1", type: "walk", direction: "up"},
+        ])
     }
 }

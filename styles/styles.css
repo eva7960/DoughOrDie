@@ -1,17 +1,6 @@
-:root {
-    --border-color: #291D4D;
-    --dialog-background: #FFF3B4;
-
-    --menu-background: #FFE8D2;
-    --menu-border-color: #A48465;
-    --menu-font-color: #3A160D;
-    --menu-selected-background: #7fc2ff;
-}
-
 * {
     box-sizing:border-box;
 }
-
 body {
     background: #f5c397;
     padding: 0;
@@ -24,11 +13,12 @@ body {
     width: 352px;
     height: 198px;
     margin: 0 auto;
-    outline: 1px solid #fff;
-
-    transform: scale(3) translateY(50%);
+    outline: 1 px solid #fff;
+    /* scales game container by 2x and then shifts it
+    down 50% of game container height*/
+    transform: scale(3) translateY(50%) translateX(30%);
 }
-
+/* evenly multiplies pixels so graphics are enhanced*/
 .game-container canvas {
-    image-rendering: pixelated;
+    image-render: pixelated;
 }
