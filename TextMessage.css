@@ -8,11 +8,11 @@
 
 .TextMessage {
     position: absolute;
-    left: 5%;
-    right: 5%;
-    bottom: 5%;
-    height: 120px;
-    padding: 12px 20px;
+    left: 6%;
+    right: 40%;
+    bottom: 10%;
+    height: 50px;
+    padding: 12px 12px;
     background: var(--text-bg);
     border: 2px solid var(--border-color);
     border-radius: 12px;
@@ -25,7 +25,7 @@
 
 .TextMessage_p {
     margin: 0;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.5;
     max-width: 85%; 
     white-space: pre-line; 

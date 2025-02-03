@@ -154,11 +154,11 @@ window.OverworldMaps = {
       [utils.asGridCoord(0,1)] : true,
       //side counter 
       [utils.asGridCoord(5,4)] : true,
-      //[utils.asGridCoord(5,3)] : true,
+      [utils.asGridCoord(5,3)] : true,
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,
-      [utils.asGridCoord(2,4)] : false, //so the player can talk to the npc that walks up to counter 
+      [utils.asGridCoord(2,4)] : true, //so the player can talk to the npc that walks up to counter
       [utils.asGridCoord(3,4)] : true,
       [utils.asGridCoord(4,4)] : true,
       //back wall
@@ -220,7 +220,6 @@ window.OverworldMaps = {
         {
           events: [
             {type: "changeMap", map: "Outside"},
-            {type: "textMessage", text:"Get ready to hunt for your ingredients!"},
           ]
         }
       ],
@@ -240,7 +239,7 @@ window.OverworldMaps = {
       cheese: new Person({
           x: utils.withGrid(7),
           y: utils.withGrid(9),
-          src: "./sprites/player.png"
+          src: "./sprites/cheese.png"
       }),
     },
     cutsceneSpaces: {
