@@ -220,7 +220,7 @@ window.OverworldMaps = {
         {
           events: [
             {type: "changeMap", map: "Outside"},
-            {type: "textMessage", text:"Get ready to hunt for your ingredients!"},
+            //{type: "textMessage", text:"Get ready to hunt for your ingredients!"},
           ]
         }
       ],
@@ -234,8 +234,8 @@ window.OverworldMaps = {
     gameObjects: {
       hero: new Person({
         isPlayerControlled: true,
-        x: utils.withGrid(5),
-        y: utils.withGrid(5),
+        x: utils.withGrid(0),
+        y: utils.withGrid(2),
         src: "./sprites/playerGun.png",
       }),
       cheese: new Person({
@@ -338,11 +338,10 @@ window.OverworldMaps = {
 
     },
     cutsceneSpaces: {
-      [utils.asGridCoord(0,2)] : [
+      [utils.asGridCoord(0,0)] : [
         {
           events: [
             {type: "changeMap", map: "Shop"},
-            {type: "textMessage", text:"Going back to the shop!"},
           ]
         }
       ],
