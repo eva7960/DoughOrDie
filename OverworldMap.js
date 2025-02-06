@@ -91,15 +91,8 @@ window.OverworldMaps = {
     gameObjects: {
       hero: new Person({
           isPlayerControlled: true,
-             //in shop
-          // x: utils.withGrid(5),
-          // y: utils.withGrid(5),
-            //behind counter
           x: utils.withGrid(2),
           y: utils.withGrid(3),
-            //door way
-          // x: utils.withGrid(0),
-          // y: utils.withGrid(2),
       }),
       npc1: new Person({
           x: utils.withGrid(2),
@@ -107,21 +100,6 @@ window.OverworldMaps = {
           src: "./sprites/customer1.png",
           behaviorLoop: [
               //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"stand",direction:"up",time:1000},
-              //{type:"walk", direction:"right"},
-              //{type:"walk", direction:"right"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
           ],
           talking: [
             {
@@ -220,6 +198,7 @@ window.OverworldMaps = {
         {
           events: [
             {type: "changeMap", map: "Outside"},
+            {type: "changeCursor", map: "Outside"},
             //{type: "textMessage", text:"Get ready to hunt for your ingredients!"},
           ]
         }
