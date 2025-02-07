@@ -58,13 +58,11 @@ class OverworldEvent {
 
     changeMap(resolve) {
         this.map.overworld.startMap( window.OverworldMaps[this.event.map] );
-        document.body.style.cursor = 'url("./sprites/crosshair.png"), auto';
-
-        // if (this.event.map === "Outside") {
-        //     document.body.style.cursor = 'url("./sprites/crosshair.png"), auto';
-        // } else {
-        //     document.body.style.cursor = "auto";
-        // }
+        if (this.event.map === "Outside") {
+            document.body.style.cursor = 'url("./sprites/crosshair.png"), auto';
+        } else {
+            document.body.style.cursor = "auto";
+        }
         resolve();
     }
 

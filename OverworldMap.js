@@ -213,7 +213,7 @@ window.OverworldMaps = {
       hero: new Person({
         isPlayerControlled: true,
         x: utils.withGrid(0),
-        y: utils.withGrid(2),
+        y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
       }),
       cheese: new Person({
