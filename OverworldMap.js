@@ -1,5 +1,6 @@
 class OverworldMap {
   constructor(config) {
+    this.overworld = null;
     this.gameObjects = config.gameObjects;
     this.walls = config.walls || {};
     this.cutsceneSpaces = config.cutsceneSpaces || {};
@@ -90,12 +91,15 @@ window.OverworldMaps = {
     gameObjects: {
       hero: new Person({
           isPlayerControlled: true,
-            //in shop
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
+             //in shop
+          // x: utils.withGrid(5),
+          // y: utils.withGrid(5),
             //behind counter
-          // x: utils.withGrid(2),
-          // y: utils.withGrid(3),
+          x: utils.withGrid(2),
+          y: utils.withGrid(3),
+            //door way
+          // x: utils.withGrid(0),
+          // y: utils.withGrid(2),
       }),
       npc1: new Person({
           x: utils.withGrid(2),
@@ -137,13 +141,17 @@ window.OverworldMaps = {
         talking: [
           {
             events : [
-              {type: "textMessage", text: "Hello, can I have a Cheese Pizza.", faceHero: "npc1"},
+              {type: "textMessage", text: "Hello, can I have a Cheese Pizza.", faceHero: "npc2"},
             ]
           },
         ]
     }),
     },
     walls: {
+      //right side of door way
+      [utils.asGridCoord(-1,2)] : true,
+      //back of door way 
+      [utils.asGridCoord(0,1)] : true,
       //side counter 
       [utils.asGridCoord(5,4)] : true,
       //[utils.asGridCoord(5,3)] : true,
@@ -207,22 +215,43 @@ window.OverworldMaps = {
             {type: "textMessage", text:"GET BACK TO WORK"},
           ]
         }
-      ]
+      ],
+      [utils.asGridCoord(0,2)] : [
+        {
+          events: [
+            {type: "changeMap", map: "Outside"},
+            {type: "textMessage", text:"Get ready to hunt for your ingredients!"},
+          ]
+        }
+      ],
     }
   },
   Outside: {
     lowerSrc: "./backgrounds/grass.png",
-    upperSrc: "./backgrounds/grass.png",
+    upperSrc: "./backgrounds/hall.png",
+    //player doesn't spawn in with the grass.png as upperSrc 
+    //upperSrc: "./backgrounds/grass.png",
     gameObjects: {
-      hero: new GameObject({
-        x: 3,
-        y: 5,
+      hero: new Person({
+        isPlayerControlled: true,
+        x: utils.withGrid(5),
+        y: utils.withGrid(5),
       }),
-      cheese: new GameObject({
-          x: 7,
-          y: 9,
-          src: "./sprites/cheese.png"
-      })
+      cheese: new Person({
+          x: utils.withGrid(7),
+          y: utils.withGrid(9),
+          src: "./sprites/player.png"
+      }),
+    },
+    cutsceneSpaces: {
+      [utils.asGridCoord(0,2)] : [
+        {
+          events: [
+            {type: "changeMap", map: "Shop"},
+            {type: "textMessage", text:"Going back to the shop!"},
+          ]
+        }
+      ],
     }
   },
 }

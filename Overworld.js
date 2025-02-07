@@ -54,9 +54,16 @@ class Overworld {
     })
   }
 
+  startMap(mapConfig) {
+    this.map = new OverworldMap(mapConfig);
+    this.map.overworld = this;
+    this.map.mountObjects();
+  }
+
  init() {
-  this.map = new OverworldMap(window.OverworldMaps.Shop);
-  this.map.mountObjects();
+  // this.map = new OverworldMap(window.OverworldMaps.Shop);
+  // this.map.mountObjects();
+  this.startMap(window.OverworldMaps.Shop);
 
   this.bindActionInput();
   this.bindHeroPositionCheck();
