@@ -198,7 +198,6 @@ window.OverworldMaps = {
         {
           events: [
             {type: "changeMap", map: "Outside"},
-            {type: "changeCursor", map: "Outside"},
             //{type: "textMessage", text:"Get ready to hunt for your ingredients!"},
           ]
         }
