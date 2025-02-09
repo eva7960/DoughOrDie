@@ -5,6 +5,7 @@ class GameObject {
     this.x = config.x || 0;
     this.y = config.y || 0;
     this.direction = config.direction || "down";
+    this.angle = this.getAngle();  // Call getAngle method here to set angle
     this.sprite = new Sprite({
       gameObject: this,
       src: config.src || "./sprites/player.png",
@@ -16,12 +17,28 @@ class GameObject {
     this.talking = config.talking || [];
   }
 
+  getAngle() {
+    const angleMap = {
+      "up": 90,
+      "down": 270,
+      "left": 180,
+      "right": 0,
+    };
+    return angleMap[this.direction] || 0;  // Use this.direction here to get the angle
+  }
+  getX() {
+    return this.x;
+  }
+  getY() {
+    return this.y;
+  }
+
   mount(map) {
     this.isMounted = true;
     map.addWall(this.x, this.y);
 
     setTimeout(() => {
-        this.doBehaviorEvent(map).then(r => {});
+      this.doBehaviorEvent(map).then(r => {});
     }, 10)
   }
 
@@ -29,9 +46,8 @@ class GameObject {
   }
 
   async doBehaviorEvent(map) {
-
     if(map.isCutScenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
-        return;
+      return;
     }
     let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
     eventConfig.who = this.id;
@@ -41,10 +57,9 @@ class GameObject {
 
     this.behaviorLoopIndex += 1;
     if(this.behaviorLoopIndex === this.behaviorLoop.length) {
-        this.behaviorLoopIndex = 0;
+      this.behaviorLoopIndex = 0;
     }
 
     await this.doBehaviorEvent(map);
   }
-
 }

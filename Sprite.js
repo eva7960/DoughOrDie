@@ -90,4 +90,5 @@ class Sprite {
     this.updateAnimationProgress();
   }
 
+
 }
