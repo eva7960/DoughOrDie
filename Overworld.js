@@ -67,12 +67,12 @@ class Overworld {
     this.startGameLoop();
 
     this.map.startCutScene([
-      { type: "textMessage", text: "Get ready for your first day on the job!" },
-      { who: "npc1", type: "walk", direction: "up" },
-      { who: "npc1", type: "walk", direction: "up" },
-      { who: "npc1", type: "walk", direction: "up" },
-      { who: "npc1", type: "walk", direction: "up" },
-      { who: "npc1", type: "walk", direction: "up" },
+      // { type: "textMessage", text: "Get ready for your first day on the job!" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
     ]);
   }
 }
