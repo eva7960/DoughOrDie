@@ -170,7 +170,7 @@ window.OverworldMaps = {
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,
-      [utils.asGridCoord(2,4)] : true, //so the player can talk to the npc that walks up to counter
+      [utils.asGridCoord(2,4)] : false, //so the player can talk to the npc that walks up to counter
       [utils.asGridCoord(3,4)] : true,
       [utils.asGridCoord(4,4)] : true,
       //back wall

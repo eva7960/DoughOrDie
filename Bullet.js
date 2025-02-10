@@ -5,4 +5,7 @@ class Bullet extends GameObject {
         this.bulletSpeed = 20;
 
     }
+    draw(ctx) {
+
+    }
 }
