@@ -101,47 +101,59 @@ window.OverworldMaps = {
           // x: utils.withGrid(0),
           // y: utils.withGrid(2),
       }),
-      npc1: new Person({
-          x: utils.withGrid(2),
-          y: utils.withGrid(10),
+      cheesePizzaNPC: new Person({
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
           src: "./sprites/customer1.png",
-          behaviorLoop: [
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"stand",direction:"up",time:1000},
-              //{type:"walk", direction:"right"},
-              //{type:"walk", direction:"right"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
+          behaviorLoop:[
+              //default behavior for npc
           ],
           talking: [
             {
               events : [
-                {type: "textMessage", text: "Hello, can I have a Cheese Pizza.", faceHero: "npc1"},
+                {type: "textMessage", 
+                 text: "Hello, can I have a Cheese Pizza.", 
+                 faceHero: "cheesePizzaNPC",
+                 who: "cheesePizzaNPC",
+                 order: "Cheese Pizza"
+                },
               ]
             },
           ]
       }),
-      npc2: new Person({
-        x: utils.withGrid(11),
-        y: utils.withGrid(5),
+
+      pepperoniPizzaNPC: new Person({
+        x: utils.withGrid(6),
+        y: utils.withGrid(6),
         src: "./sprites/customer1.png",
         behaviorLoop:[
-
+            //default behavior for npc 
         ],
         talking: [
           {
             events : [
-              {type: "textMessage", text: "Hello, can I have a Cheese Pizza.", faceHero: "npc2"},
+              {type: "textMessage", 
+               text: "Hello, can I have a Pepperoni Pizza.", 
+               faceHero: "pepperoniPizzaNPC",
+               who: "pepperoniPizzaNPC",
+               order: "Pepperoni Pizza"
+              },
+            ]
+          },
+        ]
+    }),
+
+      boss: new Person({
+        x: utils.withGrid(11),
+        y: utils.withGrid(5),
+        src: "./sprites/customer1.png",
+        behaviorLoop:[
+            //default behavior for npc 
+        ],
+        talking: [
+          {
+            events : [
+              {type: "textMessage", text: "Are we working hard or hardly working?", faceHero: "boss"},
             ]
           },
         ]
@@ -154,7 +166,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(0,1)] : true,
       //side counter 
       [utils.asGridCoord(5,4)] : true,
-      [utils.asGridCoord(5,3)] : true,
+      //[utils.asGridCoord(5,3)] : true,
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,
@@ -211,8 +223,8 @@ window.OverworldMaps = {
       [utils.asGridCoord(11,3)] : [
         {
           events: [
-            {who: "npc2", type:"walk", direction: "up"},
-            {type: "textMessage", text:"GET BACK TO WORK"},
+            {who: "boss", type:"walk", direction: "up"},
+            {type: "textMessage", text:"GET BACK TO WORK!"},
           ]
         }
       ],
@@ -228,47 +240,47 @@ window.OverworldMaps = {
   },
   Outside: {
     lowerSrc: "./backgrounds/grass.png",
-    upperSrc: "./backgrounds/hall.png",
-    //player doesn't spawn in with the grass.png as upperSrc 
+    upperSrc: "./backgrounds/outHall.png",
+    //player doesn't spawn in with the grass.png as upperSrc
     //upperSrc: "./backgrounds/grass.png",
     gameObjects: {
       hero: new Person({
         isPlayerControlled: true,
-        x: utils.withGrid(5),
-        y: utils.withGrid(5),
+        x: utils.withGrid(0),
+        y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
       }),
-      cheese: new Person({
-          x: utils.withGrid(2),
-          y: utils.withGrid(9),
-          src: "./sprites/cheese.png",
+      cheese: new Cheese({
+        x: utils.withGrid(2),
+        y: utils.withGrid(9),
+        src: "./sprites/cheese.png",
         behaviorLoop: generateRandomBehaviorLoop(20),
       }),
-      cheese1: new Person({
+      cheese1: new Cheese({
         x: utils.withGrid(10),
         y: utils.withGrid(6),
         src: "./sprites/cheese.png",
         behaviorLoop: generateRandomBehaviorLoop(20),
       }),
-      cheese2: new Person({
+      cheese2: new Cheese({
         x: utils.withGrid(6),
         y: utils.withGrid(10),
         src: "./sprites/cheese.png",
         behaviorLoop: generateRandomBehaviorLoop(20),
       }),
-      cheese3: new Person({
+      cheese3: new Cheese({
         x: utils.withGrid(9),
         y: utils.withGrid(5),
         src: "./sprites/cheese.png",
         behaviorLoop: generateRandomBehaviorLoop(20),
       }),
-      cheese4: new Person({
+      cheese4: new Cheese({
         x: utils.withGrid(1),
         y: utils.withGrid(10),
         src: "./sprites/cheese.png",
         behaviorLoop: generateRandomBehaviorLoop(20),
       }),
-      cheese5: new Person({
+      cheese5: new Cheese({
         x: utils.withGrid(6),
         y: utils.withGrid(7),
         src: "./sprites/cheese.png",
@@ -289,44 +301,36 @@ window.OverworldMaps = {
       [utils.asGridCoord(10, -1)]: true,
       [utils.asGridCoord(11, -1)]: true,
       [utils.asGridCoord(12, -1)]: true,
-      [utils.asGridCoord(13, -1)]: true,
-      [utils.asGridCoord(14, -1)]: true,
-      [utils.asGridCoord(15, -1)]: true,
 
       //east wall
-      [utils.asGridCoord(16, 0)]: true,
-      [utils.asGridCoord(16, 1)]: true,
-      [utils.asGridCoord(16, 2)]: true,
-      [utils.asGridCoord(16, 3)]: true,
-      [utils.asGridCoord(16, 4)]: true,
-      [utils.asGridCoord(16, 5)]: true,
-      [utils.asGridCoord(16, 6)]: true,
-      [utils.asGridCoord(16, 7)]: true,
-      [utils.asGridCoord(16, 8)]: true,
-      [utils.asGridCoord(16, 9)]: true,
-      [utils.asGridCoord(16, 10)]: true,
-      [utils.asGridCoord(16, 11)]: true,
-      [utils.asGridCoord(16, 12)]: true,
-      [utils.asGridCoord(16, 13)]: true,
-      [utils.asGridCoord(16, 14)]: true,
+      [utils.asGridCoord(12, 0)]: true,
+      [utils.asGridCoord(12, 1)]: true,
+      [utils.asGridCoord(12, 2)]: true,
+      [utils.asGridCoord(12, 3)]: true,
+      [utils.asGridCoord(12, 4)]: true,
+      [utils.asGridCoord(12, 5)]: true,
+      [utils.asGridCoord(12, 6)]: true,
+      [utils.asGridCoord(12, 7)]: true,
+      [utils.asGridCoord(12, 8)]: true,
+      [utils.asGridCoord(12, 9)]: true,
+      [utils.asGridCoord(12, 10)]: true,
+      [utils.asGridCoord(12, 11)]: true,
+      [utils.asGridCoord(12, 12)]: true,
 
       //south wall
-      [utils.asGridCoord(0, 13)]: true,
-      [utils.asGridCoord(1, 13)]: true,
-      [utils.asGridCoord(2, 13)]: true,
-      [utils.asGridCoord(3, 13)]: true,
-      [utils.asGridCoord(4, 13)]: true,
-      [utils.asGridCoord(5, 13)]: true,
-      [utils.asGridCoord(6, 13)]: true,
-      [utils.asGridCoord(7, 13)]: true,
-      [utils.asGridCoord(8, 13)]: true,
-      [utils.asGridCoord(9, 13)]: true,
-      [utils.asGridCoord(10, 13)]: true,
-      [utils.asGridCoord(11, 13)]: true,
-      [utils.asGridCoord(12, 13)]: true,
-      [utils.asGridCoord(13, 13)]: true,
-      [utils.asGridCoord(14, 13)]: true,
-      [utils.asGridCoord(15, 13)]: true,
+      [utils.asGridCoord(0, 11)]: true,
+      [utils.asGridCoord(1, 11)]: true,
+      [utils.asGridCoord(2, 11)]: true,
+      [utils.asGridCoord(3, 11)]: true,
+      [utils.asGridCoord(4, 11)]: true,
+      [utils.asGridCoord(5, 11)]: true,
+      [utils.asGridCoord(6, 11)]: true,
+      [utils.asGridCoord(7, 11)]: true,
+      [utils.asGridCoord(8, 11)]: true,
+      [utils.asGridCoord(9, 11)]: true,
+      [utils.asGridCoord(10, 11)]: true,
+      [utils.asGridCoord(11, 11)]: true,
+      [utils.asGridCoord(12, 11)]: true,
 
       //west wall
       [utils.asGridCoord(-1, 0)]: true,
@@ -342,16 +346,14 @@ window.OverworldMaps = {
       [utils.asGridCoord(-1, 10)]: true,
       [utils.asGridCoord(-1, 11)]: true,
       [utils.asGridCoord(-1, 12)]: true,
-      [utils.asGridCoord(-1, 13)]: true,
-      [utils.asGridCoord(-1, 14)]: true,
+
 
     },
     cutsceneSpaces: {
-      [utils.asGridCoord(0,2)] : [
+      [utils.asGridCoord(0,0)] : [
         {
           events: [
             {type: "changeMap", map: "Shop"},
-            {type: "textMessage", text:"Going back to the shop!"},
           ]
         }
       ],
