@@ -101,47 +101,59 @@ window.OverworldMaps = {
           // x: utils.withGrid(0),
           // y: utils.withGrid(2),
       }),
-      npc1: new Person({
-          x: utils.withGrid(2),
-          y: utils.withGrid(10),
+      cheesePizzaNPC: new Person({
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
           src: "./sprites/customer1.png",
           behaviorLoop:[
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"walk", direction:"up"},
-              //{type:"stand",direction:"up",time:1000},
-              //{type:"walk", direction:"right"},
-              //{type:"walk", direction:"right"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
-              //{type:"walk", direction:"down"},
+              //default behavior for npc
           ],
           talking: [
             {
               events : [
-                {type: "textMessage", text: "Hello, can I have a Cheese Pizza.", faceHero: "npc1"},
+                {type: "textMessage", 
+                 text: "Hello, can I have a Cheese Pizza.", 
+                 faceHero: "cheesePizzaNPC",
+                 who: "cheesePizzaNPC",
+                 order: "Cheese Pizza"
+                },
               ]
             },
           ]
       }),
-      npc2: new Person({
-        x: utils.withGrid(11),
-        y: utils.withGrid(5),
+
+      pepperoniPizzaNPC: new Person({
+        x: utils.withGrid(6),
+        y: utils.withGrid(6),
         src: "./sprites/customer1.png",
         behaviorLoop:[
-
+            //default behavior for npc 
         ],
         talking: [
           {
             events : [
-              {type: "textMessage", text: "Hello, can I have a Cheese Pizza.", faceHero: "npc2"},
+              {type: "textMessage", 
+               text: "Hello, can I have a Pepperoni Pizza.", 
+               faceHero: "pepperoniPizzaNPC",
+               who: "pepperoniPizzaNPC",
+               order: "Pepperoni Pizza"
+              },
+            ]
+          },
+        ]
+    }),
+
+      boss: new Person({
+        x: utils.withGrid(11),
+        y: utils.withGrid(5),
+        src: "./sprites/customer1.png",
+        behaviorLoop:[
+            //default behavior for npc 
+        ],
+        talking: [
+          {
+            events : [
+              {type: "textMessage", text: "Are we working hard or hardly working?", faceHero: "boss"},
             ]
           },
         ]
@@ -211,8 +223,8 @@ window.OverworldMaps = {
       [utils.asGridCoord(11,3)] : [
         {
           events: [
-            {who: "npc2", type:"walk", direction: "up"},
-            {type: "textMessage", text:"GET BACK TO WORK"},
+            {who: "boss", type:"walk", direction: "up"},
+            {type: "textMessage", text:"GET BACK TO WORK!"},
           ]
         }
       ],
