@@ -44,6 +44,9 @@ class Overworld {
   new KeyPressListener("Enter", () => {
     this.map.checkForActionCutScene()
   })
+  new KeyPressListener("F", () => {
+      new Bullet();
+  })
  }
 
   bindHeroPositionCheck() {
