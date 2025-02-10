@@ -3,6 +3,7 @@ class Person extends GameObject {
     super(config);
     this.movingProgressRemaining = 0;
     this.isStanding = false; 
+    this.health = 100;
 
     this.isPlayerControlled = config.isPlayerControlled || false;
 

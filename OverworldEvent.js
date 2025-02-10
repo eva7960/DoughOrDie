@@ -44,26 +44,37 @@ class OverworldEvent {
     }
 
     textMessage(resolve) {
-
-        if(this.event.faceHero) {
-            const obj = this.map.gameObjects[this.event.faceHero];
-            obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
+        if (this.event.faceHero) {
+          const obj = this.map.gameObjects[this.event.faceHero];
+          obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
         }
+    
+        let messageText = this.event.text;
+    
+        if (this.event.order && this.event.who) {
+          if (window.orderManager.getOrders()[this.event.who]) {
+            window.orderManager.completeOrder(this.event.who);
+            messageText = "Wow, that looks amazing! Thank you.";
+          } else {
+            window.orderManager.addOrder(this.event.who, this.event.order);
+          }
+        }
+    
+        // Create and display the text message.
         const message = new TextMessage({
-            text: this.event.text,
-            onComplete: () => resolve()
-        })
-        message.init(document.querySelector(".game-container"))
-    }
+          text: messageText,
+          onComplete: () => resolve()
+        });
+        message.init(document.querySelector(".game-container"));
+      }
 
     changeMap(resolve) {
-        this.map.overworld.startMap( window.OverworldMaps[this.event.map] );
-        if (this.event.map === "Outside") {
-            document.body.style.cursor = 'url("./sprites/crosshair.png"), auto';
-        } else {
-            document.body.style.cursor = "auto";
-        }
-        resolve();
+        const sceneTransition = new SceneTransition();
+        sceneTransition.init(document.querySelector(".game-container"), () => {
+            this.map.overworld.startMap(window.OverworldMaps[this.event.map] );
+            resolve();
+        });
+        sceneTransition.fadeOut();
     }
 
     init() {
