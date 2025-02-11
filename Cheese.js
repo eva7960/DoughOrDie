@@ -31,14 +31,24 @@ class Cheese extends GameObject {
   startBehavior(state, behavior) {
     this.direction = behavior.direction;
 
-    if(behavior.type === "walk") {
-      console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
-      if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-        behavior.retry && setTimeout(() => {
-          this.startBehavior(state, behavior)
-        },10)
-        return;
+    if (behavior.type === "walk") {
+      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+        // Reverse direction if space is taken
+        const oppositeDirections = {
+          up: "down",
+          down: "up",
+          left: "right",
+          right: "left",
+        };
+
+        this.direction = oppositeDirections[this.direction];
+
+        // Check if the new direction is also blocked
+        if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+          return; // If both original and opposite directions are blocked, stop moving
+        }
       }
+
       state.map.moveWall(this.x, this.y, this.direction);
       this.movingProgressRemaining = 16;
       this.updateSprite(state);
@@ -53,8 +63,8 @@ class Cheese extends GameObject {
         this.isStanding = false;
       }, behavior.time)
     }
-
   }
+
 
   updatePosition() {
     const [property, change] = this.directionUpdate[this.direction];

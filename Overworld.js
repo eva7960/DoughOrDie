@@ -38,11 +38,14 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       this.map.checkForActionCutScene();
     });
+    new KeyPressListener("Space",() => {
+      new bullet
+    });
   }
 
   bindHeroPositionCheck() {
     document.addEventListener("PersonWalkingComplete", e => {
-      if (e.detail.whoId == "hero") {
+      if (e.detail.whoId === "hero") {
         this.map.checkForFootstepCutscene();
       }
     });
