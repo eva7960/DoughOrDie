@@ -5,7 +5,6 @@ class GameObject {
     this.x = config.x || 0;
     this.y = config.y || 0;
     this.direction = config.direction || "down";
-    //this.angle = this.getAngle();  // Call getAngle method here to set angle
     this.sprite = new Sprite({
       gameObject: this,
       src: config.src || "./sprites/player.png",
@@ -15,22 +14,6 @@ class GameObject {
     this.behaviorLoopIndex = 0;
 
     this.talking = config.talking || [];
-  }
-
-  getAngle() {
-    const angleMap = {
-      "up": 90,
-      "down": 270,
-      "left": 180,
-      "right": 0,
-    };
-    return angleMap[this.direction] || 0;  // Use this.direction here to get the angle
-  }
-  getX() {
-    return this.x;
-  }
-  getY() {
-    return this.y;
   }
 
   mount(map) {

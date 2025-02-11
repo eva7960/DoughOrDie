@@ -6,6 +6,7 @@ class Overworld {
     this.map = null;
   }
 
+
   startGameLoop() {
     const step = () => {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -25,7 +26,7 @@ class Overworld {
 
       this.map.drawUpperImage(this.ctx);
 
-      //update the HUD, currently just shows position of hero 
+      //update the HUD, currently just shows position of hero
       const hero = this.map.gameObjects.hero;
       this.hud.update("Position: (" + hero.x + ", " + hero.y + ")  Health: " + hero.health);
 
@@ -38,14 +39,15 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       this.map.checkForActionCutScene();
     });
-    new KeyPressListener("Space",() => {
-      new bullet
+    new KeyPressListener("Space", () => {
+      this.map.shoot();
     });
+
   }
 
   bindHeroPositionCheck() {
     document.addEventListener("PersonWalkingComplete", e => {
-      if (e.detail.whoId === "hero") {
+      if (e.detail.whoId == "hero") {
         this.map.checkForFootstepCutscene();
       }
     });
