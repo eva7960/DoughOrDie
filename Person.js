@@ -1,6 +1,7 @@
 class Person extends GameObject {
   constructor(config) {
     super(config);
+
     this.movingProgressRemaining = 0;
     this.isStanding = false; 
     this.health = 100;
@@ -13,6 +14,7 @@ class Person extends GameObject {
       "left": ["x", -1],
       "right": ["x", 1],
     }
+
   }
 
   update(state) {

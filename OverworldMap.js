@@ -28,6 +28,15 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(currentX,currentY,direction);
     return this.walls[`${x},${y}`] || false;
   }
+  shoot() {
+      const bullet = new Bullet({
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
+          src: "./sprites/bullet2.png"
+      });
+      this.gameObjects["bullet"] = bullet;
+      bullet.mount(this)
+  }
 
   mountObjects() {
     Object.keys(this.gameObjects).forEach(key => {
@@ -61,6 +70,7 @@ class OverworldMap {
     console.log({match});
   }
 
+
   checkForFootstepCutscene() {
     const hero = this.gameObjects["hero"];
     const match = this.cutsceneSpaces[ `${hero.x},${hero.y}` ];
@@ -82,6 +92,8 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(oldX, oldY, direction);
     this.addWall(x,y)
   }
+
+
 }
 
 window.OverworldMaps = {
@@ -247,46 +259,49 @@ window.OverworldMaps = {
         x: utils.withGrid(0),
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
-        behaviorLoop: [
-
-        ],
       }),
-      cheese: new Cheese({
-        x: utils.withGrid(2),
-        y: utils.withGrid(9),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
-      cheese1: new Cheese({
-        x: utils.withGrid(10),
-        y: utils.withGrid(6),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
-      cheese2: new Cheese({
-        x: utils.withGrid(6),
-        y: utils.withGrid(10),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
-      cheese3: new Cheese({
-        x: utils.withGrid(9),
-        y: utils.withGrid(5),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
-      cheese4: new Cheese({
-        x: utils.withGrid(1),
-        y: utils.withGrid(10),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
-      cheese5: new Cheese({
-        x: utils.withGrid(6),
-        y: utils.withGrid(7),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
+        bullet: new Bullet({
+            x: utils.withGrid(0),
+            y: utils.withGrid(3),
+            src: "./sprites/bullet2.png",
+            useShadow: false,
+        }),
+      // cheese: new Cheese({
+      //   x: utils.withGrid(2),
+      //   y: utils.withGrid(9),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
+      // cheese1: new Cheese({
+      //   x: utils.withGrid(10),
+      //   y: utils.withGrid(6),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
+      // cheese2: new Cheese({
+      //   x: utils.withGrid(6),
+      //   y: utils.withGrid(10),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
+      // cheese3: new Cheese({
+      //   x: utils.withGrid(9),
+      //   y: utils.withGrid(5),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
+      // cheese4: new Cheese({
+      //   x: utils.withGrid(1),
+      //   y: utils.withGrid(10),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
+      // cheese5: new Cheese({
+      //   x: utils.withGrid(6),
+      //   y: utils.withGrid(7),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
     },
     walls: {
       //north wall
@@ -374,3 +389,5 @@ function generateRandomBehaviorLoop(steps) {
 
   return loop;
 }
+
+

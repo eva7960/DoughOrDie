@@ -39,6 +39,10 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       this.map.checkForActionCutScene();
     });
+    new KeyPressListener("Space", () => {
+      this.map.shoot();
+    });
+
   }
 
   bindHeroPositionCheck() {
