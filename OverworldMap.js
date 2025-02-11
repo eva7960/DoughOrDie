@@ -241,14 +241,15 @@ window.OverworldMaps = {
   Outside: {
     lowerSrc: "./backgrounds/grass.png",
     upperSrc: "./backgrounds/outHall.png",
-    //player doesn't spawn in with the grass.png as upperSrc
-    //upperSrc: "./backgrounds/grass.png",
     gameObjects: {
       hero: new Person({
         isPlayerControlled: true,
         x: utils.withGrid(0),
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
+        behaviorLoop: [
+
+        ],
       }),
       cheese: new Cheese({
         x: utils.withGrid(2),

@@ -72,10 +72,16 @@ class OverworldEvent {
         const sceneTransition = new SceneTransition();
         sceneTransition.init(document.querySelector(".game-container"), () => {
             this.map.overworld.startMap(window.OverworldMaps[this.event.map] );
+            if (this.event.map === "Outside") {
+                document.body.style.cursor = 'url("./sprites/crosshair.png"), auto';
+            } else {
+                document.body.style.cursor = "auto";
+            }
             resolve();
         });
         sceneTransition.fadeOut();
     }
+
 
     init() {
         return new Promise(resolve => {
