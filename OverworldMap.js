@@ -32,7 +32,8 @@ class OverworldMap {
       const bullet = new Bullet({
           x: this.gameObjects["hero"].x,
           y: this.gameObjects["hero"].y,
-          src: "./sprites/bullet2.png"
+          src: "./sprites/bullet.png",
+          direction: this.gameObjects["hero"].direction,
       });
       this.gameObjects["bullet"] = bullet;
       bullet.mount(this)
