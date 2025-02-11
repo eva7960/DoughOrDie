@@ -30,8 +30,8 @@ class OverworldMap {
   }
   shoot() {
       const bullet = new Bullet({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
+          x: this.gameObjects["hero"].x,
+          y: this.gameObjects["hero"].y,
           src: "./sprites/bullet2.png"
       });
       this.gameObjects["bullet"] = bullet;
@@ -260,12 +260,6 @@ window.OverworldMaps = {
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
       }),
-        bullet: new Bullet({
-            x: utils.withGrid(0),
-            y: utils.withGrid(3),
-            src: "./sprites/bullet2.png",
-            useShadow: false,
-        }),
       // cheese: new Cheese({
       //   x: utils.withGrid(2),
       //   y: utils.withGrid(9),
