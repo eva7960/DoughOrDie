@@ -3,7 +3,7 @@ class Bullet extends GameObject {
         super(config);
 
         // Bullet-specific properties
-        this.speed = 3; // Speed of the bullet
+        this.speed = 7; // Speed of the bullet
         this.direction = config.direction; // Direction to move the bullet
 
         // Bullet uses the same sprite as hero (or any other object)
