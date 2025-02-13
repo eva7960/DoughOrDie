@@ -4,9 +4,10 @@ class Person extends GameObject {
     this.movingProgressRemaining = 0;
     this.isStanding = false; 
     this.health = 100;
+    this.inventory = config.inventory || {cheese: 0, pepperoni: 1};
 
     this.isPlayerControlled = config.isPlayerControlled || false;
-
+    
     this.directionUpdate = {
       "up": ["y", -1],
       "down": ["y", 1],
@@ -33,7 +34,7 @@ class Person extends GameObject {
     this.direction = behavior.direction;
 
     if(behavior.type === "walk") {
-    console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
+    //console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
     if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
       behavior.retry && setTimeout(() => {
           this.startBehavior(state, behavior)

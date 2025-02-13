@@ -25,7 +25,6 @@ class Overworld {
 
       this.map.drawUpperImage(this.ctx);
 
-      //update the HUD, currently just shows position of hero 
       const hero = this.map.gameObjects.hero;
       this.hud.update("Position: (" + hero.x + ", " + hero.y + ")  Health: " + hero.health);
 
@@ -48,6 +47,17 @@ class Overworld {
     });
   }
 
+  bindInventoryInput() {
+    new KeyPressListener("KeyI", () => {
+      const hero = this.map.gameObjects["hero"];
+      if (hero && hero.inventory) {
+        console.log("Player Inventory:", hero.inventory);
+      } else {
+        console.log("No inventory found for the hero.");
+      }
+    });
+  }
+
   startMap(mapConfig) {
     this.map = new OverworldMap(mapConfig);
     this.map.overworld = this;
@@ -57,6 +67,7 @@ class Overworld {
   init() {
     this.startMap(window.OverworldMaps.Shop);
     this.bindActionInput();
+    this.bindInventoryInput();
     this.bindHeroPositionCheck();
 
     this.directionInput = new DirectionInput();
@@ -67,12 +78,12 @@ class Overworld {
     this.startGameLoop();
 
     this.map.startCutScene([
-      { type: "textMessage", text: "Get ready for your first day on the job!" },
-      { who: "npc1", type: "walk", direction: "up" },
-      { who: "npc1", type: "walk", direction: "up" },
-      { who: "npc1", type: "walk", direction: "up" },
-      { who: "npc1", type: "walk", direction: "up" },
-      { who: "npc1", type: "walk", direction: "up" },
+      // { type: "textMessage", text: "Get ready for your first day on the job!" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
     ]);
   }
 }
