@@ -11,7 +11,10 @@ class OverworldMap {
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
 
-    this.isCutScenePlaying = false; 
+    this.isCutScenePlaying = false;
+
+    this.canShoot = true;
+    this.shootCoolDown = 500;
   }
 
   drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
@@ -29,14 +32,23 @@ class OverworldMap {
     return this.walls[`${x},${y}`] || false;
   }
   shoot() {
-      const bullet = new Bullet({
-          x: this.gameObjects["hero"].x,
-          y: this.gameObjects["hero"].y,
-          src: "./sprites/bullet.png",
-          direction: this.gameObjects["hero"].direction,
-      });
-      this.gameObjects["bullet"] = bullet;
-      bullet.mount(this)
+    if (!this.canShoot) return; // Prevent shooting if still on cooldown
+
+    const bullet = new Bullet({
+      x: this.gameObjects["hero"].x,
+      y: this.gameObjects["hero"].y,
+      src: "./sprites/bullet.png",
+      direction: this.gameObjects["hero"].direction,
+    });
+
+    this.gameObjects["bullet"] = bullet;
+    bullet.mount(this);
+
+    // Set cooldown
+    this.canShoot = false;
+    setTimeout(() => {
+      this.canShoot = true;
+    }, this.shootCoolDown);
   }
 
   mountObjects() {
