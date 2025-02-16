@@ -81,7 +81,7 @@ class OverworldMap {
     if(!this.isCutScenePlaying && match && match.talking.length) {
       this.startCutScene(match.talking[0].events);
     }
-    console.log({match});
+    //console.log({match});
   }
 
 
@@ -136,12 +136,12 @@ window.OverworldMaps = {
           ],
           talking: [
             {
-              events : [
+              events : [ 
                 {type: "textMessage", 
                  text: "Hello, can I have a Cheese Pizza.", 
                  faceHero: "cheesePizzaNPC",
                  who: "cheesePizzaNPC",
-                 order: "Cheese Pizza"
+                 order: "Cheese",
                 },
               ]
             },
@@ -162,7 +162,7 @@ window.OverworldMaps = {
                text: "Hello, can I have a Pepperoni Pizza.", 
                faceHero: "pepperoniPizzaNPC",
                who: "pepperoniPizzaNPC",
-               order: "Pepperoni Pizza"
+               order: "Pepperoni",
               },
             ]
           },
@@ -179,7 +179,7 @@ window.OverworldMaps = {
         talking: [
           {
             events : [
-              {type: "textMessage", text: "Are we working hard or hardly working?", faceHero: "boss"},
+              {type: "textMessage", text: "Are we working hard or hardly working? (event array)", faceHero: "boss"},
             ]
           },
         ]
@@ -250,7 +250,7 @@ window.OverworldMaps = {
         {
           events: [
             {who: "boss", type:"walk", direction: "up"},
-            {type: "textMessage", text:"GET BACK TO WORK!"},
+            {type: "textMessage", text:"Are we working hard or hardly working? (cutscene)"},
           ]
         }
       ],
