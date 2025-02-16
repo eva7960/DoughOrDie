@@ -1,11 +1,10 @@
 class Cheese extends GameObject {
   constructor(config) {
     super(config);
+    this.health = 30;
     this.movingProgressRemaining = 0;
     this.isStanding = false;
-
     this.isPlayerControlled = config.isPlayerControlled || false;
-
     this.directionUpdate = {
       "up": ["y", -1],
       "down": ["y", 1],
@@ -75,6 +74,13 @@ class Cheese extends GameObject {
       return;
     }
     this.sprite.setAnimation("idle-"+this.direction);
+  }
+  hit() {
+    console.log(this.health)
+    this.health = Math.max(this.health - 10, 0);
+    if(this.health === 0 && this.isMounted) {
+      delete window.OverworldMaps.Outside.gameObjects[this.id];
+    }
   }
 
 }

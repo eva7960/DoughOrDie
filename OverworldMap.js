@@ -2,6 +2,7 @@ class OverworldMap {
   constructor(config) {
     this.overworld = null;
     this.gameObjects = config.gameObjects;
+    this.enemies = config.enemies || {};
     this.walls = config.walls || {};
     this.cutsceneSpaces = config.cutsceneSpaces || {};
 
@@ -56,7 +57,7 @@ class OverworldMap {
       let object = this.gameObjects[key];
       object.id = key;
       object.mount(this);
-    })
+    });
   }
 
   async startCutScene(events) {
@@ -75,7 +76,7 @@ class OverworldMap {
     const hero = this.gameObjects["hero"];
     const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
     const match = Object.values(this.gameObjects).find(object =>{
-      return `${object.x},${object.y}` == `${nextCoords.x},${nextCoords.y}`
+      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
     });
     if(!this.isCutScenePlaying && match && match.talking.length) {
       this.startCutScene(match.talking[0].events);
@@ -257,7 +258,7 @@ window.OverworldMaps = {
         {
           events: [
             {type: "changeMap", map: "Outside"},
-            {type: "textMessage", text:"Get ready to hunt for your ingredients!"},
+            //{type: "textMessage", text:"Get ready to hunt for your ingredients!"},
           ]
         }
       ],
@@ -273,12 +274,13 @@ window.OverworldMaps = {
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
       }),
-      // cheese: new Cheese({
-      //   x: utils.withGrid(2),
-      //   y: utils.withGrid(9),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
+      cheese: new Cheese({
+        x: utils.withGrid(2),
+        y: utils.withGrid(9),
+        src: "./sprites/cheese.png",
+        label: "bad",
+        behaviorLoop: [],
+      }),
       // cheese1: new Cheese({
       //   x: utils.withGrid(10),
       //   y: utils.withGrid(6),

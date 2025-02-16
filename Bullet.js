@@ -3,7 +3,7 @@ class Bullet extends GameObject {
         super(config);
 
         // Bullet-specific properties
-        this.speed = 7; // Speed of the bullet
+        this.speed = 5; // Speed of the bullet
         this.direction = config.direction; // Direction to move the bullet
 
         // Bullet uses the same sprite as hero (or any other object)
@@ -24,23 +24,25 @@ class Bullet extends GameObject {
     }
 
     update() {
-        // Move the bullet based on its direction
-        if (this.direction === "up") {
-            this.y -= this.speed;
-        } else if (this.direction === "down") {
-            this.y += this.speed;
-        } else if (this.direction === "left") {
-            this.x -= this.speed;
-        } else if (this.direction === "right") {
-            this.x += this.speed;
-        }
 
-        // Update the animation (if needed)
-        this.sprite.updateAnimationProgress();
+        const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
+
+        // Check for collision with all gameObjects at the next position
+        Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
+            let object = window.OverworldMaps.Outside.gameObjects[key];
+
+            // If the object is a cheese and the next position collides
+            if (object instanceof Cheese && utils.collide(nextPosition, object)) {
+                object.hit(); // Apply hit if collision detected
+                this.isMounted = false;
+                delete window.OverworldMaps.Outside.gameObjects[this.id];
+            } else if(this.isMounted) {
+                this.x = nextPosition.x;
+                this.y = nextPosition.y;
+                this.sprite.updateAnimationProgress();
+            }
+        });
     }
 
-    draw(ctx) {
-        // Draw the sprite (bullet image)
-        this.sprite.draw(ctx);
-    }
+
 }
