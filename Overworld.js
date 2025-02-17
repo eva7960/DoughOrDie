@@ -52,6 +52,16 @@ class Overworld {
       }
     });
   }
+  bindInventoryInput() {
+    new KeyPressListener("KeyI", () => {
+      const hero = this.map.gameObjects["hero"];
+      if (hero && hero.inventory) {
+        console.log("Player Inventory:", hero.inventory);
+      } else {
+        console.log("No inventory found for the hero.");
+      }
+    });
+  }
 
   startMap(mapConfig) {
     this.map = new OverworldMap(mapConfig);
@@ -62,6 +72,7 @@ class Overworld {
   init() {
     this.startMap(window.OverworldMaps.Shop);
     this.bindActionInput();
+    this.bindInventoryInput();
     this.bindHeroPositionCheck();
 
     this.directionInput = new DirectionInput();
