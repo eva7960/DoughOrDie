@@ -45,28 +45,28 @@ class OverworldEvent {
 
     textMessage(resolve) {
         if (this.event.faceHero) {
-          const obj = this.map.gameObjects[this.event.faceHero];
-          obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
+            const obj = this.map.gameObjects[this.event.faceHero];
+            obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
         }
-    
+
         let messageText = this.event.text;
-    
+
         if (this.event.order && this.event.who) {
-          if (window.orderManager.getOrders()[this.event.who]) {
-            window.orderManager.completeOrder(this.event.who);
-            messageText = "Wow, that looks amazing! Thank you.";
-          } else {
-            window.orderManager.addOrder(this.event.who, this.event.order);
-          }
+            const hero = this.map.gameObjects["hero"];
+            if (window.orderManager.getOrders()[this.event.who]) {
+                const ingredientKey = this.event.order.toLowerCase();
+                if (hero.inventory && hero.inventory[ingredientKey] > 0) {
+                    hero.inventory[ingredientKey]--;
+                    window.orderManager.completeOrder(this.event.who);
+                    messageText = `Thank you! This ${this.event.order} pizza looks amazing!`;
+                } else {
+                    messageText = `You don't have any ${this.event.order} to complete the order!`;
+                }
+            } else {
+                window.orderManager.addOrder(this.event.who, this.event.order);
+            }
         }
-    
-        // Create and display the text message.
-        const message = new TextMessage({
-          text: messageText,
-          onComplete: () => resolve()
-        });
-        message.init(document.querySelector(".game-container"));
-      }
+    }
 
     changeMap(resolve) {
         const sceneTransition = new SceneTransition();
