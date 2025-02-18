@@ -137,7 +137,7 @@ window.OverworldMaps = {
             {
               events : [ 
                 {type: "textMessage", 
-                 text: "Hello, can I have a Cheese Pizza.", 
+                 text: "Hello, can I have a Ingredient Pizza.",
                  faceHero: "cheesePizzaNPC",
                  who: "cheesePizzaNPC",
                  order: "Cheese",
@@ -273,38 +273,38 @@ window.OverworldMaps = {
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
       }),
-      cheese: new Cheese({
+      cheese: new Ingredient({
         x: utils.withGrid(2),
         y: utils.withGrid(9),
         src: "./sprites/cheese.png",
         label: "bad",
-        behaviorLoop: [],
+        //behaviorLoop: generateRandomBehaviorLoop(20),
       }),
-      // cheese1: new Cheese({
+      // cheese1: new Ingredient({
       //   x: utils.withGrid(10),
       //   y: utils.withGrid(6),
       //   src: "./sprites/cheese.png",
       //   behaviorLoop: generateRandomBehaviorLoop(20),
       // }),
-      // cheese2: new Cheese({
+      // cheese2: new Ingredient({
       //   x: utils.withGrid(6),
       //   y: utils.withGrid(10),
       //   src: "./sprites/cheese.png",
       //   behaviorLoop: generateRandomBehaviorLoop(20),
       // }),
-      // cheese3: new Cheese({
+      // cheese3: new Ingredient({
       //   x: utils.withGrid(9),
       //   y: utils.withGrid(5),
       //   src: "./sprites/cheese.png",
       //   behaviorLoop: generateRandomBehaviorLoop(20),
       // }),
-      // cheese4: new Cheese({
+      // cheese4: new Ingredient({
       //   x: utils.withGrid(1),
       //   y: utils.withGrid(10),
       //   src: "./sprites/cheese.png",
       //   behaviorLoop: generateRandomBehaviorLoop(20),
       // }),
-      // cheese5: new Cheese({
+      // cheese5: new Ingredient({
       //   x: utils.withGrid(6),
       //   y: utils.withGrid(7),
       //   src: "./sprites/cheese.png",

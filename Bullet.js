@@ -32,7 +32,7 @@ class Bullet extends GameObject {
             let object = window.OverworldMaps.Outside.gameObjects[key];
 
             // If the object is a cheese and the next position collides
-            if (object instanceof Cheese && utils.collide(this, object)) {
+            if (object instanceof Ingredient && utils.collide(this, object)) {
                 object.hit(); // Apply hit if collision detected
                 delete this.id;
             } else {
