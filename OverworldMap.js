@@ -11,7 +11,10 @@ class OverworldMap {
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
 
-    this.isCutScenePlaying = false; 
+    this.isCutScenePlaying = false;
+
+    this.canShoot = true;
+    this.shootCoolDown = 500;
   }
 
   drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
@@ -29,14 +32,23 @@ class OverworldMap {
     return this.walls[`${x},${y}`] || false;
   }
   shoot() {
-      const bullet = new Bullet({
-          x: this.gameObjects["hero"].x,
-          y: this.gameObjects["hero"].y,
-          src: "./sprites/bullet.png",
-          direction: this.gameObjects["hero"].direction,
-      });
-      this.gameObjects["bullet"] = bullet;
-      bullet.mount(this)
+    if (!this.canShoot) return; // Prevent shooting if still on cooldown
+
+    const bullet = new Bullet({
+      x: this.gameObjects["hero"].x,
+      y: this.gameObjects["hero"].y,
+      src: "./sprites/bullet.png",
+      direction: this.gameObjects["hero"].direction,
+    });
+
+    this.gameObjects["bullet"] = bullet;
+    bullet.mount(this);
+
+    // Set cooldown
+    this.canShoot = false;
+    setTimeout(() => {
+      this.canShoot = true;
+    }, this.shootCoolDown);
   }
 
   mountObjects() {
@@ -44,7 +56,7 @@ class OverworldMap {
       let object = this.gameObjects[key];
       object.id = key;
       object.mount(this);
-    })
+    });
   }
 
   async startCutScene(events) {
@@ -63,12 +75,12 @@ class OverworldMap {
     const hero = this.gameObjects["hero"];
     const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
     const match = Object.values(this.gameObjects).find(object =>{
-      return `${object.x},${object.y}` == `${nextCoords.x},${nextCoords.y}`
+      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
     });
     if(!this.isCutScenePlaying && match && match.talking.length) {
       this.startCutScene(match.talking[0].events);
     }
-    console.log({match});
+    //console.log({match});
   }
 
 
@@ -123,12 +135,12 @@ window.OverworldMaps = {
           ],
           talking: [
             {
-              events : [
+              events : [ 
                 {type: "textMessage", 
                  text: "Hello, can I have a Cheese Pizza.", 
                  faceHero: "cheesePizzaNPC",
                  who: "cheesePizzaNPC",
-                 order: "Cheese Pizza"
+                 order: "Cheese",
                 },
               ]
             },
@@ -149,7 +161,7 @@ window.OverworldMaps = {
                text: "Hello, can I have a Pepperoni Pizza.", 
                faceHero: "pepperoniPizzaNPC",
                who: "pepperoniPizzaNPC",
-               order: "Pepperoni Pizza"
+               order: "Pepperoni",
               },
             ]
           },
@@ -166,7 +178,7 @@ window.OverworldMaps = {
         talking: [
           {
             events : [
-              {type: "textMessage", text: "Are we working hard or hardly working?", faceHero: "boss"},
+              {type: "textMessage", text: "Are we working hard or hardly working? (event array)", faceHero: "boss"},
             ]
           },
         ]
@@ -237,7 +249,7 @@ window.OverworldMaps = {
         {
           events: [
             {who: "boss", type:"walk", direction: "up"},
-            {type: "textMessage", text:"GET BACK TO WORK!"},
+            {type: "textMessage", text:"Are we working hard or hardly working? (cutscene)"},
           ]
         }
       ],
@@ -245,7 +257,7 @@ window.OverworldMaps = {
         {
           events: [
             {type: "changeMap", map: "Outside"},
-            {type: "textMessage", text:"Get ready to hunt for your ingredients!"},
+            //{type: "textMessage", text:"Get ready to hunt for your ingredients!"},
           ]
         }
       ],
@@ -265,38 +277,39 @@ window.OverworldMaps = {
         x: utils.withGrid(2),
         y: utils.withGrid(9),
         src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
+        label: "bad",
+        behaviorLoop: [],
       }),
-      cheese1: new Cheese({
-        x: utils.withGrid(10),
-        y: utils.withGrid(6),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
-      cheese2: new Cheese({
-        x: utils.withGrid(6),
-        y: utils.withGrid(10),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
-      cheese3: new Cheese({
-        x: utils.withGrid(9),
-        y: utils.withGrid(5),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
-      cheese4: new Cheese({
-        x: utils.withGrid(1),
-        y: utils.withGrid(10),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
-      cheese5: new Cheese({
-        x: utils.withGrid(6),
-        y: utils.withGrid(7),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
-      }),
+      // cheese1: new Cheese({
+      //   x: utils.withGrid(10),
+      //   y: utils.withGrid(6),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
+      // cheese2: new Cheese({
+      //   x: utils.withGrid(6),
+      //   y: utils.withGrid(10),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
+      // cheese3: new Cheese({
+      //   x: utils.withGrid(9),
+      //   y: utils.withGrid(5),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
+      // cheese4: new Cheese({
+      //   x: utils.withGrid(1),
+      //   y: utils.withGrid(10),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
+      // cheese5: new Cheese({
+      //   x: utils.withGrid(6),
+      //   y: utils.withGrid(7),
+      //   src: "./sprites/cheese.png",
+      //   behaviorLoop: generateRandomBehaviorLoop(20),
+      // }),
     },
     walls: {
       //north wall

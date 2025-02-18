@@ -52,6 +52,25 @@ class Overworld {
       }
     });
   }
+  bindInventoryInput() {
+    new KeyPressListener("KeyI", () => {
+      const hero = this.map.gameObjects["hero"];
+      if (hero && hero.inventory) {
+        console.log("Player Inventory:", hero.inventory);
+      } else {
+        console.log("No inventory found for the hero.");
+      }
+    });
+  }
+
+  //to test add item method 
+  bindTestPepperoniInput() {
+    new KeyPressListener("KeyP", () => {
+      const hero = this.map.gameObjects["hero"];
+      hero.addItem("pepperoni", 1);
+      console.log("Pepperoni added. Current inventory:", hero.inventory);
+    });
+  }
 
   startMap(mapConfig) {
     this.map = new OverworldMap(mapConfig);
@@ -62,7 +81,9 @@ class Overworld {
   init() {
     this.startMap(window.OverworldMaps.Shop);
     this.bindActionInput();
+    this.bindInventoryInput();
     this.bindHeroPositionCheck();
+    this.bindTestPepperoniInput();
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();

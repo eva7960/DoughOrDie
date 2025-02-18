@@ -31,16 +31,16 @@ const utils = {
   },
 
   oppositeDirection(direction) {
-    if(direction == "right") {
+    if(direction === "right") {
       return "left";
     }
-    if(direction == "left") {
+    if(direction === "left") {
       return "right";
     }
-    if(direction == "up") {
+    if(direction === "up") {
       return "down";
     }
-    if(direction == "down") {
+    if(direction === "down") {
       return "up";
     }
   },
@@ -50,5 +50,9 @@ const utils = {
        detail
     });
     document.dispatchEvent(event);
-  }
+  },
+  collide(A, B) {
+    return (A.x === B.x && A.y === B.y);
+  },
+
 }
