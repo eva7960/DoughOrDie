@@ -15,12 +15,12 @@ class Bullet extends GameObject {
         this.sprite.setAnimation(this.direction);
     }
 
-    update() {
+    update(state) {
         const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
         // Check for collision with all gameObjects at the next position
         Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
             let object = window.OverworldMaps.Outside.gameObjects[key];
-            if (object instanceof Cheese && utils.collide(this, object)) {
+            if (object instanceof Cheese && state.map.isSpaceTaken(nextPosition.x, nextPosition.y, this.direction)) {
                 object.hit(); // Apply hit if collision detected
                 delete window.OverworldMaps.Outside.gameObjects[this.id];
             } else {
