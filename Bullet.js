@@ -20,7 +20,7 @@ class Bullet extends GameObject {
         // Check for collision with all gameObjects at the next position
         Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
             let object = window.OverworldMaps.Outside.gameObjects[key];
-            if (object instanceof Cheese && state.map.isSpaceTaken(nextPosition.x, nextPosition.y, this.direction)) {
+            if (object instanceof Cheese && utils.collide(this, object)) {
                 object.hit(); // Apply hit if collision detected
                 delete window.OverworldMaps.Outside.gameObjects[this.id];
             } else {

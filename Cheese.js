@@ -2,7 +2,7 @@ class Cheese extends GameObject {
   constructor(config) {
     super(config);
     this.health = 30;
-    this.speed = 1;
+    this.speed = 5;
     this.direction = "right";
     this.directionUpdate = {
       "up": ["y", -1],
@@ -12,11 +12,17 @@ class Cheese extends GameObject {
     }
   }
   update(state) {
+    if(this.speed > 0) {
+      this.speed--;
+    }
     const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
-    let hero = window.OverworldMaps.Outside.gameObjects["hero"];
-    if (state.map.isSpaceTaken(nextPosition.x, nextPosition.y, this.direction) && hero) {
-      hero.hit();
-    } if(state.map.isSpaceTaken(nextPosition.x, nextPosition.y, this.direction)) {
+    Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
+      let object = window.OverworldMaps.Outside.gameObjects[key];
+      if (utils.collide(this, object) && object instanceof Person) {
+        object.hit();
+      }
+    });
+    if (state.map.isSpaceTaken(nextPosition.x, nextPosition.y, this.direction)) {
       this.changeDirection();
     } else {
       // Update position if no wall detected
@@ -24,6 +30,7 @@ class Cheese extends GameObject {
       this.y = nextPosition.y;
       this.sprite.updateAnimationProgress();
     }
+
 
   }
 
