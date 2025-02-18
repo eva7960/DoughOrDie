@@ -277,8 +277,6 @@ window.OverworldMaps = {
         x: utils.withGrid(2),
         y: utils.withGrid(9),
         src: "./sprites/cheese.png",
-        label: "bad",
-        behaviorLoop: [],
       }),
       // cheese1: new Cheese({
       //   x: utils.withGrid(10),

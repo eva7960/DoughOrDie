@@ -2,9 +2,8 @@ class Cheese extends GameObject {
   constructor(config) {
     super(config);
     this.health = 30;
-    this.movingProgressRemaining = 0;
-    this.isStanding = false;
-    this.isPlayerControlled = config.isPlayerControlled || false;
+    this.speed = 1;
+    this.direction = "right";
     this.directionUpdate = {
       "up": ["y", -1],
       "down": ["y", 1],
@@ -12,78 +11,21 @@ class Cheese extends GameObject {
       "right": ["x", 1],
     }
   }
+  update() {
+    const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
 
-  update(state) {
-    if (this.movingProgressRemaining > 0) {
-      this.updatePosition();
-    } else {
-      if (!state.map.isCutScenePlaying && this.isPlayerControlled && state.arrow) {
-        this.startBehavior(state, {
-          type: "walk",
-          direction: state.arrow
-        })
+    // Check for collision with all gameObjects at the next position
+    Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
+      let object = window.OverworldMaps.Outside.gameObjects[key];
+      if (object instanceof Person && utils.collide(this, object)) {
+        object.hit(); // Apply hit if collision detected
+        delete window.OverworldMaps.Outside.gameObjects[this.id];
+      } else {
+        this.x = nextPosition.x;
+        this.y = nextPosition.y;
+        this.sprite.updateAnimationProgress();
       }
-      this.updateSprite(state);
-    }
-  }
-
-  startBehavior(state, behavior) {
-    this.direction = behavior.direction;
-
-    if (behavior.type === "walk") {
-      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-        // Reverse direction if space is taken
-        const oppositeDirections = {
-          up: "down",
-          down: "up",
-          left: "right",
-          right: "left",
-        };
-
-        this.direction = oppositeDirections[this.direction];
-
-        // Check if the new direction is also blocked
-        if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-          return; // If both original and opposite directions are blocked, stop moving
-        }
-      }
-
-      state.map.moveWall(this.x, this.y, this.direction);
-      this.movingProgressRemaining = 16;
-      this.updateSprite(state);
-    }
-
-    if (behavior.type === "stand") {
-      this.isStanding = true;
-      setTimeout(() => {
-        utils.emitEvent("PersonStandComplete", {
-          whoId: this.id
-        })
-        this.isStanding = false;
-      }, behavior.time)
-    }
-  }
-
-
-  updatePosition() {
-    const [property, change] = this.directionUpdate[this.direction];
-    this[property] += change;
-    this.movingProgressRemaining -= 1;
-
-    if (this.movingProgressRemaining === 0) {
-      utils.emitEvent("PersonWalkingComplete", {
-        whoId: this.id
-      })
-    }
-
-  }
-
-  updateSprite() {
-    if (this.movingProgressRemaining > 0) {
-      this.sprite.setAnimation("walk-"+this.direction);
-      return;
-    }
-    this.sprite.setAnimation("idle-"+this.direction);
+    });
   }
   hit() {
     console.log(this.health)
