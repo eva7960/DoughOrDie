@@ -1,23 +1,23 @@
 :root {
-    --text-bg: rgba(0, 0, 0, 0.8); 
-    --border-color: #ffffff; 
-    --text-color: #ffffff; 
-    --button-bg: rgba(255, 255, 255, 0.2); 
+    --text-bg: rgba(0, 0, 0, 0.8);
+    --border-color: #ffffff;
+    --text-color: #ffffff;
+    --button-bg: rgba(255, 255, 255, 0.2);
     --button-hover: rgba(255, 255, 255, 0.5);
 }
 
 .TextMessage {
     position: absolute;
-    left: 5%;
-    right: 5%;
-    bottom: 5%;
-    height: 120px;
-    padding: 12px 20px;
+    left: 0;
+    right: 44%;
+    bottom: 10%;
+    height: 60px;
+    padding: 6px 10px;
     background: var(--text-bg);
     border: 2px solid var(--border-color);
     border-radius: 12px;
     color: var(--text-color);
-    font-family: 'Press Start 2P', sans-serif; 
+    font-family: sans-serif;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -25,11 +25,23 @@
 
 .TextMessage_p {
     margin: 0;
-    font-size: 14px;
+    font-size: 11px;
     line-height: 1.5;
-    max-width: 85%; 
-    white-space: pre-line; 
+    max-width: 85%;
+    white-space: pre-line;
 }
+
+.TextMessage span {
+    opacity: 0;
+}
+
+.TextMessage span.revealed {
+    opacity: 1;
+}
+
+
+
+
 
 .TextMessage_button {
     font-size: 12px;

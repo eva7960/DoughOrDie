@@ -44,26 +44,42 @@ class OverworldEvent {
     }
 
     textMessage(resolve) {
-
-        if(this.event.faceHero) {
+        if (this.event.faceHero) {
             const obj = this.map.gameObjects[this.event.faceHero];
             obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
         }
-        const message = new TextMessage({
-            text: this.event.text,
-            onComplete: () => resolve()
-        })
-        message.init(document.querySelector(".game-container"))
+
+        let messageText = this.event.text;
+
+        if (this.event.order && this.event.who) {
+            const hero = this.map.gameObjects["hero"];
+            if (window.orderManager.getOrders()[this.event.who]) {
+                const ingredientKey = this.event.order.toLowerCase();
+                if (hero.inventory && hero.inventory[ingredientKey] > 0) {
+                    hero.inventory[ingredientKey]--;
+                    window.orderManager.completeOrder(this.event.who);
+                    messageText = `Thank you! This ${this.event.order} pizza looks amazing!`;
+                } else {
+                    messageText = `You don't have any ${this.event.order} to complete the order!`;
+                }
+            } else {
+                window.orderManager.addOrder(this.event.who, this.event.order);
+            }
+        }
     }
 
     changeMap(resolve) {
-        this.map.overworld.startMap( window.OverworldMaps[this.event.map] );
-        if (this.event.map === "Outside") {
-            document.body.style.cursor = 'url("./sprites/crosshair.png"), auto';
-        } else {
-            document.body.style.cursor = "auto";
-        }
-        resolve();
+        const sceneTransition = new SceneTransition();
+        sceneTransition.init(document.querySelector(".game-container"), () => {
+            this.map.overworld.startMap(window.OverworldMaps[this.event.map] );
+            if (this.event.map === "Outside") {
+                document.body.style.cursor = 'url("./sprites/crosshair.png"), auto';
+            } else {
+                document.body.style.cursor = "auto";
+            }
+            resolve();
+        });
+        sceneTransition.fadeOut();
     }
 
 
