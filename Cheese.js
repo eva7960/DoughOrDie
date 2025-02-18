@@ -78,7 +78,7 @@ class Cheese extends GameObject {
   hit() {
     console.log(this.health)
     this.health = Math.max(this.health - 10, 0);
-    if(this.health === 0 && this.isMounted) {
+    if(this.health === 0) {
       window.OverworldMaps.Outside.gameObjects["hero"].addItem("cheese", 1);
       delete window.OverworldMaps.Outside.gameObjects[this.id];
     }

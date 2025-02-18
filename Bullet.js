@@ -32,11 +32,10 @@ class Bullet extends GameObject {
             let object = window.OverworldMaps.Outside.gameObjects[key];
 
             // If the object is a cheese and the next position collides
-            if (object instanceof Cheese && utils.collide(nextPosition, object)) {
+            if (object instanceof Cheese && utils.collide(this, object)) {
                 object.hit(); // Apply hit if collision detected
-                this.isMounted = false;
-                delete window.OverworldMaps.Outside.gameObjects[this.id];
-            } else if(this.isMounted) {
+                delete this.id;
+            } else {
                 this.x = nextPosition.x;
                 this.y = nextPosition.y;
                 this.sprite.updateAnimationProgress();
