@@ -1,7 +1,6 @@
 class Person extends GameObject {
   constructor(config) {
     super(config);
-
     this.movingProgressRemaining = 0;
     this.isStanding = false; 
     this.health = 100;

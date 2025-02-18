@@ -54,8 +54,5 @@ const utils = {
   collide(A, B) {
     return (A.x === B.x && A.y === B.y);
   },
-  remove(id, location) {
-    delete window.OverworldMaps.location.gameObjects[id]; // Remove from gameObjects
-  }
 
 }
