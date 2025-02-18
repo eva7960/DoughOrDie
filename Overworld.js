@@ -63,6 +63,15 @@ class Overworld {
     });
   }
 
+  //to test add item method 
+  bindTestPepperoniInput() {
+    new KeyPressListener("KeyP", () => {
+      const hero = this.map.gameObjects["hero"];
+      hero.addItem("pepperoni", 1);
+      console.log("Pepperoni added. Current inventory:", hero.inventory);
+    });
+  }
+
   startMap(mapConfig) {
     this.map = new OverworldMap(mapConfig);
     this.map.overworld = this;
@@ -74,6 +83,7 @@ class Overworld {
     this.bindActionInput();
     this.bindInventoryInput();
     this.bindHeroPositionCheck();
+    this.bindTestPepperoniInput();
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();
