@@ -12,7 +12,13 @@ class Cheese extends GameObject {
     }
   }
   update(state) {
-    const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
+      if (this.speed > 0) {
+          this.speed--; // Slow down movement
+          return;
+      }
+      this.speed = 5;
+      const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
+
 
     // Check for collision with all gameObjects at the next position
     Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
