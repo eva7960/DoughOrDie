@@ -19,7 +19,8 @@ class Cheese extends GameObject {
       let object = window.OverworldMaps.Outside.gameObjects[key];
       if (object instanceof Person && utils.collide(this, object)) {
         object.hit(); // Apply hit if collision detected
-        delete window.OverworldMaps.Outside.gameObjects[this.id];
+      } else if(window.OverworldMaps.isSpaceTaken(this.x, this.y, this.direction)) {
+        this.changeDirection();
       } else {
         this.x = nextPosition.x;
         this.y = nextPosition.y;
@@ -35,5 +36,16 @@ class Cheese extends GameObject {
       delete window.OverworldMaps.Outside.gameObjects[this.id];
     }
   }
-
+  changeDirection() {
+    const random = Math.floor(Math.random() * 4);
+    if(random === 0) {
+      this.direction = "up"
+    } else if(random === 1) {
+      this.direction = "down"
+    } else if(random === 2) {
+      this.direction = "right"
+    } else {
+      this.direction = "left"
+    }
+  }
 }
