@@ -6,6 +6,7 @@ class Overworld {
     this.map = null;
   }
 
+
   startGameLoop() {
     const step = () => {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -25,7 +26,7 @@ class Overworld {
 
       this.map.drawUpperImage(this.ctx);
 
-      //update the HUD, currently just shows position of hero 
+      //update the HUD, currently just shows position of hero
       const hero = this.map.gameObjects.hero;
       this.hud.update("Position: (" + hero.x + ", " + hero.y + ")  Health: " + hero.health);
 
@@ -38,16 +39,36 @@ class Overworld {
     new KeyPressListener("Enter", () => {
       this.map.checkForActionCutScene();
     });
-    new KeyPressListener("Space",() => {
-      new bullet
+    new KeyPressListener("Space", () => {
+      this.map.shoot();
     });
+
   }
 
   bindHeroPositionCheck() {
     document.addEventListener("PersonWalkingComplete", e => {
-      if (e.detail.whoId === "hero") {
+      if (e.detail.whoId == "hero") {
         this.map.checkForFootstepCutscene();
       }
+    });
+  }
+  bindInventoryInput() {
+    new KeyPressListener("KeyI", () => {
+      const hero = this.map.gameObjects["hero"];
+      if (hero && hero.inventory) {
+        console.log("Player Inventory:", hero.inventory);
+      } else {
+        console.log("No inventory found for the hero.");
+      }
+    });
+  }
+
+  //to test add item method 
+  bindTestPepperoniInput() {
+    new KeyPressListener("KeyP", () => {
+      const hero = this.map.gameObjects["hero"];
+      hero.addItem("pepperoni", 1);
+      console.log("Pepperoni added. Current inventory:", hero.inventory);
     });
   }
 
@@ -60,7 +81,9 @@ class Overworld {
   init() {
     this.startMap(window.OverworldMaps.Shop);
     this.bindActionInput();
+    this.bindInventoryInput();
     this.bindHeroPositionCheck();
+    this.bindTestPepperoniInput();
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();

@@ -4,14 +4,34 @@ class Person extends GameObject {
     this.movingProgressRemaining = 0;
     this.isStanding = false; 
     this.health = 100;
+    this.inventory = config.inventory || {cheese: 0, pepperoni: 1};
 
     this.isPlayerControlled = config.isPlayerControlled || false;
-
+    
     this.directionUpdate = {
       "up": ["y", -1],
       "down": ["y", 1],
       "left": ["x", -1],
       "right": ["x", 1],
+    }
+
+  }
+  
+  addItem(item, amount = 1) {
+    if (this.inventory.hasOwnProperty(item)) {
+      this.inventory[item] += amount;
+    } else {
+      this.inventory[item] = amount;
+    }
+  }
+
+  setItem(item, amount) {
+    this.inventory[item] = amount;
+  }
+
+  removeItem(item, amount = 1) {
+    if (this.inventory.hasOwnProperty(item)) {
+      this.inventory[item] = Math.max(0, this.inventory[item] - amount);
     }
   }
 
@@ -33,7 +53,7 @@ class Person extends GameObject {
     this.direction = behavior.direction;
 
     if(behavior.type === "walk") {
-    console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
+    //console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
     if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
       behavior.retry && setTimeout(() => {
           this.startBehavior(state, behavior)
