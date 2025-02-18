@@ -11,7 +11,7 @@ class Cheese extends GameObject {
       "right": ["x", 1],
     }
   }
-  update() {
+  update(state) {
     const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
 
     // Check for collision with all gameObjects at the next position
@@ -19,15 +19,20 @@ class Cheese extends GameObject {
       let object = window.OverworldMaps.Outside.gameObjects[key];
       if (object instanceof Person && utils.collide(this, object)) {
         object.hit(); // Apply hit if collision detected
-      } else if(window.OverworldMaps.isSpaceTaken(this.x, this.y, this.direction)) {
-        this.changeDirection();
-      } else {
-        this.x = nextPosition.x;
-        this.y = nextPosition.y;
-        this.sprite.updateAnimationProgress();
       }
     });
+
+    // Check if the next position is taken by a wall
+    if (state.map.isSpaceTaken(nextPosition.x, nextPosition.y, this.direction)) {
+      this.changeDirection(); // Change direction if space is taken by a wall
+    } else {
+      // Update position if no collisions or wall detected
+      this.x = nextPosition.x;
+      this.y = nextPosition.y;
+      this.sprite.updateAnimationProgress();
+    }
   }
+
   hit() {
     console.log(this.health)
     this.health = Math.max(this.health - 10, 0);
