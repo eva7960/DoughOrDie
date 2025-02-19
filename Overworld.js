@@ -46,6 +46,8 @@ class Overworld {
     step();
   }
 
+ 
+
   drawStartMenu() {
     this.ctx.fillStyle = "black";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -63,10 +65,10 @@ class Overworld {
 
     this.ctx.fillStyle = "red";
     this.ctx.font = "15px Arial";
-    this.ctx.fillText("Game Over", this.canvas.width / 2 - 80, this.canvas.height / 2);
+    this.ctx.fillText("Game Over", this.canvas.width / 2 - 65, this.canvas.height / 2);
     
     this.ctx.fillStyle = "white";
-    this.ctx.fillText("Press R to Restart", this.canvas.width / 2 - 100, this.canvas.height / 2 + 50);
+    this.ctx.fillText("Press R to Restart", this.canvas.width / 2 - 65, this.canvas.height / 2 + 30);
   }
 
 
@@ -135,6 +137,8 @@ class Overworld {
 
   gameOver() {
     this.gameState = "gameover";
+    this.drawGameOverScreen();
+
   }
 
   restartGame() {
