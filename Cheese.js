@@ -16,7 +16,7 @@ class Cheese extends GameObject {
       this.speed--; // Slow down movement
       return;
     }
-    this.speed = 4;
+    this.speed = 3;
     const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
 
 
@@ -44,7 +44,6 @@ class Cheese extends GameObject {
     this.health = Math.max(this.health - 10, 0);
     if(this.health === 0) {
       window.OverworldMaps.Shop.gameObjects["hero"].addItem("cheese", 1);
-      delete window.OverworldMaps.Outside.gameObjects[this];
     }
   }
   changeDirection() {

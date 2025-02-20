@@ -105,6 +105,13 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(oldX, oldY, direction);
     this.addWall(x,y)
   }
+  removeGameObject(map, id) {
+    // Directly delete the object by its id if it exists in the map's gameObjects
+    if (map.gameObjects[id]) {
+      delete map.gameObjects[id];
+    }
+  }
+
 
 
 }
