@@ -83,7 +83,7 @@ class Overworld {
     this.map.overworld = this;
     this.map.mountObjects();
   }
-  static drawGameOverScreen(ctx, canvas) {
+  drawGameOverScreen(ctx, canvas) {
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 

@@ -102,5 +102,4 @@ class Person extends GameObject {
       delete window.OverworldMaps.Outside.gameObjects[this.id];
     }
   }
-
 }
