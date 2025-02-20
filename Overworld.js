@@ -74,10 +74,10 @@ class Overworld {
 
     this.ctx.fillStyle = "red";
     this.ctx.font = "40px Arial";
-    this.ctx.fillText("Game Over", this.canvas.width / 2 - 80, this.canvas.height / 2);
+    this.ctx.fillText("Game Over", this.canvas.width / 2 - 65, this.canvas.height / 2);
     
     this.ctx.fillStyle = "white";
-    this.ctx.fillText("Press R to Restart", this.canvas.width / 2 - 100, this.canvas.height / 2 + 50);
+    this.ctx.fillText("Press R to Restart", this.canvas.width / 2 - 65, this.canvas.height / 2 + 50);
   }
 
 
@@ -172,7 +172,7 @@ init() {
 
     // ✅ Reset and Start Timer
     this.timer.reset();
-    this.timer.start();
+
 
     // ✅ Update HUD immediately
     this.hud.update({ health: this.map.gameObjects.hero.health, timer: this.timer.formatTime() });
