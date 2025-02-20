@@ -71,7 +71,6 @@ class Sprite {
 
 
   draw(ctx) { //REMEMBER TO ADD CAMERA BACK
-    const scaleFactor = this.gameObject.type === "food" ? 0.5 : 1; // Scale only food
     const x = this.gameObject.x - 8; // + utils.withGrid(5) - camera.x
     const y = this.gameObject.y - 18; //+ utils.withGrid(5) - camera.y
 

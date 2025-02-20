@@ -1,11 +1,9 @@
 class Cheese extends GameObject {
   constructor(config) {
     super(config);
-    this.movingProgressRemaining = 0;
-    this.isStanding = false;
-
-    this.isPlayerControlled = config.isPlayerControlled || false;
-
+    this.health = 30;
+    this.speed = 1;
+    this.direction = "right";
     this.directionUpdate = {
       "up": ["y", -1],
       "down": ["y", 1],
@@ -13,78 +11,51 @@ class Cheese extends GameObject {
       "right": ["x", 1],
     }
   }
-
   update(state) {
-    if (this.movingProgressRemaining > 0) {
-      this.updatePosition();
-    } else {
-      if (!state.map.isCutScenePlaying && this.isPlayerControlled && state.arrow) {
-        this.startBehavior(state, {
-          type: "walk",
-          direction: state.arrow
-        })
-      }
-      this.updateSprite(state);
-    }
-  }
-
-  startBehavior(state, behavior) {
-    this.direction = behavior.direction;
-
-    if (behavior.type === "walk") {
-      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-        // Reverse direction if space is taken
-        const oppositeDirections = {
-          up: "down",
-          down: "up",
-          left: "right",
-          right: "left",
-        };
-
-        this.direction = oppositeDirections[this.direction];
-
-        // Check if the new direction is also blocked
-        if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-          return; // If both original and opposite directions are blocked, stop moving
-        }
-      }
-
-      state.map.moveWall(this.x, this.y, this.direction);
-      this.movingProgressRemaining = 16;
-      this.updateSprite(state);
-    }
-
-    if (behavior.type === "stand") {
-      this.isStanding = true;
-      setTimeout(() => {
-        utils.emitEvent("PersonStandComplete", {
-          whoId: this.id
-        })
-        this.isStanding = false;
-      }, behavior.time)
-    }
-  }
-
-
-  updatePosition() {
-    const [property, change] = this.directionUpdate[this.direction];
-    this[property] += change;
-    this.movingProgressRemaining -= 1;
-
-    if (this.movingProgressRemaining === 0) {
-      utils.emitEvent("PersonWalkingComplete", {
-        whoId: this.id
-      })
-    }
-
-  }
-
-  updateSprite() {
-    if (this.movingProgressRemaining > 0) {
-      this.sprite.setAnimation("walk-"+this.direction);
+    if (this.speed > 0) {
+      this.speed--; // Slow down movement
       return;
     }
-    this.sprite.setAnimation("idle-"+this.direction);
+    this.speed = 3;
+    const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
+
+
+    // Check for collision with all gameObjects at the next position
+    Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
+      let object = window.OverworldMaps.Outside.gameObjects[key];
+      if (key === "hero" && state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+        object.hit(); // Apply hit if collision detected
+      }
+    });
+
+    // Check if the next position is taken by a wall
+    if (state.map.isSpaceTaken(nextPosition.x, nextPosition.y, this.direction)) {
+      this.changeDirection(); // Change direction if space is taken by a wall
+    } else {
+      // Update position if no collisions or wall detected
+      this.x = nextPosition.x;
+      this.y = nextPosition.y;
+      this.sprite.updateAnimationProgress();
+    }
   }
 
+  hit() {
+    console.log(this.health)
+    this.health = Math.max(this.health - 10, 0);
+    if(this.health === 0) {
+      window.OverworldMaps.Shop.gameObjects["hero"].addItem("cheese", 1);
+    }
+  }
+  changeDirection() {
+    const random = Math.floor(Math.random() * 4);
+    if(random === 0) {
+      this.direction = "up"
+    } else if(random === 1) {
+      this.direction = "down"
+    } else if(random === 2) {
+      this.direction = "right"
+    } else {
+      this.direction = "left"
+    }
+  }
 }
