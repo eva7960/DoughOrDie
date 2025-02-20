@@ -28,7 +28,10 @@ class Overworld {
 
       //update the HUD, currently just shows position of hero
       const hero = this.map.gameObjects.hero;
-      this.hud.update("Position: (" + hero.x + ", " + hero.y + ")  Health: " + hero.health);
+      this.hud.update({
+        health: hero.health,
+        timer: window.timer ? window.timer.remainingTime : "0"
+      });
 
       requestAnimationFrame(step);
     };
