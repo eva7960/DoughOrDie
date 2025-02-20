@@ -12,12 +12,12 @@ class Cheese extends GameObject {
     }
   }
   update(state) {
-      if (this.speed > 0) {
-          this.speed--; // Slow down movement
-          return;
-      }
-      this.speed = 5;
-      const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
+    if (this.speed > 0) {
+      this.speed--; // Slow down movement
+      return;
+    }
+    this.speed = 4;
+    const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
 
 
     // Check for collision with all gameObjects at the next position
@@ -25,7 +25,6 @@ class Cheese extends GameObject {
       let object = window.OverworldMaps.Outside.gameObjects[key];
       if (key === "hero" && state.map.isSpaceTaken(this.x, this.y, this.direction)) {
         object.hit(); // Apply hit if collision detected
-        this.changeDirection();
       }
     });
 
@@ -44,7 +43,7 @@ class Cheese extends GameObject {
     console.log(this.health)
     this.health = Math.max(this.health - 10, 0);
     if(this.health === 0) {
-      window.OverworldMaps.Outside.gameObjects["hero"].addItem("cheese", 1);
+      window.OverworldMaps.Shop.gameObjects["hero"].addItem("cheese", 1);
       delete window.OverworldMaps.Outside.gameObjects[this];
     }
   }

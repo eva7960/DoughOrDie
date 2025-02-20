@@ -4,6 +4,7 @@ class Overworld {
     this.canvas = this.element.querySelector(".game-canvas");
     this.ctx = this.canvas.getContext("2d");
     this.map = null;
+    this.timer = new Timer();
   }
 
 
@@ -30,7 +31,7 @@ class Overworld {
       const hero = this.map.gameObjects.hero;
       this.hud.update({
         health: hero.health,
-        timer: window.timer ? window.timer.remainingTime : "0"
+        timer: this.timer.formatTime(),
       });
 
       requestAnimationFrame(step);
