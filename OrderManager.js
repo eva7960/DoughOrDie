@@ -2,6 +2,7 @@ class OrderManager {
   constructor() {
     //array of orders
     this.orders = {};
+    this.timer = new Timer();
 
     //press o on the keyboard to output all orders to the console
     new KeyPressListener("KeyO", () => {
@@ -14,6 +15,7 @@ class OrderManager {
     if (!this.orders[npcId]) {
       this.orders[npcId] = order;
       console.log(`Order added from ${npcId}: ${order}`);
+      this.timer.start();
     }
   }
 
@@ -22,6 +24,8 @@ class OrderManager {
     if (this.orders[npcId]) {
       console.log(`Order completed for ${npcId}: ${this.orders[npcId]}`);
       delete this.orders[npcId];
+      this.timer.stop();
+      this.timer.reset();
     }
   }
 

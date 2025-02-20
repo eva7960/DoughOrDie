@@ -28,7 +28,10 @@ class Overworld {
 
       //update the HUD, currently just shows position of hero
       const hero = this.map.gameObjects.hero;
-      this.hud.update("Position: (" + hero.x + ", " + hero.y + ")  Health: " + hero.health);
+      this.hud.update({
+        health: hero.health,
+        timer: window.orderManager.timer.formatTime(),
+      });
 
       requestAnimationFrame(step);
     };
@@ -43,11 +46,14 @@ class Overworld {
       this.map.shoot();
     });
 
+    new KeyPressListener("KeyR", () => {
+      
+    });
   }
 
   bindHeroPositionCheck() {
     document.addEventListener("PersonWalkingComplete", e => {
-      if (e.detail.whoId == "hero") {
+      if (e.detail.whoId === "hero") {
         this.map.checkForFootstepCutscene();
       }
     });
@@ -76,6 +82,17 @@ class Overworld {
     this.map = new OverworldMap(mapConfig);
     this.map.overworld = this;
     this.map.mountObjects();
+  }
+  static drawGameOverScreen(ctx, canvas) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "red";
+    ctx.font = "15px Arial";
+    ctx.fillText("Game Over", canvas.width / 2 - 65, canvas.height / 2);
+
+    ctx.fillStyle = "white";
+    ctx.fillText("Press R to Restart", canvas.width / 2 - 65, canvas.height / 2 + 30);
   }
 
   init() {

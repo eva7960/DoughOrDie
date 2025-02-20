@@ -105,6 +105,13 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(oldX, oldY, direction);
     this.addWall(x,y)
   }
+  removeGameObject(map, id) {
+    // Directly delete the object by its id if it exists in the map's gameObjects
+    if (map.gameObjects[id]) {
+      delete map.gameObjects[id];
+    }
+  }
+
 
 
 }
@@ -137,7 +144,7 @@ window.OverworldMaps = {
             {
               events : [ 
                 {type: "textMessage", 
-                 text: "Hello, can I have a Ingredient Pizza.",
+                 text: "Hello, can I have a Cheese Pizza.", 
                  faceHero: "cheesePizzaNPC",
                  who: "cheesePizzaNPC",
                  order: "Cheese",
@@ -273,44 +280,45 @@ window.OverworldMaps = {
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
       }),
-      cheese: new Ingredient({
+      cheese: new Cheese({
         x: utils.withGrid(2),
         y: utils.withGrid(9),
         src: "./sprites/cheese.png",
-        label: "bad",
-        //behaviorLoop: generateRandomBehaviorLoop(20),
+        behaviorLoop: generateRandomBehaviorLoop(100)
       }),
-      // cheese1: new Ingredient({
-      //   x: utils.withGrid(10),
-      //   y: utils.withGrid(6),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
-      // cheese2: new Ingredient({
-      //   x: utils.withGrid(6),
-      //   y: utils.withGrid(10),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
-      // cheese3: new Ingredient({
-      //   x: utils.withGrid(9),
-      //   y: utils.withGrid(5),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
-      // cheese4: new Ingredient({
-      //   x: utils.withGrid(1),
-      //   y: utils.withGrid(10),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
-      // cheese5: new Ingredient({
+      cheese1: new Cheese({
+        x: utils.withGrid(10),
+        y: utils.withGrid(6),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese2: new Cheese({
+        x: utils.withGrid(6),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese3: new Cheese({
+        x: utils.withGrid(9),
+        y: utils.withGrid(5),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese4: new Cheese({
+        x: utils.withGrid(1),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      // cheese5: new Cheese({
       //   x: utils.withGrid(6),
       //   y: utils.withGrid(7),
       //   src: "./sprites/cheese.png",
       //   behaviorLoop: generateRandomBehaviorLoop(20),
       // }),
+
     },
+
     walls: {
       //north wall
       [utils.asGridCoord(1, -1)]: true,
@@ -383,6 +391,12 @@ window.OverworldMaps = {
       ],
     }
   },
+
+  gameOver: {
+    upperSrc: "./backgrounds/over.png",
+    lowerSrc: "./backgrounds/over.png",
+    gameObjects: {}
+  },
 }
 function generateRandomBehaviorLoop(steps) {
   const directions = ["up", "down", "left", "right"];
@@ -394,7 +408,6 @@ function generateRandomBehaviorLoop(steps) {
     loop.push({ type: "walk", direction: randomDirection });
     loop.push({ type: "walk", direction: randomDirection });
   }
-
   return loop;
 }
 

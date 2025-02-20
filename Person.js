@@ -74,7 +74,6 @@ class Person extends GameObject {
         this.isStanding = false;
       }, behavior.time)
     }
-
   }
 
   updatePosition() {
@@ -96,6 +95,12 @@ class Person extends GameObject {
       return;
     }
     this.sprite.setAnimation("idle-"+this.direction);
+  }
+  hit() {
+    this.health = Math.max(this.health - 10, 0);
+    if(this.health === 0) {
+      delete window.OverworldMaps.Outside.gameObjects[this.id];
+    }
   }
 
 }
