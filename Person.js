@@ -102,6 +102,7 @@ class Person extends GameObject {
     this.health = Math.max(this.health - 10, 0);
     if(this.health === 0) {
       delete window.OverworldMaps.Outside.gameObjects[this.id];
+      window.Overworld.map = "gameOver";
     }
   }
 

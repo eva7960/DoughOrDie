@@ -184,6 +184,9 @@ window.OverworldMaps = {
         ]
     }),
     },
+    gameOver: {
+      upperSrc: "./backgrounds/over.png",
+    },
     walls: {
       //right side of door way
       [utils.asGridCoord(-1,2)] : true,
@@ -308,7 +311,9 @@ window.OverworldMaps = {
       //   src: "./sprites/cheese.png",
       //   behaviorLoop: generateRandomBehaviorLoop(20),
       // }),
+
     },
+
     walls: {
       //north wall
       [utils.asGridCoord(1, -1)]: true,

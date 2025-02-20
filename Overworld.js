@@ -46,6 +46,9 @@ class Overworld {
       this.map.shoot();
     });
 
+    new KeyPressListener("KeyR", () => {
+      
+    });
   }
 
   bindHeroPositionCheck() {
