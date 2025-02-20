@@ -134,10 +134,10 @@ class Overworld {
     this.gameState = "playing";
     this.startGameLoop();
 
-    // TEMPORARY: Trigger game over after 3 seconds
-    setTimeout(() => {
-      this.gameOver();
-  }, 5000); // 5 seconds
+    // TEMPORARY: Trigger game over after 5 seconds
+    //setTimeout(() => {
+     // this.gameOver();
+  //}, 5000); // 5 seconds
   }
 
   gameOver() {
