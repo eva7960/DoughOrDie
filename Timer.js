@@ -1,7 +1,7 @@
 class Timer {
     constructor() {
-      this.initialTime = 60;
-      this.remainingTime = 60;
+      this.initialTime = 5;
+      this.remainingTime = 5;
       this.interval = null;
     }
   
@@ -28,6 +28,10 @@ class Timer {
         clearInterval(this.interval);
         this.interval = null;
       }
+    }
+    reset() {
+        this.initialTime = 60;
+        this.remainingTime = 60;
     }
   }
 

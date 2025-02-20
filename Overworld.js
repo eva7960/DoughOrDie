@@ -53,7 +53,7 @@ class Overworld {
 
   bindHeroPositionCheck() {
     document.addEventListener("PersonWalkingComplete", e => {
-      if (e.detail.whoId == "hero") {
+      if (e.detail.whoId === "hero") {
         this.map.checkForFootstepCutscene();
       }
     });
@@ -82,6 +82,17 @@ class Overworld {
     this.map = new OverworldMap(mapConfig);
     this.map.overworld = this;
     this.map.mountObjects();
+  }
+  static drawGameOverScreen(ctx, canvas) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "red";
+    ctx.font = "15px Arial";
+    ctx.fillText("Game Over", canvas.width / 2 - 65, canvas.height / 2);
+
+    ctx.fillStyle = "white";
+    ctx.fillText("Press R to Restart", canvas.width / 2 - 65, canvas.height / 2 + 30);
   }
 
   init() {

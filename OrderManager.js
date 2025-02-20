@@ -25,6 +25,7 @@ class OrderManager {
       console.log(`Order completed for ${npcId}: ${this.orders[npcId]}`);
       delete this.orders[npcId];
       this.timer.stop();
+      this.timer.reset();
     }
   }
 

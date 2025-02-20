@@ -401,7 +401,6 @@ function generateRandomBehaviorLoop(steps) {
     loop.push({ type: "walk", direction: randomDirection });
     loop.push({ type: "walk", direction: randomDirection });
   }
-
   return loop;
 }
 
