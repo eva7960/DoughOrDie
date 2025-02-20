@@ -15,8 +15,8 @@ class OrderManager {
     if (!this.orders[npcId]) {
       this.orders[npcId] = order;
       console.log(`Order added from ${npcId}: ${order}`);
+      this.timer.start();
     }
-    this.timer.start();
   }
 
   //finish the order, delete it from the array
@@ -24,6 +24,7 @@ class OrderManager {
     if (this.orders[npcId]) {
       console.log(`Order completed for ${npcId}: ${this.orders[npcId]}`);
       delete this.orders[npcId];
+      this.timer.stop();
     }
   }
 

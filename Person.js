@@ -97,11 +97,9 @@ class Person extends GameObject {
     this.sprite.setAnimation("idle-"+this.direction);
   }
   hit() {
-    console.log(this.health)
     this.health = Math.max(this.health - 10, 0);
     if(this.health === 0) {
       delete window.OverworldMaps.Outside.gameObjects[this.id];
-      window.Overworld.map = "gameOver";
     }
   }
 
