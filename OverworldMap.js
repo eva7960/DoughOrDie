@@ -136,7 +136,7 @@ window.OverworldMaps = {
       cheesePizzaNPC: new Person({
           x: utils.withGrid(5),
           y: utils.withGrid(5),
-          src: "./sprites/customer1.png",
+          src: "./sprites/npc1.png",
           behaviorLoop:[
               //default behavior for npc
           ],
@@ -157,7 +157,7 @@ window.OverworldMaps = {
       pepperoniPizzaNPC: new Person({
         x: utils.withGrid(6),
         y: utils.withGrid(6),
-        src: "./sprites/customer1.png",
+        src: "./sprites/npc7.png",
         behaviorLoop:[
             //default behavior for npc 
         ],
