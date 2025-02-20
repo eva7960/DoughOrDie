@@ -23,8 +23,9 @@ class Cheese extends GameObject {
     // Check for collision with all gameObjects at the next position
     Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
       let object = window.OverworldMaps.Outside.gameObjects[key];
-      if (object instanceof Person && utils.collide(this, object)) {
+      if (key === "hero" && state.map.isSpaceTaken(this.x, this.y, this.direction)) {
         object.hit(); // Apply hit if collision detected
+        this.changeDirection();
       }
     });
 
@@ -44,7 +45,7 @@ class Cheese extends GameObject {
     this.health = Math.max(this.health - 10, 0);
     if(this.health === 0) {
       window.OverworldMaps.Outside.gameObjects["hero"].addItem("cheese", 1);
-      delete window.OverworldMaps.Outside.gameObjects[this.id];
+      delete window.OverworldMaps.Outside.gameObjects[this];
     }
   }
   changeDirection() {

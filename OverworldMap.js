@@ -279,30 +279,30 @@ window.OverworldMaps = {
         src: "./sprites/cheese.png",
         behaviorLoop: generateRandomBehaviorLoop(100)
       }),
-      // cheese1: new Cheese({
-      //   x: utils.withGrid(10),
-      //   y: utils.withGrid(6),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
-      // cheese2: new Cheese({
-      //   x: utils.withGrid(6),
-      //   y: utils.withGrid(10),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
-      // cheese3: new Cheese({
-      //   x: utils.withGrid(9),
-      //   y: utils.withGrid(5),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
-      // cheese4: new Cheese({
-      //   x: utils.withGrid(1),
-      //   y: utils.withGrid(10),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
+      cheese1: new Cheese({
+        x: utils.withGrid(10),
+        y: utils.withGrid(6),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese2: new Cheese({
+        x: utils.withGrid(6),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese3: new Cheese({
+        x: utils.withGrid(9),
+        y: utils.withGrid(5),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese4: new Cheese({
+        x: utils.withGrid(1),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
       // cheese5: new Cheese({
       //   x: utils.withGrid(6),
       //   y: utils.withGrid(7),
