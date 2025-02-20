@@ -273,10 +273,11 @@ window.OverworldMaps = {
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
       }),
-      cheese: new Cheese({
+      cheese: new Cheese2({
         x: utils.withGrid(2),
         y: utils.withGrid(9),
         src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(100)
       }),
       // cheese1: new Cheese({
       //   x: utils.withGrid(10),

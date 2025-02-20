@@ -74,7 +74,6 @@ class Person extends GameObject {
         this.isStanding = false;
       }, behavior.time)
     }
-
   }
 
   updatePosition() {
