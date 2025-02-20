@@ -11,6 +11,9 @@ class Cheese extends GameObject {
       "right": ["x", 1],
     }
   }
+  startBehavior() {
+    console.log('startBehavior');
+  }
   update(state) {
     if (this.speed > 0) {
       this.speed--; // Slow down movement
@@ -44,6 +47,7 @@ class Cheese extends GameObject {
     this.health = Math.max(this.health - 10, 0);
     if(this.health === 0) {
       window.OverworldMaps.Shop.gameObjects["hero"].addItem("cheese", 1);
+      delete window.OverworldMaps.Outside.gameObjects[this.id];
     }
   }
   changeDirection() {

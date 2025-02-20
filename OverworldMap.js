@@ -55,6 +55,7 @@ class OverworldMap {
     Object.keys(this.gameObjects).forEach(key => {
       let object = this.gameObjects[key];
       object.id = key;
+      console.log(key);
       object.mount(this);
     });
   }
@@ -134,11 +135,11 @@ window.OverworldMaps = {
           // y: utils.withGrid(2),
       }),
       cheesePizzaNPC: new Person({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
+          x: utils.withGrid(2),
+          y: utils.withGrid(14),
           src: "./sprites/npc1.png",
           behaviorLoop:[
-              //default behavior for npc
+              { who: "cheesePizzaNPC", type: "walk", direction: "up" },
           ],
           talking: [
             {
@@ -155,11 +156,11 @@ window.OverworldMaps = {
       }),
 
       pepperoniPizzaNPC: new Person({
-        x: utils.withGrid(6),
-        y: utils.withGrid(6),
+        x: utils.withGrid(2),
+        y: utils.withGrid(20),
         src: "./sprites/npc7.png",
         behaviorLoop:[
-            //default behavior for npc 
+          { who: "cheesePizzaNPC", type: "walk", direction: "up" },
         ],
         talking: [
           {
@@ -202,7 +203,7 @@ window.OverworldMaps = {
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,
-      [utils.asGridCoord(2,4)] : false, //so the player can talk to the npc that walks up to counter 
+      [utils.asGridCoord(2,4)] : true, //so the player can talk to the npc that walks up to counter
       [utils.asGridCoord(3,4)] : true,
       [utils.asGridCoord(4,4)] : true,
       //back wall

@@ -27,7 +27,6 @@ class GameObject {
 
   update() {
   }
-
   async doBehaviorEvent(map) {
     if(map.isCutScenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
       return;

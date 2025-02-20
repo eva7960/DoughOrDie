@@ -59,6 +59,8 @@ class OverworldEvent {
                     hero.inventory[ingredientKey]--;
                     window.orderManager.completeOrder(this.event.who);
                     messageText = `Thank you! This ${this.event.order} pizza looks amazing!`;
+                    //this.event.who override behavior loop to walk away
+                    //this.event.who.behaviorLoop = [];
                 } else {
                     messageText = `You don't have any ${this.event.order} to complete the order!`;
                 }
