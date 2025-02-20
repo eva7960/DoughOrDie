@@ -8,3 +8,4 @@
   window.timer = new Timer({ initialTime: 2 });
   window.timer.start();
 })();
+
