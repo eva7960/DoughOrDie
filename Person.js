@@ -36,18 +36,21 @@ class Person extends GameObject {
   }
 
   update(state) {
+    if (window.overworld.isGameOver) return; // Prevents movement when game over is active
+
     if (this.movingProgressRemaining > 0) {
-      this.updatePosition();
+        this.updatePosition();
     } else {
-      if (!state.map.isCutScenePlaying && this.isPlayerControlled && state.arrow) {
-        this.startBehavior(state, {
-          type: "walk",
-          direction: state.arrow
-        })
-      }
-    this.updateSprite(state);
+        if (!state.map.isCutScenePlaying && this.isPlayerControlled && state.arrow) {
+            this.startBehavior(state, {
+                type: "walk",
+                direction: state.arrow
+            });
+        }
+        this.updateSprite(state);
     }
-  }
+}
+
 
   startBehavior(state, behavior) {
     this.direction = behavior.direction;
@@ -98,11 +101,14 @@ class Person extends GameObject {
   }
   hit() {
     this.health = Math.max(this.health - 10, 0);
-    if(this.health === 0) {
-      delete window.OverworldMaps.Outside.gameObjects[this.id];
+
+// Ensure Game Over triggers when health is 0
+if (this.health <= 0) {
+    utils.emitEvent("GameOver");
+}
+
       if(this.overworld){
         this.overworld.gameOver();
       }
     }
   }
-}

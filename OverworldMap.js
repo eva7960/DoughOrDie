@@ -76,8 +76,6 @@ class OverworldMap {
     const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
     const match = Object.values(this.gameObjects).find(object =>{
       return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
-      this.timer.start();
-
     });
     if(!this.isCutScenePlaying && match && match.talking.length) {
       this.startCutScene(match.talking[0].events);

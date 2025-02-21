@@ -17,8 +17,9 @@ class HUD {
     container.appendChild(this.element);
   }
 
-  update({health, timer }) {
-    this.healthElement.innerText = "Health: " + health;
+  update({ health, timer }) {
+    this.healthElement.innerText = "Health: " + (health > 0 ? health : 0); // Prevent negative values
     this.timerElement.innerText = "Timer: " + timer;
-  }
+}
+
 }
