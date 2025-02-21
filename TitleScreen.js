@@ -1,6 +1,6 @@
 class TitleScreen {
-    constructor({ onStart }) {
-        this.onStart = onStart;
+    constructor({ onComplete }) {
+        this.onComplete = onComplete;
         this.element = null;
         this.selectedOption = 0; // 0 = Play, 1 = Exit
     }
@@ -10,7 +10,7 @@ class TitleScreen {
         this.element.classList.add("TitleScreen");
 
         this.element.innerHTML = `
-            <h1 class="title">Dough or Die</h1>
+            <h1 class="title">🍕 Dough or Die 🍕</h1>
             <div class="options">
                 <p class="option ${this.selectedOption === 0 ? "selected" : ""}" data-option="play">▶ Play</p>
                 <p class="option ${this.selectedOption === 1 ? "selected" : ""}" data-option="exit">Exit</p>
@@ -27,10 +27,9 @@ class TitleScreen {
         }
         if (event.key === "Enter") {
             if (this.selectedOption === 0) {
-                this.cleanup();  // Remove title screen before starting the game
-                this.onStart();  // Start game
+                this.onComplete(); // Start the game
             } else {
-                window.close();  // Exit game
+                window.close(); // Exit the game
             }
         }
     };
@@ -40,11 +39,6 @@ class TitleScreen {
         options.forEach((option, index) => {
             option.classList.toggle("selected", index === this.selectedOption);
         });
-    }
-
-    cleanup() {
-        document.removeEventListener("keydown", this.handleInput);
-        this.element.remove();
     }
 
     init(container) {
