@@ -19,14 +19,14 @@ class Cheese extends GameObject {
       this.speed--; // Slow down movement
       return;
     }
-    this.speed = 3;
+    this.speed = 100;
     const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
 
 
     // Check for collision with all gameObjects at the next position
     Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
       let object = window.OverworldMaps.Outside.gameObjects[key];
-      if (key === "hero" && state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+      if (key === "hero" && utils.collide(this, object)) {
         object.hit(); // Apply hit if collision detected
       }
     });
