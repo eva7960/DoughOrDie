@@ -1,3 +1,8 @@
+//important coordinates 
+//(2,5) in front of counter
+//(11,4) first spot in line
+//(10,4) second spot in line 
+//(6,4) (game over)
 class OverworldMap {
   constructor(config) {
     this.overworld = null;
@@ -51,15 +56,27 @@ class OverworldMap {
 
   checkForActionCutScene() {
     const hero = this.gameObjects["hero"];
-    const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
-    const match = Object.values(this.gameObjects).find(object =>{
-      return `${object.x},${object.y}` == `${nextCoords.x},${nextCoords.y}`
+    let nextCoords;
+    
+    if (hero.x === utils.withGrid(2) && hero.y === utils.withGrid(3) && hero.direction === "down") {
+      let firstTile = utils.nextPosition(hero.x, hero.y, hero.direction);
+      nextCoords = {
+        x: firstTile.x,
+        y: firstTile.y + 16 
+      };
+    } else {
+      nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
+    }
+  
+    const match = Object.values(this.gameObjects).find(object => {
+      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`;
     });
-    if(!this.isCutScenePlaying && match && match.talking.length) {
+    
+    if (!this.isCutScenePlaying && match && match.talking.length) {
       this.startCutScene(match.talking[0].events);
     }
-    //console.log({match});
   }
+  
 
   checkForFootstepCutscene() {
     const hero = this.gameObjects["hero"];
@@ -102,7 +119,7 @@ window.OverworldMaps = {
           // y: utils.withGrid(2),
       }),
       cheesePizzaNPC: new Person({
-          x: utils.withGrid(5),
+          x: utils.withGrid(3),
           y: utils.withGrid(5),
           src: "./sprites/customer1.png",
           behaviorLoop:[
@@ -123,8 +140,8 @@ window.OverworldMaps = {
       }),
 
       pepperoniPizzaNPC: new Person({
-        x: utils.withGrid(6),
-        y: utils.withGrid(6),
+        x: utils.withGrid(2),
+        y: utils.withGrid(5),
         src: "./sprites/customer1.png",
         behaviorLoop:[
             //default behavior for npc 
@@ -143,9 +160,30 @@ window.OverworldMaps = {
         ]
     }),
 
+    cheesePepperoniPizzaNPC: new Person({
+      x: utils.withGrid(6),
+      y: utils.withGrid(4),
+      src: "./sprites/customer1.png",
+      behaviorLoop:[
+          //default behavior for npc 
+      ],
+      talking: [
+        {
+          events : [
+            {type: "textMessage", 
+             text: "Hello, can I have a Cheese and Pepperoni Pizza.", 
+             faceHero: "cheesePepperoniPizzaNPC",
+             who: "cheesePepperoniPizzaNPC",
+             order: "Cheese, Pepperoni",
+            },
+          ]
+        },
+      ]
+  }),
+
       boss: new Person({
-        x: utils.withGrid(11),
-        y: utils.withGrid(5),
+        x: utils.withGrid(0),
+        y: utils.withGrid(3),
         src: "./sprites/customer1.png",
         behaviorLoop:[
             //default behavior for npc 
@@ -166,11 +204,11 @@ window.OverworldMaps = {
       [utils.asGridCoord(0,1)] : true,
       //side counter 
       [utils.asGridCoord(5,4)] : true,
-      //[utils.asGridCoord(5,3)] : true,
+      [utils.asGridCoord(5,3)] : false, //so player can enter the shop and deliver orders 
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,
-      [utils.asGridCoord(2,4)] : false, //so the player can talk to the npc that walks up to counter 
+      [utils.asGridCoord(2,4)] : true, //register 
       [utils.asGridCoord(3,4)] : true,
       [utils.asGridCoord(4,4)] : true,
       //back wall
@@ -220,19 +258,19 @@ window.OverworldMaps = {
       [utils.asGridCoord(1,2)] : true,
     },
     cutsceneSpaces: {
-      [utils.asGridCoord(11,3)] : [
-        {
-          events: [
-            {who: "boss", type:"walk", direction: "up"},
-            {type: "textMessage", text:"Are we working hard or hardly working? (cutscene)"},
-          ]
-        }
-      ],
+      // [utils.asGridCoord(11,3)] : [
+      //   {
+      //     events: [
+      //       {who: "boss", type:"walk", direction: "up"},
+      //       {type: "textMessage", text:"Are we working hard or hardly working? (cutscene)"},
+      //     ]
+      //   }
+      // ],
       [utils.asGridCoord(0,2)] : [
         {
           events: [
             {type: "changeMap", map: "Outside"},
-            {type: "textMessage", text:"Get ready to hunt for your ingredients!"},
+            //{type: "textMessage", text:"Get ready to hunt for your ingredients!"},
           ]
         }
       ],
@@ -260,7 +298,7 @@ window.OverworldMaps = {
         {
           events: [
             {type: "changeMap", map: "Shop"},
-            {type: "textMessage", text:"Going back to the shop!"},
+            //{type: "textMessage", text:"Going back to the shop!"},
           ]
         }
       ],
