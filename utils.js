@@ -11,22 +11,18 @@ const utils = {
     let x = initalX;
     let y = initalY;
     const size = 16;
-    if(direction == "left") {
+    if(direction === "left") {
       x -= size;
     }
-    if(direction == "right") {
+    if(direction === "right") {
       x += size;
     }
-    if(direction == "up") {
+    if(direction === "up") {
       y -= size;
     }
-    if(direction == "down") {
+    if(direction === "down") {
       y += size;
     }
-    return {x,y};
-  },
-
-  currentPosition (initalX, initalY, direction) {
     return {x,y};
   },
 
@@ -54,5 +50,4 @@ const utils = {
   collide(A, B) {
     return (A.x === B.x && A.y === B.y);
   },
-
 }

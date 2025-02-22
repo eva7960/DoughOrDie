@@ -55,7 +55,6 @@ class OverworldMap {
     Object.keys(this.gameObjects).forEach(key => {
       let object = this.gameObjects[key];
       object.id = key;
-      console.log(key);
       object.mount(this);
     });
   }
@@ -81,7 +80,6 @@ class OverworldMap {
     if(!this.isCutScenePlaying && match && match.talking.length) {
       this.startCutScene(match.talking[0].events);
     }
-    //console.log({match});
   }
 
 
@@ -106,15 +104,6 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(oldX, oldY, direction);
     this.addWall(x,y)
   }
-  removeGameObject(map, id) {
-    // Directly delete the object by its id if it exists in the map's gameObjects
-    if (map.gameObjects[id]) {
-      delete map.gameObjects[id];
-    }
-  }
-
-
-
 }
 
 window.OverworldMaps = {
