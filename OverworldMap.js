@@ -146,10 +146,10 @@ window.OverworldMaps = {
       }),
       cheesePizzaNPC: new Person({
           x: utils.withGrid(2),
-          y: utils.withGrid(5),
+          y: utils.withGrid(14),
           src: "./sprites/npc1.png",
           behaviorLoop:[
-              //default behavior for npc
+            {who: "cheesePizzaNPC",type:"walk",direction:"up"},
           ],
           talking: [
             {
