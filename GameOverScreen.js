@@ -11,7 +11,7 @@ class GameOverScreen {
         this.element.innerHTML = `
             <h1 class="title">Game Over</h1>
             <div class="options">
-                <p class="option selected" data-option="exit">▶Exit</p>
+                <p class="option selected" data-option="exit">Exit</p>
             </div>
         `;
 
