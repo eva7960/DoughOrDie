@@ -16,7 +16,7 @@ class Cheese extends GameObject {
       this.speed--; // Slow down movement
       return;
     }
-    this.speed = 5;
+    this.speed = 10;
     const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
 
 

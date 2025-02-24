@@ -82,12 +82,22 @@ window.orderManager.addOrder(this.event.who, this.event.order);
     }
 
     changeMap(resolve) {
+
+        //Deactivate old objects
+        Object.values(this.map.gameObjects).forEach(obj => {
+            obj.isMounted = false;
+        })
+
         const sceneTransition = new SceneTransition();
         sceneTransition.init(document.querySelector(".game-container"), () => {
-            this.map.overworld.startMap(window.OverworldMaps[this.event.map] );
+            this.map.overworld.startMap( window.OverworldMaps[this.event.map], {
+                x: this.event.x,
+                y: this.event.y,
+                direction: this.event.direction,
+            });
             resolve();
-        });
-        sceneTransition.fadeOut();
+            sceneTransition.fadeOut();
+        })
     }
 
 

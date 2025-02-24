@@ -6,38 +6,36 @@ class Overworld {
     this.map = null;
   }
 
-
   startGameLoop() {
     const step = () => {
-        if (this.isGameOver) return; // Stop the game loop when game over is triggered
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-        Object.values(this.map.gameObjects).forEach(object => {
-            object.update({
-                arrow: this.directionInput.direction,
-                map: this.map,
-            });
+      Object.values(this.map.gameObjects).forEach(object => {
+        object.update({
+          arrow: this.directionInput.direction,
+          map: this.map,
         });
+      });
 
-        this.map.drawLowerImage(this.ctx);
-        Object.values(this.map.gameObjects).forEach(object => {
-            object.sprite.draw(this.ctx);
-        });
-        this.map.drawUpperImage(this.ctx);
+      this.map.drawLowerImage(this.ctx);
 
-        // Update HUD
-        const hero = this.map.gameObjects.hero;
-        this.hud.update({
-            health: hero.health,
-            timer: window.orderManager.timer.formatTime(),
-        });
+      Object.values(this.map.gameObjects).forEach(object => {
+        object.sprite.draw(this.ctx);
+      });
 
-        requestAnimationFrame(step);
+      this.map.drawUpperImage(this.ctx);
+
+      //update the HUD, currently just shows position of hero
+      const hero = window.OverworldMaps.Outside.gameObjects.hero;
+      this.hud.update({
+        health: hero.health,
+        timer: window.orderManager.timer.formatTime(),
+      });
+
+      requestAnimationFrame(step);
     };
     step();
-}
-
+  }
 
   bindActionInput() {
     new KeyPressListener("Enter", () => {
@@ -84,30 +82,19 @@ class Overworld {
     this.map.overworld = this;
     this.map.mountObjects();
   }
-  
+  drawGameOverScreen(ctx, canvas) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "red";
+    ctx.font = "15px Arial";
+    ctx.fillText("Game Over", canvas.width / 2 - 65, canvas.height / 2);
+
+    ctx.fillStyle = "white";
+    ctx.fillText("Press R to Restart", canvas.width / 2 - 65, canvas.height / 2 + 30);
+  }
 
   init() {
-    this.showTitleScreen();
-
-    document.addEventListener("GameOver", () => {
-      window.timer.stop(); // Stop the timer when game over happens
-      this.showGameOverScreen();
-  });
-  
-  
-}
-
-showTitleScreen() {
-    const titleScreen = new TitleScreen({
-        onComplete: () => {
-            this.startGame();
-        }
-    });
-    titleScreen.init(document.body);
-}
-
-startGame() {
-    document.querySelector(".TitleScreen").remove(); // Remove the title screen
     this.startMap(window.OverworldMaps.Shop);
     this.bindActionInput();
     this.bindInventoryInput();
@@ -121,45 +108,13 @@ startGame() {
 
     this.startGameLoop();
 
-    this.timer.stop();
-    this.timer = new Timer({ initialTime: 60 });
-
-
-    this.checkGameOver();
-}
-
-checkGameOver() {
-  const check = setInterval(() => {
-      const hero = this.map.gameObjects.hero;
-
-      if (hero.health <= 0 || this.timer.remainingTime <= 0) {
-          clearInterval(check);
-          
-          // Ensure health is exactly 0
-          hero.health = 0;
-          
-          // Stop the game loop
-          cancelAnimationFrame(this.gameLoopId);
-
-          // Show Game Over screen
-          this.showGameOverScreen();
-      }
-  }, 500); // Check every 0.5 seconds for better responsiveness
-}
-
-
-showGameOverScreen() {
-  // Hide HUD
-  this.hud.element.style.display = "none"; 
-
-  const gameOverScreen = new GameOverScreen({
-      onRestart: () => {
-          document.querySelector(".GameOverScreen").remove();
-          this.startGame();
-      }
-  });
-  gameOverScreen.init(document.body);
-}
-
-
+    this.map.startCutScene([
+      // { type: "textMessage", text: "Get ready for your first day on the job!" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+      // { who: "npc1", type: "walk", direction: "up" },
+    ]);
+  }
 }
