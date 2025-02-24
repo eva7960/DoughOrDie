@@ -73,15 +73,25 @@ class OverworldMap {
 
   checkForActionCutScene() {
     const hero = this.gameObjects["hero"];
-    const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
-    const match = Object.values(this.gameObjects).find(object =>{
-      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
-    });
-    if(!this.isCutScenePlaying && match && match.talking.length) {
-      this.startCutScene(match.talking[0].events);
+    let nextCoords;
 
+    if (hero.x === utils.withGrid(2) && hero.y === utils.withGrid(3) && hero.direction === "down") {
+      let firstTile = utils.nextPosition(hero.x, hero.y, hero.direction);
+      nextCoords = {
+        x: firstTile.x,
+        y: firstTile.y + 16
+      };
+    } else {
+      nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
     }
-    //console.log({match});
+
+    const match = Object.values(this.gameObjects).find(object => {
+      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`;
+    });
+
+    if (!this.isCutScenePlaying && match && match.talking.length) {
+      this.startCutScene(match.talking[0].events);
+    }
   }
 
 
@@ -135,7 +145,7 @@ window.OverworldMaps = {
           // y: utils.withGrid(2),
       }),
       cheesePizzaNPC: new Person({
-          x: utils.withGrid(5),
+          x: utils.withGrid(2),
           y: utils.withGrid(5),
           src: "./sprites/npc1.png",
           behaviorLoop:[
@@ -176,21 +186,21 @@ window.OverworldMaps = {
         ]
     }),
 
-      boss: new Person({
-        x: utils.withGrid(11),
-        y: utils.withGrid(5),
-        src: "./sprites/customer1.png",
-        behaviorLoop:[
-            //default behavior for npc 
-        ],
-        talking: [
-          {
-            events : [
-              {type: "textMessage", text: "Are we working hard or hardly working? (event array)", faceHero: "boss"},
-            ]
-          },
-        ]
-    }),
+      // boss: new Person({
+      //   x: utils.withGrid(11),
+      //   y: utils.withGrid(5),
+      //   src: "./sprites/customer1.png",
+      //   behaviorLoop:[
+      //       //default behavior for npc
+      //   ],
+      //   talking: [
+      //     {
+      //       events : [
+      //         {type: "textMessage", text: "Are we working hard or hardly working? (event array)", faceHero: "boss"},
+      //       ]
+      //     },
+      //   ]
+   // }),
     },
     walls: {
       //right side of door way
@@ -203,7 +213,7 @@ window.OverworldMaps = {
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,
-      [utils.asGridCoord(2,4)] : false, //so the player can talk to the npc that walks up to counter 
+      [utils.asGridCoord(2,4)] : true, //so the player can talk to the npc that walks up to counter
       [utils.asGridCoord(3,4)] : true,
       [utils.asGridCoord(4,4)] : true,
       //back wall
