@@ -274,11 +274,17 @@ window.OverworldMaps = {
         x: utils.withGrid(2),
         y: utils.withGrid(9),
         src: "./sprites/cheese.png",
+        behaviorLoop: [
+          {type: "walk", direction: "left"},
+        ],
       }),
       cheese2: new Cheese({
         x: utils.withGrid(10),
         y: utils.withGrid(6),
         src: "./sprites/cheese.png",
+        behaviorLoop: [
+          {type: "walk", direction: "left"},
+        ],
       }),
       // cheese3: new Cheese({
       //   x: utils.withGrid(6),
