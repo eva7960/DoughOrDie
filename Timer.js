@@ -17,9 +17,10 @@ class Timer {
         this.remainingTime--;
         if (this.remainingTime <= 0) {
           this.stop();
-          //add code here to show the game over screen
-          console.log("Timer finished!");
+          this.remainingTime = 0; // Ensure it doesn’t go negative
+          utils.emitEvent("GameOver"); // Fire Game Over event
         }
+        
       }, 1000);
     }
   

@@ -20,15 +20,14 @@ class Bullet extends GameObject {
         // loop through game objects looking for enemies
         Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
             let object = window.OverworldMaps.Outside.gameObjects[key];
-            if (object instanceof Cheese && utils.collide(this, object)) {
-                object.hit(); // Apply hit if collision detected
-                delete window.OverworldMaps.Outside.gameObjects[this.id];
+            if (object instanceof Cheese && utils.collide(this,object)) {
+                object.hit();
             }
+            this.x = nextPosition.x;
+            this.y = nextPosition.y;
+            this.sprite.updateAnimationProgress();
+
         });
-        this.x = nextPosition.x;
-        this.y = nextPosition.y;
-        state.map.moveWall(this.x, this.y, this.direction);
-        this.sprite.updateAnimationProgress();
     }
 
 

@@ -65,7 +65,12 @@ class OverworldEvent {
                     messageText = `You don't have any ${this.event.order} to complete the order!`;
                 }
             } else {
-                window.orderManager.addOrder(this.event.who, this.event.order);
+
+                if (!window.timer.interval) {  // Only start the timer if it's not already running
+    window.timer.start();
+}
+window.orderManager.addOrder(this.event.who, this.event.order);
+
             }
         }
 

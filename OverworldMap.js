@@ -73,11 +73,23 @@ class OverworldMap {
 
   checkForActionCutScene() {
     const hero = this.gameObjects["hero"];
-    const nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
-    const match = Object.values(this.gameObjects).find(object =>{
-      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`
+    let nextCoords;
+
+    if (hero.x === utils.withGrid(2) && hero.y === utils.withGrid(3) && hero.direction === "down") {
+      let firstTile = utils.nextPosition(hero.x, hero.y, hero.direction);
+      nextCoords = {
+        x: firstTile.x,
+        y: firstTile.y + 16
+      };
+    } else {
+      nextCoords = utils.nextPosition(hero.x, hero.y, hero.direction);
+    }
+
+    const match = Object.values(this.gameObjects).find(object => {
+      return `${object.x},${object.y}` === `${nextCoords.x},${nextCoords.y}`;
     });
-    if(!this.isCutScenePlaying && match && match.talking.length) {
+
+    if (!this.isCutScenePlaying && match && match.talking.length) {
       this.startCutScene(match.talking[0].events);
     }
   }
@@ -104,6 +116,15 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(oldX, oldY, direction);
     this.addWall(x,y)
   }
+  removeGameObject(map, id) {
+    // Directly delete the object by its id if it exists in the map's gameObjects
+    if (map.gameObjects[id]) {
+      delete map.gameObjects[id];
+    }
+  }
+
+
+
 }
 
 window.OverworldMaps = {
@@ -128,7 +149,7 @@ window.OverworldMaps = {
           y: utils.withGrid(14),
           src: "./sprites/npc1.png",
           behaviorLoop:[
-              { who: "cheesePizzaNPC", type: "walk", direction: "up" },
+            {who: "cheesePizzaNPC",type:"walk",direction:"up"},
           ],
           talking: [
             {
@@ -145,11 +166,11 @@ window.OverworldMaps = {
       }),
 
       pepperoniPizzaNPC: new Person({
-        x: utils.withGrid(2),
-        y: utils.withGrid(20),
+        x: utils.withGrid(6),
+        y: utils.withGrid(6),
         src: "./sprites/npc7.png",
         behaviorLoop:[
-          { who: "cheesePizzaNPC", type: "walk", direction: "up" },
+            //default behavior for npc 
         ],
         talking: [
           {
@@ -165,21 +186,21 @@ window.OverworldMaps = {
         ]
     }),
 
-      boss: new Person({
-        x: utils.withGrid(11),
-        y: utils.withGrid(5),
-        src: "./sprites/customer1.png",
-        behaviorLoop:[
-            //default behavior for npc 
-        ],
-        talking: [
-          {
-            events : [
-              {type: "textMessage", text: "Are we working hard or hardly working? (event array)", faceHero: "boss"},
-            ]
-          },
-        ]
-    }),
+      // boss: new Person({
+      //   x: utils.withGrid(11),
+      //   y: utils.withGrid(5),
+      //   src: "./sprites/customer1.png",
+      //   behaviorLoop:[
+      //       //default behavior for npc
+      //   ],
+      //   talking: [
+      //     {
+      //       events : [
+      //         {type: "textMessage", text: "Are we working hard or hardly working? (event array)", faceHero: "boss"},
+      //       ]
+      //     },
+      //   ]
+   // }),
     },
     walls: {
       //right side of door way
@@ -270,40 +291,43 @@ window.OverworldMaps = {
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
       }),
-      cheese1: new Cheese({
+      cheese: new Cheese({
         x: utils.withGrid(2),
         y: utils.withGrid(9),
         src: "./sprites/cheese.png",
-        behaviorLoop: [
-          {type: "walk", direction: "left"},
-        ],
+        behaviorLoop: generateRandomBehaviorLoop(100)
       }),
-      cheese2: new Cheese({
+      cheese1: new Cheese({
         x: utils.withGrid(10),
         y: utils.withGrid(6),
         src: "./sprites/cheese.png",
-        behaviorLoop: [
-          {type: "walk", direction: "left"},
-        ],
+        behaviorLoop: generateRandomBehaviorLoop(20),
       }),
-      // cheese3: new Cheese({
-      //   x: utils.withGrid(6),
-      //   y: utils.withGrid(10),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
-      // cheese4: new Cheese({
-      //   x: utils.withGrid(9),
-      //   y: utils.withGrid(5),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
-      // }),
+      cheese2: new Cheese({
+        x: utils.withGrid(6),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese3: new Cheese({
+        x: utils.withGrid(9),
+        y: utils.withGrid(5),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
+      cheese4: new Cheese({
+        x: utils.withGrid(1),
+        y: utils.withGrid(10),
+        src: "./sprites/cheese.png",
+        behaviorLoop: generateRandomBehaviorLoop(20),
+      }),
       // cheese5: new Cheese({
-      //   x: utils.withGrid(1),
-      //   y: utils.withGrid(10),
+      //   x: utils.withGrid(6),
+      //   y: utils.withGrid(7),
       //   src: "./sprites/cheese.png",
       //   behaviorLoop: generateRandomBehaviorLoop(20),
       // }),
+
     },
 
     walls: {
