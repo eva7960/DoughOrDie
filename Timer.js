@@ -1,12 +1,12 @@
 class Timer {
-    constructor({ initialTime = 60 }) {
+    constructor(initialTime) {
       this.initialTime = initialTime;
       this.remainingTime = initialTime;
       this.interval = null;
     }
   
-    formatTime(seconds) {
-      return seconds.toString();
+    formatTime() {
+      return this.remainingTime.toString();
     }
   
     start() {
@@ -28,6 +28,9 @@ class Timer {
         clearInterval(this.interval);
         this.interval = null;
       }
+    }
+    reset() {
+        this.remainingTime = this.initialTime;
     }
     
   }
