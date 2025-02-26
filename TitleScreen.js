@@ -12,7 +12,7 @@ class TitleScreen {
         this.element.innerHTML = `
             <h1 class="title"> Dough or Die </h1>
             <div class="options">
-                <p class="option ${this.selectedOption === 0 ? "selected" : ""}" data-option="play"> Play</p>
+                <p class="option ${this.selectedOption === 0 ? "selected" : ""}" data-option="play "> Press Enter To Start</p>
                 <p class="option ${this.selectedOption === 1 ? "selected" : ""}" data-option="exit">Exit</p>
             </div>
         `;
@@ -25,7 +25,7 @@ class TitleScreen {
             this.selectedOption = this.selectedOption === 0 ? 1 : 0;
             this.updateSelection();
         }
-        if (event.key === "Enter") {
+        if (event.key === "Enter" || event.button === 1) {
             if (this.selectedOption === 0) {
                 this.onComplete(); // Start the game
             } else {
