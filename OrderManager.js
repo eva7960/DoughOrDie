@@ -3,7 +3,7 @@ class OrderManager {
       //array of orders
       this.orders = {};
   
-      //press o on the keyboard to output all orders to the console
+      //press o on the keyboard to output all orders to the console and show inventory in dialogue box
       new KeyPressListener("KeyO", () => {
         this.printOrders();
       });
@@ -30,8 +30,34 @@ class OrderManager {
     }
   
     printOrders() {
+      //does nothing if there is another dialogue box already open 
+      if (document.querySelector('.TextMessage')){
+        return;
+      } 
+
       console.log("Current Orders:", this.orders);
+      let messageText = "";
+      const orders = this.orders;
+      if (Object.keys(orders).length === 0) {
+        messageText = "No orders at the moment!";
+      } else {
+        messageText = "Current Orders:\n";
+        let count = 1;
+        for (const npc in orders) {
+          messageText += `${count}. ${orders[npc]}\n`;
+          count++;
+        }
+      }
+      const message = new TextMessage({
+        text: messageText,
+        onComplete: () => {}
+      });
+      message.init(document.querySelector(".game-container"));
+      message.revealingText.warpToDone();
     }
+    
+    
+
   }
   
   window.orderManager = new OrderManager();

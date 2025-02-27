@@ -26,7 +26,11 @@ class Overworld {
       this.map.drawUpperImage(this.ctx);
 
       const hero = this.map.gameObjects.hero;
-      this.hud.update("Position: (" + hero.x + ", " + hero.y + ")  Health: " + hero.health);
+      this.hud.update({
+        score: hero.score,
+        health: hero.health,
+        timer: window.timer ? window.timer.remainingTime : "0"
+      });
 
       requestAnimationFrame(step);
     };
@@ -49,15 +53,41 @@ class Overworld {
 
   bindInventoryInput() {
     new KeyPressListener("KeyI", () => {
+      //does nothing if there is another dialogue box
+      if (document.querySelector('.TextMessage')) {
+        return;
+      } 
+
       const hero = this.map.gameObjects["hero"];
+      let messageText = "";
       if (hero && hero.inventory) {
-        console.log("Player Inventory:", hero.inventory);
+        messageText = "";
+        let count = 1;
+        for (const item in hero.inventory) {
+          const itemName = item.charAt(0).toUpperCase() + item.slice(1);
+          messageText += `${itemName}: ${hero.inventory[item]}\t`;
+          count++;
+        }
       } else {
-        console.log("No inventory found for the hero.");
+        messageText = "Your inventory is empty!";
       }
+      const message = new TextMessage({
+        text: messageText,
+        onComplete: () => {}
+      });
+      message.init(document.querySelector(".game-container"));
+      message.revealingText.warpToDone();
     });
   }
 
+  bindTestPepperoniInput() {
+    new KeyPressListener("KeyP", () => {
+      const hero = this.map.gameObjects["hero"];
+      hero.addItem("pepperoni", 1);
+      console.log("Pepperoni added. Current inventory:", hero.inventory);
+    });
+  }
+  
   startMap(mapConfig) {
     this.map = new OverworldMap(mapConfig);
     this.map.overworld = this;
@@ -69,6 +99,7 @@ class Overworld {
     this.bindActionInput();
     this.bindInventoryInput();
     this.bindHeroPositionCheck();
+    this.bindTestPepperoniInput();
 
     this.directionInput = new DirectionInput();
     this.directionInput.init();

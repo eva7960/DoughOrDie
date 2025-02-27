@@ -1,9 +1,29 @@
 (function () {
-
-  //creates asset manager and game container
   const overworld = new Overworld({
     element: document.querySelector(".game-container")
   });
+  window.overworld = overworld; 
   overworld.init();
+  window.timer = new Timer({ 
+    container: document.querySelector(".game-container"),
+    initialTime: 2 //set inital time here (maybe 180 (3 minutes) for final game)
+  });
+  window.timer.start();
+
+
+
+  const backgroundMusic = new Audio('background.mp3'); 
+  backgroundMusic.loop = true;   
+  backgroundMusic.volume = 0.1;   
+
+  document.addEventListener('click', function startMusic() { //user has to click before it starts playing (maybe start menu)
+    backgroundMusic.play().catch(err => {
+      console.error("music error", err);
+    });
+    document.removeEventListener('click', startMusic);
+  });
+
+
+
 
 })();

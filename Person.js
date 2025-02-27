@@ -4,7 +4,10 @@ class Person extends GameObject {
     this.movingProgressRemaining = 0;
     this.isStanding = false; 
     this.health = 100;
-    this.inventory = config.inventory || {cheese: 0, pepperoni: 1};
+    this.score = 0;
+    this.inventory = config.inventory || {cheese: 1, pepperoni: 1, sausage: 1, meatball: 1, mushroom: 1, pineapple: 1, olive: 1,
+      peppers: 1, 
+    };
 
     this.isPlayerControlled = config.isPlayerControlled || false;
     
@@ -13,6 +16,24 @@ class Person extends GameObject {
       "down": ["y", 1],
       "left": ["x", -1],
       "right": ["x", 1],
+    }
+  }
+
+  addItem(item, amount = 1) {
+    if (this.inventory.hasOwnProperty(item)) {
+      this.inventory[item] += amount;
+    } else {
+      this.inventory[item] = amount;
+    }
+  }
+  
+  setItem(item, amount) {
+    this.inventory[item] = amount;
+  }
+
+  removeItem(item, amount = 1) {
+    if (this.inventory.hasOwnProperty(item)) {
+      this.inventory[item] = Math.max(0, this.inventory[item] - amount);
     }
   }
 
