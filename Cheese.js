@@ -11,7 +11,7 @@ class Cheese {
     this.health = 30;
     this.movingProgressRemaining = 0; // Track movement like the hero
     this.speed = 0.5;
-
+    this.lastDirectionChangeTime = Date.now(); // Track last change
     this.directionMap = {
       up: { x: 0, y: -1 },
       down: { x: 0, y: 1 },
@@ -25,19 +25,23 @@ class Cheese {
       this.updatePosition();
       return;
     }
-
-    // Pick next tile position
-    // const nextX = this.x + this.directionMap[this.direction].x * 16;
-    // const nextY = this.y + this.directionMap[this.direction].y * 16;
     let hero = state.map.gameObjects.hero;
     if(utils.collide(this,hero)) {
       hero.hit();
     }
+    if (Date.now() - this.lastDirectionChangeTime >= 5000) {
+      this.changeDirection();
+      this.lastDirectionChangeTime = Date.now();
+      return;
+    }
     // Check if movement is blocked
-    if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+    const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
+    if (state.map.isSpaceTaken(this.x, this.y, this.direction) ||
+        (nextPosition.x <= 20 && nextPosition.y <= 25)) {
       this.changeDirection();
       return;
     }
+
 
     // Start movement
     this.movingProgressRemaining = 16;
