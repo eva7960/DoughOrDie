@@ -1,7 +1,7 @@
 class OrderManager {
     constructor() {
-      //array of orders
       this.orders = {};
+      this.timer = new Timer();
   
       //press o on the keyboard to output all orders to the console and show inventory in dialogue box
       new KeyPressListener("KeyO", () => {

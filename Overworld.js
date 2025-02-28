@@ -10,14 +10,14 @@ class Overworld {
     const step = () => {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-      Object.values(this.map.gameObjects).forEach(object => {
-        object.update({
-          arrow: this.directionInput.direction,
-          map: this.map,
-        });
-      });
-
       this.map.drawLowerImage(this.ctx);
+
+      Object.values(this.map.gameObjects).forEach(object => {
+          object.update({
+            arrow: this.directionInput.direction,
+            map: this.map,
+          });
+      });
 
       Object.values(this.map.gameObjects).forEach(object => {
         object.sprite.draw(this.ctx);
