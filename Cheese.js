@@ -7,7 +7,9 @@ class Cheese {
     this.sprite = new Sprite({
       gameObject: this,
       src: "./sprites/cheese.png",
+      hasHealthBar: true,
     });
+    this.maxHealth = 30;
     this.health = 30;
     this.movingProgressRemaining = 0; // Track movement like the hero
     this.speed = 0.5;
@@ -34,7 +36,7 @@ class Cheese {
       this.lastDirectionChangeTime = Date.now();
       return;
     }
-
+    // Check if movement is blocked
     const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
     if (state.map.isSpaceTaken(this.x, this.y, this.direction) ||
         (nextPosition.x <= 20 && nextPosition.y <= 25)) {
@@ -42,6 +44,8 @@ class Cheese {
       return;
     }
 
+
+    // Start movement
     this.movingProgressRemaining = 16;
   }
 
@@ -51,6 +55,7 @@ class Cheese {
       this.y += this.directionMap[this.direction].y * this.speed;
       this.movingProgressRemaining -= this.speed;
 
+      // Snap to grid when movement completes
       if (this.movingProgressRemaining <= 0) {
         this.x = Math.round(this.x / 16) * 16;
         this.y = Math.round(this.y / 16) * 16;
@@ -62,7 +67,7 @@ class Cheese {
     console.log(this.health);
     this.health = Math.max(this.health - 10, 0)
     if(this.health === 0) {
-      window.OverworldMaps.Shop.gameObjects["hero"].addItem("cheese", 1);
+      window.OverworldMaps.Outside.gameObjects["hero"].addItem("cheese", 1);
       delete window.OverworldMaps.Outside.gameObjects[this.id];
     }
   }
@@ -76,5 +81,6 @@ class Cheese {
     this.direction = newDirection;
   }
   mount() {
+
   }
 }
