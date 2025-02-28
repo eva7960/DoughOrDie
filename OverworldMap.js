@@ -400,17 +400,4 @@ window.OverworldMaps = {
     gameObjects: {}
   },
 }
-function generateRandomBehaviorLoop(steps) {
-  const directions = ["up", "down", "left", "right"];
-  let loop = [];
-
-  for (let i = 0; i < steps; i++) {
-    let randomDirection = directions[Math.floor(Math.random() * directions.length)];
-    loop.push({ type: "walk", direction: randomDirection });
-    loop.push({ type: "walk", direction: randomDirection });
-    loop.push({ type: "walk", direction: randomDirection });
-  }
-  return loop;
-}
-
 
