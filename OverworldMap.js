@@ -50,6 +50,9 @@ class OverworldMap {
       this.canShoot = true;
     }, this.shootCoolDown);
   }
+  setCanShoot(boolean) {
+    this.canShoot = boolean;
+  }
 
   mountObjects() {
     Object.keys(this.gameObjects).forEach(key => {
@@ -294,38 +297,26 @@ window.OverworldMaps = {
       cheese: new Cheese({
         x: utils.withGrid(2),
         y: utils.withGrid(9),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(100)
       }),
       cheese1: new Cheese({
         x: utils.withGrid(10),
         y: utils.withGrid(6),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
       }),
       cheese2: new Cheese({
         x: utils.withGrid(6),
         y: utils.withGrid(10),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
       }),
       cheese3: new Cheese({
         x: utils.withGrid(9),
         y: utils.withGrid(5),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
       }),
       cheese4: new Cheese({
         x: utils.withGrid(1),
         y: utils.withGrid(10),
-        src: "./sprites/cheese.png",
-        behaviorLoop: generateRandomBehaviorLoop(20),
       }),
       // cheese5: new Cheese({
       //   x: utils.withGrid(6),
       //   y: utils.withGrid(7),
-      //   src: "./sprites/cheese.png",
-      //   behaviorLoop: generateRandomBehaviorLoop(20),
       // }),
 
     },
@@ -409,17 +400,4 @@ window.OverworldMaps = {
     gameObjects: {}
   },
 }
-function generateRandomBehaviorLoop(steps) {
-  const directions = ["up", "down", "left", "right"];
-  let loop = [];
-
-  for (let i = 0; i < steps; i++) {
-    let randomDirection = directions[Math.floor(Math.random() * directions.length)];
-    loop.push({ type: "walk", direction: randomDirection });
-    loop.push({ type: "walk", direction: randomDirection });
-    loop.push({ type: "walk", direction: randomDirection });
-  }
-  return loop;
-}
-
 

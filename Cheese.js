@@ -1,63 +1,84 @@
-class Cheese extends GameObject {
+class Cheese {
   constructor(config) {
-    super(config);
+    this.id = null;
+    this.x = config.x;
+    this.y = config.y;
+    this.direction = "down";
+    this.sprite = new Sprite({
+      gameObject: this,
+      src: "./sprites/cheese.png",
+    });
     this.health = 30;
-    this.speed = 1;
-    this.direction = "right";
-    this.directionUpdate = {
-      "up": ["y", -1],
-      "down": ["y", 1],
-      "left": ["x", -1],
-      "right": ["x", 1],
-    }
+    this.movingProgressRemaining = 0; // Track movement like the hero
+    this.speed = 0.5;
+    this.lastDirectionChangeTime = Date.now(); // Track last change
+    this.directionMap = {
+      up: { x: 0, y: -1 },
+      down: { x: 0, y: 1 },
+      left: { x: -1, y: 0 },
+      right: { x: 1, y: 0 },
+    };
   }
+
   update(state) {
-    if (this.speed > 0) {
-      this.speed--; // Slow down movement
+    if (this.movingProgressRemaining > 0) {
+      this.updatePosition();
       return;
     }
-    this.speed = 10;
-    const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
-
-
-    // Check for collision with all gameObjects at the next position
-    Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
-      let object = window.OverworldMaps.Outside.gameObjects[key];
-      if (key === "hero" && state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-        object.hit(); // Apply hit if collision detected
-        this.changeDirection();
-      }
-    });
-
-    // Check if the next position is taken by a wall
-    if (state.map.isSpaceTaken(nextPosition.x, nextPosition.y, this.direction)) {
-      this.changeDirection(); // Change direction if space is taken by a wall
-    } else {
-      // Update position if no collisions or wall detected
-      this.x = nextPosition.x;
-      this.y = nextPosition.y;
-      this.sprite.updateAnimationProgress();
+    let hero = state.map.gameObjects.hero;
+    if(utils.collide(this,hero)) {
+      hero.hit();
     }
+    if (Date.now() - this.lastDirectionChangeTime >= 5000) {
+      this.changeDirection();
+      this.lastDirectionChangeTime = Date.now();
+      return;
+    }
+    // Check if movement is blocked
+    const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
+    if (state.map.isSpaceTaken(this.x, this.y, this.direction) ||
+        (nextPosition.x <= 20 && nextPosition.y <= 25)) {
+      this.changeDirection();
+      return;
+    }
+
+
+    // Start movement
+    this.movingProgressRemaining = 16;
   }
 
+  updatePosition() {
+    if (this.movingProgressRemaining > 0) {
+      this.x += this.directionMap[this.direction].x * this.speed;
+      this.y += this.directionMap[this.direction].y * this.speed;
+      this.movingProgressRemaining -= this.speed;
+
+      // Snap to grid when movement completes
+      if (this.movingProgressRemaining <= 0) {
+        this.x = Math.round(this.x / 16) * 16;
+        this.y = Math.round(this.y / 16) * 16;
+        this.movingProgressRemaining = 0;
+      }
+    }
+  }
   hit() {
-    console.log(this.health)
-    this.health = Math.max(this.health - 10, 0);
+    console.log(this.health);
+    this.health = Math.max(this.health - 10, 0)
     if(this.health === 0) {
       window.OverworldMaps.Outside.gameObjects["hero"].addItem("cheese", 1);
-      delete window.OverworldMaps.Outside.gameObjects[this];
+      delete window.OverworldMaps.Outside.gameObjects[this.id];
     }
   }
+
   changeDirection() {
-    const random = Math.floor(Math.random() * 4);
-    if(random === 0) {
-      this.direction = "up"
-    } else if(random === 1) {
-      this.direction = "down"
-    } else if(random === 2) {
-      this.direction = "right"
-    } else {
-      this.direction = "left"
-    }
+    const directions = ["up", "down", "left", "right"];
+    let newDirection;
+    do {
+      newDirection = directions[Math.floor(Math.random() * 4)];
+    } while (newDirection === this.direction);
+    this.direction = newDirection;
+  }
+  mount() {
+
   }
 }
