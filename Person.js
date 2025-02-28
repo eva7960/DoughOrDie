@@ -41,7 +41,6 @@ class Person extends GameObject {
 
   update(state) {
     if (window.overworld.isGameOver) return; // Prevents movement when game over is active
-    state.map.deleteWall(0,-1);
     if (this.movingProgressRemaining > 0) {
       this.updatePosition();
     } else {

@@ -10,7 +10,7 @@ class Cheese {
     });
     this.health = 30;
     this.movingProgressRemaining = 0; // Track movement like the hero
-    this.speed = 0.5;
+    this.speed = 10;
 
     this.directionMap = {
       up: { x: 0, y: -1 },
@@ -25,10 +25,6 @@ class Cheese {
       this.updatePosition();
       return;
     }
-
-    // Pick next tile position
-    // const nextX = this.x + this.directionMap[this.direction].x * 16;
-    // const nextY = this.y + this.directionMap[this.direction].y * 16;
     let hero = state.map.gameObjects.hero;
     if(utils.collide(this,hero)) {
       hero.hit();

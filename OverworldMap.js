@@ -323,7 +323,6 @@ window.OverworldMaps = {
 
     walls: {
       //north wall
-      [utils.asGridCoord(0,-1)]:  true,
       [utils.asGridCoord(1, -1)]: true,
       [utils.asGridCoord(2, -1)]: true,
       [utils.asGridCoord(3, -1)]: true,
