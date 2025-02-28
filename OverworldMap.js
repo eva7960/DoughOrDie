@@ -13,7 +13,7 @@ class OverworldMap {
 
     this.isCutScenePlaying = false;
 
-    this.canShoot = false;
+    this.canShoot = true;
     this.shootCoolDown = 500;
   }
 
