@@ -5,10 +5,7 @@ class Person extends GameObject {
     this.isStanding = false;
     this.health = 100;
     this.score = 0;
-    this.inventory = config.inventory || {
-      cheese: 1, pepperoni: 1, sausage: 1, meatball: 1, mushroom: 1, pineapple: 1, olive: 1,
-      peppers: 1,
-    };
+    this.inventory = config.inventory || {};
 
     this.isPlayerControlled = config.isPlayerControlled || false;
 
