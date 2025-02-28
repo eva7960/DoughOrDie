@@ -7,10 +7,12 @@ class Cheese {
     this.sprite = new Sprite({
       gameObject: this,
       src: "./sprites/cheese.png",
+      hasHealthBar: true,
     });
+    this.maxHealth = 30;
     this.health = 30;
     this.movingProgressRemaining = 0; // Track movement like the hero
-    this.speed = 0.5;
+    this.speed = 20;
     this.lastDirectionChangeTime = Date.now(); // Track last change
     this.directionMap = {
       up: { x: 0, y: -1 },
