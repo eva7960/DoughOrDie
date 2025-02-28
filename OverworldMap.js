@@ -13,7 +13,7 @@ class OverworldMap {
 
     this.isCutScenePlaying = false;
 
-    this.canShoot = true;
+    this.canShoot = false;
     this.shootCoolDown = 500;
   }
 
@@ -49,6 +49,9 @@ class OverworldMap {
     setTimeout(() => {
       this.canShoot = true;
     }, this.shootCoolDown);
+  }
+  setCanShoot(boolean) {
+    this.canShoot = boolean;
   }
 
   mountObjects() {
@@ -320,6 +323,7 @@ window.OverworldMaps = {
 
     walls: {
       //north wall
+      [utils.asGridCoord(0,-1)]:  true,
       [utils.asGridCoord(1, -1)]: true,
       [utils.asGridCoord(2, -1)]: true,
       [utils.asGridCoord(3, -1)]: true,

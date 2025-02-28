@@ -22,7 +22,6 @@ class Bullet extends GameObject {
             let object = window.OverworldMaps.Outside.gameObjects[key];
             if (object instanceof Cheese && utils.collide(this, object)) {
                 object.hit(); // Apply hit if collision detected
-                delete window.OverworldMaps.Outside.gameObjects[this.id];
             }
         });
         this.x = nextPosition.x;

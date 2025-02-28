@@ -39,27 +39,9 @@ class Person extends GameObject {
     }
   }
 
-  addItem(item, amount = 1) {
-    if (this.inventory.hasOwnProperty(item)) {
-      this.inventory[item] += amount;
-    } else {
-      this.inventory[item] = amount;
-    }
-  }
-
-  setItem(item, amount) {
-    this.inventory[item] = amount;
-  }
-
-  removeItem(item, amount = 1) {
-    if (this.inventory.hasOwnProperty(item)) {
-      this.inventory[item] = Math.max(0, this.inventory[item] - amount);
-    }
-  }
-
   update(state) {
     if (window.overworld.isGameOver) return; // Prevents movement when game over is active
-
+    state.map.deleteWall(0,-1);
     if (this.movingProgressRemaining > 0) {
       this.updatePosition();
     } else {
@@ -85,7 +67,7 @@ class Person extends GameObject {
         }, 10)
         return;
       }
-      state.map.moveWall(this.x, this.y, this.direction);
+      //state.map.moveWall(this.x, this.y, this.direction);
       this.movingProgressRemaining = 16;
       this.updateSprite(state);
     }
@@ -111,7 +93,6 @@ class Person extends GameObject {
         whoId: this.id
       })
     }
-
   }
 
   updateSprite() {
