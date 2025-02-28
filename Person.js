@@ -39,6 +39,24 @@ class Person extends GameObject {
     }
   }
 
+  addItem(item, amount = 1) {
+    if (this.inventory.hasOwnProperty(item)) {
+      this.inventory[item] += amount;
+    } else {
+      this.inventory[item] = amount;
+    }
+  }
+  
+  setItem(item, amount) {
+    this.inventory[item] = amount;
+  }
+
+  removeItem(item, amount = 1) {
+    if (this.inventory.hasOwnProperty(item)) {
+      this.inventory[item] = Math.max(0, this.inventory[item] - amount);
+    }
+  }
+
   update(state) {
     if (window.overworld.isGameOver) return; // Prevents movement when game over is active
     if (this.movingProgressRemaining > 0) {
