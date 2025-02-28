@@ -15,10 +15,9 @@ class Timer {
       }
       this.interval = setInterval(() => {
         this.remainingTime--;
-        if (this.remainingTime <= 0) {
+        if (this.remainingTime === 0) {
           this.stop();
-          //add code here to show the game over screen
-          console.log("Timer finished!");
+          utils.emitEvent("GameOver");
         }
       }, 1000);
     }
