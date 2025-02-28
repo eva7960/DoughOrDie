@@ -27,12 +27,9 @@ class Timer {
       if (this.interval) {
         clearInterval(this.interval);
         this.interval = null;
-      }
-    }
-    reset() {
         this.initialTime = 60;
         this.remainingTime = 60;
-        clearInterval(this.interval);
+      }
     }
   }
 
