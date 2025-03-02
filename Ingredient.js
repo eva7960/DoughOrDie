@@ -1,14 +1,15 @@
 class Ingredient {
-    constructor(config) {
+    constructor(config, health, speed, name) {
         this.id = null;
         this.x = config.x;
         this.y = config.y;
         this.direction = "down";
-        this.maxHealth = 0;
-        this.health = 0;
-        this.movingProgressRemaining = 0; // Track movement like the hero
-        this.speed = 0;
-        this.lastDirectionChangeTime = Date.now(); // Track last change
+        this.health = health;
+        this.maxHealth = this.health;
+        this.name = name;
+        this.movingProgressRemaining = 0;
+        this.speed = speed;
+        this.lastDirectionChangeTime = Date.now();
         this.directionMap = {
             up: { x: 0, y: -1 },
             down: { x: 0, y: 1 },
@@ -58,10 +59,11 @@ class Ingredient {
             }
         }
     }
-    hit(name) {
+    hit() {
         this.health = Math.max(this.health - 10, 0)
         if(this.health === 0) {
-            window.OverworldMaps.Outside.gameObjects["hero"].addItem(name, 1);
+            window.OverworldMaps.Shop.gameObjects["hero"].addItem(this.name, 1);
+            window.OverworldMaps.Outside.gameObjects["hero"].addItem(this.name, 1);
             delete window.OverworldMaps.Outside.gameObjects[this.id];
         }
     }

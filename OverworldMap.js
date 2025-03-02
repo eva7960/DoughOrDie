@@ -301,11 +301,15 @@ window.OverworldMaps = {
         x: utils.withGrid(9),
         y: utils.withGrid(5),
       }),
-      cheese4: new Cheese({
-        x: utils.withGrid(1),
-        y: utils.withGrid(10),
-      }),
       ham1: new Ham({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      ham2: new Ham({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      ham3: new Ham({
         x: utils.withGrid(5),
         y: utils.withGrid(7),
       }),
@@ -313,7 +317,23 @@ window.OverworldMaps = {
         x: utils.withGrid(5),
         y: utils.withGrid(7),
       }),
+      olive2: new Olive({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
       pineapple1: new Pineapple({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      pineapple2: new Pineapple({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      pepperoni1: new Pepperoni({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      pepperoni2: new Pepperoni({
         x: utils.withGrid(5),
         y: utils.withGrid(7),
       })
