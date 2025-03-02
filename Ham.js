@@ -1,9 +1,9 @@
-class Cheese extends Ingredient {
+class Ham extends Ingredient {
   constructor(config) {
     super(config);
     this.sprite = new Sprite({
       gameObject: this,
-      src: "./sprites/cheese.png",
+      src: "./sprites/ham.png",
       hasHealthBar: true,
     });
     this.maxHealth = 30;
@@ -11,6 +11,6 @@ class Cheese extends Ingredient {
     this.speed = 0.5;
   }
   hit() {
-    super.hit("cheese");
+    super.hit("ham");
   }
 }

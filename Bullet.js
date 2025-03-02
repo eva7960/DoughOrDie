@@ -17,17 +17,13 @@ class Bullet extends GameObject {
 
     update(state) {
         const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
-        // loop through game objects looking for enemies
         Object.keys(window.OverworldMaps.Outside.gameObjects).forEach(key => {
             let object = window.OverworldMaps.Outside.gameObjects[key];
-            if (object instanceof Cheese && utils.collide(this, object)) {
-                object.hit(); // Apply hit if collision detected
+            if (object instanceof Ingredient && utils.collide(this, object)) {
+                object.hit();
             }
         });
         this.x = nextPosition.x;
         this.y = nextPosition.y;
-        state.map.moveWall(this.x, this.y, this.direction);
     }
-
-
 }

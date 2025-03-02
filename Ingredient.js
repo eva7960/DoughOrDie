@@ -1,4 +1,4 @@
-class Cheese {
+class Ingredient {
     constructor(config) {
         this.id = null;
         this.x = config.x;
@@ -58,10 +58,10 @@ class Cheese {
             }
         }
     }
-    hit() {
+    hit(name) {
         this.health = Math.max(this.health - 10, 0)
         if(this.health === 0) {
-            window.OverworldMaps.Outside.gameObjects["hero"].addItem("cheese", 1);
+            window.OverworldMaps.Outside.gameObjects["hero"].addItem(name, 1);
             delete window.OverworldMaps.Outside.gameObjects[this.id];
         }
     }

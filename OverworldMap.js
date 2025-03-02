@@ -119,15 +119,6 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(oldX, oldY, direction);
     this.addWall(x,y)
   }
-  removeGameObject(map, id) {
-    // Directly delete the object by its id if it exists in the map's gameObjects
-    if (map.gameObjects[id]) {
-      delete map.gameObjects[id];
-    }
-  }
-
-
-
 }
 
 window.OverworldMaps = {
@@ -314,11 +305,18 @@ window.OverworldMaps = {
         x: utils.withGrid(1),
         y: utils.withGrid(10),
       }),
-      // cheese5: new Cheese({
-      //   x: utils.withGrid(6),
-      //   y: utils.withGrid(7),
-      // }),
-
+      ham1: new Ham({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      olive1: new Olive({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      pineapple1: new Pineapple({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      })
     },
 
     walls: {
