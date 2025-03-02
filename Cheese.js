@@ -1,9 +1,6 @@
-class Cheese {
+class Cheese extends Ingredient {
   constructor(config) {
-    this.id = null;
-    this.x = config.x;
-    this.y = config.y;
-    this.direction = "down";
+    super
     this.sprite = new Sprite({
       gameObject: this,
       src: "./sprites/cheese.png",
