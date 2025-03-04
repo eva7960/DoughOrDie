@@ -143,11 +143,12 @@ window.OverworldMaps = {
           y: utils.withGrid(14),
           src: "./sprites/npc1.png",
           behaviorLoop:[
-            {who: "cheesePizzaNPC",type:"walk",direction:"up"},
+            //{who: "cheesePizzaNPC",type:"walk",direction:"up"},
           ],
           talking: [
             {
-              events : [ 
+              events : [
+                {who: "cheesePizzaNPC", type: "walk", direction: "up"},
                 {type: "textMessage", 
                  text: "Hello, can I have a Cheese Pizza.", 
                  faceHero: "cheesePizzaNPC",
