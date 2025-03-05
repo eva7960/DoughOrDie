@@ -123,7 +123,7 @@ class OverworldMap {
 
 window.OverworldMaps = {
   Shop: {
-    lowerSrc: "./backgrounds/shop1.png",
+    lowerSrc: "./backgrounds/shop.png",
     upperSrc: "./backgrounds/hall.png",
     gameObjects: {
       hero: new Person({
@@ -143,7 +143,7 @@ window.OverworldMaps = {
           y: utils.withGrid(14),
           src: "./sprites/npc1.png",
           behaviorLoop:[
-            //{who: "cheesePizzaNPC",type:"walk",direction:"up"},
+            {who: "cheesePizzaNPC",type:"walk",direction:"up"},
           ],
           talking: [
             {
