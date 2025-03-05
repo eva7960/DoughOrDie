@@ -24,7 +24,7 @@ class TextMessage {
     done() {
         if(this.revealingText.isDone) {
             this.element.remove();
-            this.actionListener.unbind
+            this.actionListener.unbind()
             this.onComplete();
         } else {
             this.revealingText.warpToDone();

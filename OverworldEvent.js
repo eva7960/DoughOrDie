@@ -42,7 +42,7 @@ class OverworldEvent {
       document.addEventListener("PersonWalkingComplete", completeHandler)
   }
 
-    textMessage(resolve) {
+  textMessage(resolve) {
         //make npc face hero
         if (this.event.faceHero) {
             const obj = this.map.gameObjects[this.event.faceHero];
