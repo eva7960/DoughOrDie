@@ -62,14 +62,32 @@ class Overworld {
     }
     bindInventoryInput() {
         new KeyPressListener("KeyI", () => {
-            const hero = this.map.gameObjects["hero"];
-            if (hero && hero.inventory) {
-                console.log("Player Inventory:", hero.inventory);
-            } else {
-                console.log("No inventory found for the hero.");
+          //does nothing if there is another dialogue box
+          if (document.querySelector('.TextMessage')) {
+            return;
+          } 
+    
+          const hero = this.map.gameObjects["hero"];
+          let messageText = "";
+          if (hero && hero.inventory) {
+            messageText = "";
+            let count = 1;
+            for (const item in hero.inventory) {
+              const itemName = item.charAt(0).toUpperCase() + item.slice(1);
+              messageText += `${itemName}: ${hero.inventory[item]}\t`;
+              count++;
             }
+          } else {
+            messageText = "Your inventory is empty!";
+          }
+          const message = new TextMessage({
+            text: messageText,
+            onComplete: () => {}
+          });
+          message.init(document.querySelector(".game-container"));
+          message.revealingText.warpToDone();
         });
-    }
+      }
 
     startMap(mapConfig) {
         this.map = new OverworldMap(mapConfig);
