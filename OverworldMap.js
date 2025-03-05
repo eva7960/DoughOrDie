@@ -147,7 +147,8 @@ window.OverworldMaps = {
           ],
           talking: [
             {
-              events : [ 
+              events : [
+                {who: "cheesePizzaNPC", type: "walk", direction: "up"},
                 {type: "textMessage", 
                  text: "Hello, can I have a Cheese Pizza.", 
                  faceHero: "cheesePizzaNPC",
@@ -302,12 +303,12 @@ window.OverworldMaps = {
         y: utils.withGrid(5),
       }),
       ham1: new Ham({
-        x: utils.withGrid(5),
-        y: utils.withGrid(7),
+        x: utils.withGrid(2),
+        y: utils.withGrid(6),
       }),
       ham2: new Ham({
-        x: utils.withGrid(5),
-        y: utils.withGrid(7),
+        x: utils.withGrid(7),
+        y: utils.withGrid(8),
       }),
       ham3: new Ham({
         x: utils.withGrid(5),
@@ -326,8 +327,8 @@ window.OverworldMaps = {
         y: utils.withGrid(7),
       }),
       pineapple2: new Pineapple({
-        x: utils.withGrid(5),
-        y: utils.withGrid(7),
+        x: utils.withGrid(2),
+        y: utils.withGrid(6),
       }),
       pepperoni1: new Pepperoni({
         x: utils.withGrid(5),
@@ -336,7 +337,23 @@ window.OverworldMaps = {
       pepperoni2: new Pepperoni({
         x: utils.withGrid(5),
         y: utils.withGrid(7),
-      })
+      }),
+      mushroom1: new Mushroom({
+        x: utils.withGrid(3),
+        y: utils.withGrid(8),
+      }),
+      mushroom2: new Mushroom({
+        x: utils.withGrid(5),
+        y: utils.withGrid(9),
+      }),
+      pepper1: new Pepper({
+        x: utils.withGrid(7),
+        y: utils.withGrid(7),
+      }),
+      pepper2: new Mushroom({
+        x: utils.withGrid(9),
+        y: utils.withGrid(6),
+      }),
     },
 
     walls: {

@@ -57,9 +57,6 @@ class OrderManager {
       message.init(document.querySelector(".game-container"));
       message.revealingText.warpToDone();
     }
-    
-    
-
   }
   
   window.orderManager = new OrderManager();
