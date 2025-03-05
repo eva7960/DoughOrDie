@@ -43,13 +43,15 @@ class OverworldEvent {
   }
 
   textMessage(resolve) {
+    //make npc face hero
     if (this.event.faceHero) {
       const obj = this.map.gameObjects[this.event.faceHero];
       obj.direction = utils.oppositeDirection(this.map.gameObjects["hero"].direction);
     }
   
     let messageText = this.event.text;
-  
+
+    //logic to determine output message 
     if (this.event.order && this.event.who) {
       const hero = this.map.gameObjects["hero"];
       if (window.orderManager.getOrders()[this.event.who]) {
@@ -57,7 +59,6 @@ class OverworldEvent {
         const missingIngredients = ingredients.filter(ingredient => {
           return !(hero.inventory && hero.inventory[ingredient] > 0);
         });
-  
         if (missingIngredients.length === 0) {
           for (const ingredient of ingredients) {
             hero.inventory[ingredient]--;
@@ -73,10 +74,49 @@ class OverworldEvent {
         window.orderManager.addOrder(this.event.who, this.event.order);
       }
     }
-  
+    
+    //NPC will move and then despawn after their move sequence 
     const message = new TextMessage({
       text: messageText,
-      onComplete: () => resolve()
+      onComplete: () => {
+        if (this.event.order && this.event.who && !window.orderManager.getOrders()[this.event.who]) {
+          const npc = this.map.gameObjects[this.event.who];
+          if (npc && !npc.orderMovementDone) {
+            npc.orderMovementDone = true;
+            const sequence = [
+              {type: "walk", direction: "right"},
+              {type: "walk", direction: "right"},
+              {type: "walk", direction: "down"},
+              {type: "walk", direction: "down"},
+              {type: "walk", direction: "down"},
+              {type: "walk", direction: "down"},
+              {type: "walk", direction: "down"},
+              {type: "walk", direction: "down"},
+            ];
+            let current = 0;
+            const moveNext = () => {
+              if (current >= sequence.length) {
+                this.map.deleteWall(npc.x, npc.y); 
+                delete this.map.gameObjects[this.event.who];
+                resolve();
+                return;
+              }
+              npc.startBehavior({ map: this.map }, sequence[current]);
+              const completeHandler = e => {
+                if (e.detail.whoId === this.event.who) {
+                  document.removeEventListener("PersonWalkingComplete", completeHandler);
+                  current++;
+                  moveNext();
+                }
+              };
+              document.addEventListener("PersonWalkingComplete", completeHandler);
+            };
+            moveNext();
+            return; 
+          }
+        }
+        resolve();
+      }
     });
     message.init(document.querySelector(".game-container"));
   }
