@@ -3,52 +3,52 @@ const utils = {
     return n * 16;
   },
 
-  asGridCoord(x,y) {
-    return `${x*16},${y*16}`
+  asGridCoord(x, y) {
+    return `${x * 16},${y * 16}`
   },
 
   nextPosition(initalX, initalY, direction) {
     let x = initalX;
     let y = initalY;
     const size = 16;
-    if(direction == "left") {
+    if (direction === "left") {
       x -= size;
     }
-    if(direction == "right") {
+    if (direction === "right") {
       x += size;
     }
-    if(direction == "up") {
+    if (direction === "up") {
       y -= size;
     }
-    if(direction == "down") {
+    if (direction === "down") {
       y += size;
     }
-    return {x,y};
-  },
-
-  currentPosition (initalX, initalY, direction) {
-    return {x,y};
+    return {x, y};
   },
 
   oppositeDirection(direction) {
-    if(direction == "right") {
+    if (direction === "right") {
       return "left";
     }
-    if(direction == "left") {
+    if (direction === "left") {
       return "right";
     }
-    if(direction == "up") {
+    if (direction === "up") {
       return "down";
     }
-    if(direction == "down") {
+    if (direction === "down") {
       return "up";
     }
   },
 
   emitEvent(name, detail) {
     const event = new CustomEvent(name, {
-       detail
+      detail
     });
     document.dispatchEvent(event);
-  }
+  },
+  collide(A, B) {
+    return Math.round(A.x / 16) === Math.round(B.x / 16) &&
+        Math.round(A.y / 16) === Math.round(B.y / 16);
+  },
 }

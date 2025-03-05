@@ -17,21 +17,19 @@ class GameObject {
   }
 
   mount(map) {
-    this.isMounted = true;
-    map.addWall(this.x, this.y);
-
+    // this.isMounted = true;
+    // map.addWall(this.x, this.y);
+    //
     setTimeout(() => {
-        this.doBehaviorEvent(map).then(r => {});
+      this.doBehaviorEvent(map).then(r => {});
     }, 10)
   }
 
   update() {
   }
-
   async doBehaviorEvent(map) {
-
     if(map.isCutScenePlaying || this.behaviorLoop.length === 0 || this.isStanding) {
-        return;
+      return;
     }
     let eventConfig = this.behaviorLoop[this.behaviorLoopIndex];
     eventConfig.who = this.id;
@@ -41,10 +39,9 @@ class GameObject {
 
     this.behaviorLoopIndex += 1;
     if(this.behaviorLoopIndex === this.behaviorLoop.length) {
-        this.behaviorLoopIndex = 0;
+      this.behaviorLoopIndex = 0;
     }
 
     await this.doBehaviorEvent(map);
   }
-
 }

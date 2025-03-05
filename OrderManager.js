@@ -1,7 +1,7 @@
 class OrderManager {
     constructor() {
-      //array of orders
       this.orders = {};
+      this.timer = new Timer();
   
       //press o on the keyboard to output all orders to the console and show inventory in dialogue box
       new KeyPressListener("KeyO", () => {
@@ -14,6 +14,7 @@ class OrderManager {
       if (!this.orders[npcId]) {
         this.orders[npcId] = order;
         console.log(`Order added from ${npcId}: ${order}`);
+        this.timer.start();
       }
     }
     
@@ -22,6 +23,7 @@ class OrderManager {
       if (this.orders[npcId]) {
         console.log(`Order completed for ${npcId}: ${this.orders[npcId]}`);
         delete this.orders[npcId];
+        this.timer.stop();
       }
     }
   
@@ -55,9 +57,6 @@ class OrderManager {
       message.init(document.querySelector(".game-container"));
       message.revealingText.warpToDone();
     }
-    
-    
-
   }
   
   window.orderManager = new OrderManager();

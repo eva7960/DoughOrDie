@@ -1,12 +1,12 @@
 class Timer {
-    constructor({ initialTime = 60 }) {
-      this.initialTime = initialTime;
-      this.remainingTime = initialTime;
+    constructor() {
+      this.initialTime = 60;
+      this.remainingTime = 60;
       this.interval = null;
     }
   
-    formatTime(seconds) {
-      return seconds.toString();
+    formatTime() {
+      return this.remainingTime.toString();
     }
   
     start() {
@@ -15,10 +15,9 @@ class Timer {
       }
       this.interval = setInterval(() => {
         this.remainingTime--;
-        if (this.remainingTime <= 0) {
+        if (this.remainingTime === 0) {
           this.stop();
-          //add code here to show the game over screen
-          console.log("Timer finished!");
+          utils.emitEvent("GameOver");
         }
       }, 1000);
     }
@@ -27,9 +26,11 @@ class Timer {
       if (this.interval) {
         clearInterval(this.interval);
         this.interval = null;
+        this.initialTime = 60;
+        this.remainingTime = 60;
+        clearInterval(this.interval);
       }
     }
-    
   }
 
   

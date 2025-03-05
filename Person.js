@@ -2,39 +2,20 @@ class Person extends GameObject {
   constructor(config) {
     super(config);
     this.movingProgressRemaining = 0;
-    this.isStanding = false; 
+    this.isStanding = false;
     this.health = 100;
     this.score = 0;
-    this.inventory = config.inventory || {cheese: 1, pepperoni: 1, sausage: 1, meatball: 1, mushroom: 1, pineapple: 1, olive: 1,
-      peppers: 1, 
-    };
+    this.inventory = config.inventory || {};
 
     this.isPlayerControlled = config.isPlayerControlled || false;
-    
+
     this.directionUpdate = {
       "up": ["y", -1],
       "down": ["y", 1],
       "left": ["x", -1],
       "right": ["x", 1],
     }
-  }
-  
-  addItem(item, amount = 1) {
-    if (this.inventory.hasOwnProperty(item)) {
-      this.inventory[item] += amount;
-    } else {
-      this.inventory[item] = amount;
-    }
-  }
 
-  setItem(item, amount) {
-    this.inventory[item] = amount;
-  }
-
-  removeItem(item, amount = 1) {
-    if (this.inventory.hasOwnProperty(item)) {
-      this.inventory[item] = Math.max(0, this.inventory[item] - amount);
-    }
   }
 
   addItem(item, amount = 1) {
@@ -44,7 +25,7 @@ class Person extends GameObject {
       this.inventory[item] = amount;
     }
   }
-  
+
   setItem(item, amount) {
     this.inventory[item] = amount;
   }
@@ -74,6 +55,8 @@ class Person extends GameObject {
   }
 
   update(state) {
+    if (window.overworld.isGameOver) return; // Prevents movement when game over is active
+    state.map.deleteWall(0,-1);
     if (this.movingProgressRemaining > 0) {
       this.updatePosition();
     } else {
@@ -81,25 +64,26 @@ class Person extends GameObject {
         this.startBehavior(state, {
           type: "walk",
           direction: state.arrow
-        })
+        });
       }
-    this.updateSprite(state);
+      this.updateSprite(state);
     }
   }
+
 
   startBehavior(state, behavior) {
     this.direction = behavior.direction;
 
-    if(behavior.type === "walk") {
-    //console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
-    if(state.map.isSpaceTaken(this.x, this.y, this.direction)) {
-      behavior.retry && setTimeout(() => {
+    if (behavior.type === "walk") {
+      //console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
+      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+        behavior.retry && setTimeout(() => {
           this.startBehavior(state, behavior)
-      },10)
-      return;
-    }
-    state.map.moveWall(this.x, this.y, this.direction);
-    this.movingProgressRemaining = 16;
+        }, 10)
+        return;
+      }
+      //state.map.moveWall(this.x, this.y, this.direction);
+      this.movingProgressRemaining = 16;
       this.updateSprite(state);
     }
 
@@ -112,28 +96,32 @@ class Person extends GameObject {
         this.isStanding = false;
       }, behavior.time)
     }
-
   }
 
   updatePosition() {
-      const [property, change] = this.directionUpdate[this.direction];
-      this[property] += change;
-      this.movingProgressRemaining -= 1;
+    const [property, change] = this.directionUpdate[this.direction];
+    this[property] += change;
+    this.movingProgressRemaining -= 1;
 
-      if (this.movingProgressRemaining === 0) {
-        utils.emitEvent("PersonWalkingComplete", {
-            whoId: this.id
-        })
-      }
-    
+    if (this.movingProgressRemaining === 0) {
+      utils.emitEvent("PersonWalkingComplete", {
+        whoId: this.id
+      })
+    }
   }
 
   updateSprite() {
     if (this.movingProgressRemaining > 0) {
-      this.sprite.setAnimation("walk-"+this.direction);
+      this.sprite.setAnimation("walk-" + this.direction);
       return;
     }
-    this.sprite.setAnimation("idle-"+this.direction);
+    this.sprite.setAnimation("idle-" + this.direction);
   }
 
+  hit() {
+    this.health = Math.max(this.health - 10, 0);
+    if (this.health === 0) {
+      utils.emitEvent("GameOver");
+    }
+  }
 }
