@@ -123,7 +123,7 @@ class OverworldMap {
 
 window.OverworldMaps = {
   Shop: {
-    lowerSrc: "./backgrounds/shop.png",
+    lowerSrc: "./spritess.shop1.png",
     upperSrc: "./backgrounds/hall.png",
     gameObjects: {
       hero: new Person({
