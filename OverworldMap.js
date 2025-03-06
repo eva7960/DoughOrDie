@@ -123,7 +123,7 @@ class OverworldMap {
 
 window.OverworldMaps = {
   Shop: {
-    lowerSrc: "./backgrounds/shop.png",
+    lowerSrc: "./backgrounds/shop1.png",
     upperSrc: "./backgrounds/hall.png",
     gameObjects: {
       hero: new Person({
@@ -336,7 +336,24 @@ window.OverworldMaps = {
       pepperoni2: new Pepperoni({
         x: utils.withGrid(5),
         y: utils.withGrid(7),
-      })
+      }),
+      pepper1: new Pepper({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      pepper2: new Pepper({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      mushroom1: new Mushroom({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      mushroom2: new Mushroom({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+
     },
 
     walls: {
