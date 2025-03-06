@@ -10,11 +10,13 @@ class TitleScreen {
         this.element.classList.add("TitleScreen");
 
         this.element.innerHTML = `
-            <h1 class="title">🍕 Dough or Die 🍕</h1>
+            <img src="./titleLogo.png" class="game-logo animated-logo" alt="Dough or Die Logo">
+
             <div class="options">
                 <p class="option ${this.selectedOption === 0 ? "selected" : ""}" data-option="play">▶ Play</p>
                 <p class="option ${this.selectedOption === 1 ? "selected" : ""}" data-option="exit">Exit</p>
             </div>
+            <p class="instructions">Press Enter to Select</p>
         `;
 
         document.addEventListener("keydown", this.handleInput);
