@@ -97,8 +97,8 @@ class Sprite {
   drawHealthBar(ctx, x, y) {
     const barWidth = 20;
     const barHeight = 4;
-    const yOffset = y + 8; // Move it closer to the sprite
-    const xOffset = x + 7;
+    const yOffset = y + 32; // Move it closer to the sprite
+    const xOffset = x + 6;
 
     const healthRatio = this.gameObject.health / this.gameObject.maxHealth;
     const currentWidth = Math.max(0, barWidth * healthRatio);
