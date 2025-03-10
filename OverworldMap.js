@@ -1,6 +1,6 @@
 //important coordinates 
 //(2,5) in front of counter
-//
+//(2,10) enter the shop
 class OverworldMap {
   constructor(config) {
     this.overworld = null;
@@ -15,6 +15,9 @@ class OverworldMap {
     this.upperImage.src = config.upperSrc;
 
     this.isCutScenePlaying = false; 
+    this.toppings = ["cheese", "pepperoni", "sausage", "meatball", "mushroom", "pineapple", "olive", "pepper"];
+
+    this.npcSpawnCount = 0;
   }
 
   drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
@@ -97,7 +100,85 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(oldX, oldY, direction);
     this.addWall(x,y)
   }
+
+
+
+
+
+
+
+
+  spawnNPCAtTile() {
+    this.npcSpawnCount++;
+
+    //difficulty increases with ever 2 orders (1 and 2 will have 1 topping, 3 and 4 will have 2 toppings, etc)
+    let numToppings = Math.floor((this.npcSpawnCount - 1) / 2) + 1;
+    if (numToppings > this.toppings.length) {
+      numToppings = this.toppings.length;
+    }
+
+    //select the toppings randomly 
+    const selectedToppings = [];
+    for (let i = 0; i < numToppings; i++) {
+      const randomIndex = Math.floor(Math.random() * this.toppings.length);
+      selectedToppings.push(this.toppings[randomIndex]);
+    }
+    const orderText = selectedToppings.join(", ");
+
+    const npc = new Person({
+      x: utils.withGrid(2),
+      y: utils.withGrid(10),
+      src: "./sprites/customer1.png", 
+      behaviorLoop: [],
+      talking: [{
+        events: [
+          {
+            type: "textMessage",
+            text: `Hello, can I have a ${orderText} Pizza?`,
+            faceHero: "", 
+            order: orderText,
+            who: ""
+          }
+        ]
+      }]
+    });
+
+    //make sure when changing maps the npcSpawnCount is not reset, or we will have duplicate NPC ids
+    const npcId = `${orderText.replace(/,\s*/g, "").toLowerCase()}_${this.npcSpawnCount}`;
+    npc.id = npcId;
+    npc.talking[0].events[0].faceHero = npcId;
+    npc.talking[0].events[0].who = npcId;
+
+    this.gameObjects[npcId] = npc;
+    npc.mount(this);
+
+    const moves = [
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true }
+    ];
+
+    let currentMove = 0;
+    const moveNext = () => {
+      if (currentMove >= moves.length) {
+        return;
+      }
+      npc.startBehavior({ map: this }, moves[currentMove]);
+      const completeHandler = e => {
+        if (e.detail.whoId === npcId) {
+          document.removeEventListener("PersonWalkingComplete", completeHandler);
+          currentMove++;
+          moveNext();
+        }
+      };
+      document.addEventListener("PersonWalkingComplete", completeHandler);
+    };
+    moveNext();
+  }
 }
+
 
 window.OverworldMaps = {
   Shop: {
@@ -138,7 +219,7 @@ window.OverworldMaps = {
       }),
 
       pepperoniPizzaNPC: new Person({
-        x: utils.withGrid(2),
+        x: utils.withGrid(5),
         y: utils.withGrid(5),
         src: "./sprites/customer1.png",
         behaviorLoop:[
