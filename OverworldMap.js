@@ -147,9 +147,9 @@ window.OverworldMaps = {
           ],
           talking: [
             {
-              events : [ 
-                {type: "textMessage", 
-                 text: "Hello, can I have a Cheese Pizza.", 
+              events : [
+                {type: "textMessage",
+                 text: "Hello, can I have a Cheese Pizza.",
                  faceHero: "cheesePizzaNPC",
                  who: "cheesePizzaNPC",
                  order: "Cheese",
@@ -158,27 +158,27 @@ window.OverworldMaps = {
             },
           ]
       }),
-
-      pepperoniPizzaNPC: new Person({
-        x: utils.withGrid(6),
-        y: utils.withGrid(6),
-        src: "./sprites/npc7.png",
-        behaviorLoop:[
-            //default behavior for npc 
-        ],
-        talking: [
-          {
-            events : [
-              {type: "textMessage", 
-               text: "Hello, can I have a Pepperoni Pizza.", 
-               faceHero: "pepperoniPizzaNPC",
-               who: "pepperoniPizzaNPC",
-               order: "Pepperoni",
-              },
-            ]
-          },
-        ]
-    }),
+    //
+    //   pepperoniPizzaNPC: new Person({
+    //     x: utils.withGrid(6),
+    //     y: utils.withGrid(6),
+    //     src: "./sprites/npc7.png",
+    //     behaviorLoop:[
+    //         //default behavior for npc
+    //     ],
+    //     talking: [
+    //       {
+    //         events : [
+    //           {type: "textMessage",
+    //            text: "Hello, can I have a Pepperoni Pizza.",
+    //            faceHero: "pepperoniPizzaNPC",
+    //            who: "pepperoniPizzaNPC",
+    //            order: "Pepperoni",
+    //           },
+    //         ]
+    //       },
+    //     ]
+    // }),
 
       // boss: new Person({
       //   x: utils.withGrid(11),

@@ -6,9 +6,8 @@ class Person extends GameObject {
     this.health = 100;
     this.score = 0;
     this.inventory = {};
-
+    this.isHero = config.isHero || false;
     this.isPlayerControlled = config.isPlayerControlled || false;
-
     this.directionUpdate = {
       "up": ["y", -1],
       "down": ["y", 1],
@@ -26,24 +25,6 @@ class Person extends GameObject {
     }
   }
 
-  setItem(item, amount) {
-    this.inventory[item] = amount;
-  }
-
-  removeItem(item, amount = 1) {
-    if (this.inventory.hasOwnProperty(item)) {
-      this.inventory[item] = Math.max(0, this.inventory[item] - amount);
-    }
-  }
-
-  addItem(item, amount = 1) {
-    if (this.inventory.hasOwnProperty(item)) {
-      this.inventory[item] += amount;
-    } else {
-      this.inventory[item] = amount;
-    }
-  }
-  
   setItem(item, amount) {
     this.inventory[item] = amount;
   }
