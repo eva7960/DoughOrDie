@@ -31,8 +31,17 @@ class OverworldMap {
   // replace 0, 0 utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y
 
   isSpaceTaken(currentX, currentY, direction) {
-    const {x,y} = utils.nextPosition(currentX,currentY,direction);
-    return this.walls[`${x},${y}`] || false;
+    const { x, y } = utils.nextPosition(currentX, currentY, direction);
+    
+    if (this.walls[`${x},${y}`]) return true;
+    
+    for (let key in this.gameObjects) {
+      const obj = this.gameObjects[key];
+      if (obj.x === x && obj.y === y) {
+        return true;
+      }
+    }
+    return false;
   }
 
   mountObjects() {
