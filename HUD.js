@@ -20,7 +20,7 @@ class HUD {
   }
 
   update({ score, health, timer }) {
-    this.scoreElement.innerText = "Score: " + score;
+    this.scoreElement.innerText = "Money: " + score;
     this.healthElement.innerText = "Health: " + health;
     this.timerElement.innerText = "Timer: " + timer;
   }
