@@ -116,6 +116,12 @@ class Overworld {
 
         this.hud = new HUD({ container: this.element });
 
+        //how long until the next NPC spawns
+        setInterval(() => {
+            this.map.spawnNPCAtTile();
+        }, 5000);
+
+
         this.startGameLoop();
     }
 }
