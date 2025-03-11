@@ -105,12 +105,7 @@ class Overworld {
     }
 
     startGame() {
-        const titleScreen = document.querySelector(".TitleScreen");
-        if (titleScreen) {
-            titleScreen.remove();
-        } else {
-            console.warn("TitleScreen element not found");
-        }
+        document.querySelector(".TitleScreen").remove();
         this.startMap(window.OverworldMaps.Shop);
         this.bindActionInput();
         this.bindInventoryInput();
@@ -128,8 +123,8 @@ class Overworld {
             // Start the interval after the first NPC has spawned
             setInterval(() => {
                 this.map.spawnNPCAtTile();
-            }, 20000);
-        }, 3000);
+            }, 8000);
+        }, 1000);
 
 
 

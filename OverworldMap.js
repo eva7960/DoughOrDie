@@ -165,7 +165,7 @@ class OverworldMap {
 
     const npc = new Person({
       x: utils.withGrid(2),
-      y: utils.withGrid(10),
+      y: utils.withGrid(13),
       src: "./sprites/customer1.png",
       behaviorLoop: [],
       talking: [{
@@ -191,6 +191,9 @@ class OverworldMap {
     npc.mount(this);
 
     const moves = [
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
       { type: "walk", direction: "up", retry: true },
       { type: "walk", direction: "up", retry: true },
       { type: "walk", direction: "up", retry: true },
