@@ -86,6 +86,14 @@ class Overworld {
       message.revealingText.warpToDone();
     });
   }
+  showTitleScreen() {
+      const titleScreen = new TitleScreen({
+          onComplete: () => {
+              this.startGame();
+          }
+      });
+      titleScreen.init(document.body);
+  }
   
   startMap(mapConfig) {
     this.map = new OverworldMap(mapConfig);
@@ -105,6 +113,7 @@ class Overworld {
   }
 
   init() {
+    this.showTitleScreen();
     this.startMap(window.OverworldMaps.Shop);
     this.bindActionInput();
     this.bindInventoryInput();

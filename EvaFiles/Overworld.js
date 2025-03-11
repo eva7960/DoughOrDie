@@ -7,6 +7,7 @@ class Overworld {
   }
 
   startGameLoop() {
+    document.querySelector(".TitleScreen").remove();
     const step = () => {
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -125,5 +126,34 @@ class Overworld {
       // { who: "npc1", type: "walk", direction: "up" },
       // { who: "npc1", type: "walk", direction: "up" },
     ]);
+  }checkGameOver() {
+    const check = setInterval(() => {
+      const hero = this.map.gameObjects.hero;
+
+      if (hero.health <= 0 || this.timer.remainingTime <= 0) {
+        clearInterval(check);
+
+        // Ensure health is exactly 0
+        hero.health = 0;
+
+        // Stop the game loop
+        cancelAnimationFrame(this.gameLoopId);
+
+        // Show Game Over screen
+        this.showGameOverScreen();
+      }
+    }, 500); // Check every 0.5 seconds for better responsiveness
+  }
+  showGameOverScreen() {
+    // Hide HUD
+    this.hud.element.style.display = "none";
+
+    const gameOverScreen = new GameOverScreen({
+      onRestart: () => {
+        document.querySelector(".GameOverScreen").remove();
+        this.startGame();
+      }
+    });
+    gameOverScreen.init(document.body);
   }
 }
