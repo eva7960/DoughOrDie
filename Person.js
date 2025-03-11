@@ -105,8 +105,5 @@ class Person extends GameObject {
 
   hit() {
     this.health = Math.max(this.health - 10, 0);
-    if (this.health === 0) {
-      utils.emitEvent("GameOver");
-    }
   }
 }

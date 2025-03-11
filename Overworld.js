@@ -32,6 +32,10 @@ class Overworld {
                 timer: window.orderManager.timer.formatTime(),
             });
 
+            if(hero.health === 0) {
+                this.showGameOverScreen();
+            }
+
             requestAnimationFrame(step);
         };
         step();
@@ -129,5 +133,17 @@ class Overworld {
 
 
         this.startGameLoop();
+    }
+    showGameOverScreen() {
+        // Hide HUD
+        this.hud.element.style.display = "none";
+
+        const gameOverScreen = new GameOverScreen({
+            onRestart: () => {
+                document.querySelector(".GameOverScreen").remove();
+                this.startGame();
+            }
+        });
+        gameOverScreen.init(document.body);
     }
 }

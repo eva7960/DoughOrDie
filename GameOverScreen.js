@@ -11,7 +11,7 @@ class GameOverScreen {
         this.element.innerHTML = `
             <img src="gameOverLogo.png" class="animated-logo">
             <div class="options">
-                <p class="option selected" data-option="exit">▶Exit</p>
+                <p class="option selected" data-option="exit">Exit</p>
             </div>
             <p class="instruction-text">Press Enter to exit</p>
         `;
