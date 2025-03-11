@@ -11,6 +11,9 @@ class OverworldMap {
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
 
+    this.canShoot = true;
+    this.shootCoolDown = 500;
+
     this.isCutScenePlaying = false;
     this.toppings = ["cheese", "pepperoni", "sausage", "meatball", "mushroom", "pineapple", "olive", "pepper"];
 
@@ -106,7 +109,36 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(oldX, oldY, direction);
     this.addWall(x,y)
   }
+  shoot() {
+    if (!this.canShoot) return; // Prevent shooting if still on cooldown
 
+    const bullet = new Bullet({
+      x: this.gameObjects["hero"].x,
+      y: this.gameObjects["hero"].y,
+      src: "./sprites/bullet.png",
+      direction: this.gameObjects["hero"].direction,
+    });
+
+    this.gameObjects["bullet"] = bullet;
+    bullet.mount(this);
+
+    // Set cooldown
+    this.canShoot = false;
+    setTimeout(() => {
+      this.canShoot = true;
+    }, this.shootCoolDown);
+  }
+  setCanShoot(boolean) {
+    this.canShoot = boolean;
+  }
+
+  mountObjects() {
+    Object.keys(this.gameObjects).forEach(key => {
+      let object = this.gameObjects[key];
+      object.id = key;
+      object.mount(this);
+    });
+  }
 
 
 
@@ -193,15 +225,9 @@ window.OverworldMaps = {
     gameObjects: {
       hero: new Person({
         isPlayerControlled: true,
-        //in shop
-        // x: utils.withGrid(5),
-        // y: utils.withGrid(5),
-        //behind counter
         x: utils.withGrid(2),
         y: utils.withGrid(3),
-        //door way
-        // x: utils.withGrid(0),
-        // y: utils.withGrid(2),
+        isHero: true,
       }),
     },
     walls: {
@@ -292,6 +318,7 @@ window.OverworldMaps = {
         x: utils.withGrid(0),
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
+        isHero: true,
       }),
       cheese: new Cheese({
         x: utils.withGrid(2),

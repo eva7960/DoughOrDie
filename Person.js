@@ -5,9 +5,12 @@ class Person extends GameObject {
     this.isStanding = false;
     this.health = 100;
     this.score = 0;
-    this.inventory = {};
     this.isHero = config.isHero || false;
+    this.inventory = config.inventory || {cheese: 11, pepperoni: 11, sausage: 11, meatball: 11, mushroom: 11, pineapple: 11, olive: 11,
+      pepper: 11,
+    };
     this.isPlayerControlled = config.isPlayerControlled || false;
+
     this.directionUpdate = {
       "up": ["y", -1],
       "down": ["y", 1],
@@ -36,7 +39,10 @@ class Person extends GameObject {
   }
 
   update(state) {
-    if (window.overworld.isGameOver) return; // Prevents movement when game over is active
+    if (window.overworld.isGameOver) return;
+    if(this.isHero === false) {
+      state.map.deleteWall(0,-1);
+    }
     if (this.movingProgressRemaining > 0) {
       this.updatePosition();
     } else {
@@ -55,7 +61,6 @@ class Person extends GameObject {
     this.direction = behavior.direction;
 
     if (behavior.type === "walk") {
-      //console.log(state.map.isSpaceTaken(this.x, this.y, this.direction));
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
         behavior.retry && setTimeout(() => {
           this.startBehavior(state, behavior)

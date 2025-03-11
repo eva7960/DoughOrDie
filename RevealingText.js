@@ -5,7 +5,7 @@ class RevealingText {
         this.speed = config.speed || 70;
 
         this.timeout = null;
-        this.isDone = false; 
+        this.isDone = false;
     }
 
     revealOneCharacter(list) {
@@ -23,7 +23,7 @@ class RevealingText {
 
     warpToDone() {
         clearTimeout(this.timeout);
-        this.isDone = true; 
+        this.isDone = true;
         this.element.querySelectorAll("span").forEach(s => {
             s.classList.add("revealed");
         })
