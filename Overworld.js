@@ -9,8 +9,6 @@ class Overworld {
 
     startGameLoop() {
         const step = () => {
-            if (this.isGameOver) return; // Stop the game loop when game over is triggered
-
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
             Object.values(this.map.gameObjects).forEach(object => {
@@ -30,15 +28,13 @@ class Overworld {
             const hero = this.map.gameObjects.hero;
             this.hud.update({
                 health: hero.health,
-                timer: window.orderManager.timer.formatTime(),
+                timer: window.timer ? window.timer.remainingTime : "0"
             });
 
             requestAnimationFrame(step);
         };
         step();
     }
-
-
     bindActionInput() {
         new KeyPressListener("Enter", () => {
             this.map.checkForActionCutScene();
@@ -46,9 +42,35 @@ class Overworld {
         new KeyPressListener("Space", () => {
             this.map.shoot();
         });
+    }
 
-        new KeyPressListener("KeyR", () => {
 
+    bindInventoryInput() {
+        new KeyPressListener("KeyI", () => {
+            //does nothing if there is another dialogue box
+            if (document.querySelector('.TextMessage')) {
+                return;
+            }
+
+            const hero = this.map.gameObjects["hero"];
+            let messageText = "";
+            if (hero && hero.inventory) {
+                messageText = "";
+                let count = 1;
+                for (const item in hero.inventory) {
+                    const itemName = item.charAt(0).toUpperCase() + item.slice(1);
+                    messageText += `${itemName}: ${hero.inventory[item]}\t`;
+                    count++;
+                }
+            } else {
+                messageText = "Your inventory is empty!";
+            }
+            const message = new TextMessage({
+                text: messageText,
+                onComplete: () => {}
+            });
+            message.init(document.querySelector(".game-container"));
+            message.revealingText.warpToDone();
         });
     }
 
@@ -59,25 +81,7 @@ class Overworld {
             }
         });
     }
-    bindInventoryInput() {
-        new KeyPressListener("KeyI", () => {
-            const hero = this.map.gameObjects["hero"];
-            if (hero && hero.inventory) {
-                console.log("Player Inventory:", hero.inventory);
-            } else {
-                console.log("No inventory found for the hero.");
-            }
-        });
-    }
 
-    //to test add item method
-    bindTestPepperoniInput() {
-        new KeyPressListener("KeyP", () => {
-            const hero = this.map.gameObjects["hero"];
-            hero.addItem("pepperoni", 1);
-            console.log("Pepperoni added. Current inventory:", hero.inventory);
-        });
-    }
 
     startMap(mapConfig) {
         this.map = new OverworldMap(mapConfig);
@@ -88,13 +92,6 @@ class Overworld {
 
     init() {
         this.showTitleScreen();
-
-        document.addEventListener("GameOver", () => {
-            window.timer.stop(); // Stop the timer when game over happens
-            this.showGameOverScreen();
-        });
-
-
     }
 
     showTitleScreen() {
@@ -112,7 +109,6 @@ class Overworld {
         this.bindActionInput();
         this.bindInventoryInput();
         this.bindHeroPositionCheck();
-        this.bindTestPepperoniInput();
 
         this.directionInput = new DirectionInput();
         this.directionInput.init();
@@ -120,46 +116,5 @@ class Overworld {
         this.hud = new HUD({ container: this.element });
 
         this.startGameLoop();
-
-        this.timer.stop();
-        this.timer = new Timer({ initialTime: 60 });
-
-
-        this.checkGameOver();
     }
-
-    checkGameOver() {
-        const check = setInterval(() => {
-            const hero = this.map.gameObjects.hero;
-
-            if (hero.health <= 0 || this.timer.remainingTime <= 0) {
-                clearInterval(check);
-
-                // Ensure health is exactly 0
-                hero.health = 0;
-
-                // Stop the game loop
-                cancelAnimationFrame(this.gameLoopId);
-
-                // Show Game Over screen
-                this.showGameOverScreen();
-            }
-        }, 500); // Check every 0.5 seconds for better responsiveness
-    }
-
-
-    showGameOverScreen() {
-        // Hide HUD
-        this.hud.element.style.display = "none";
-
-        const gameOverScreen = new GameOverScreen({
-            onRestart: () => {
-                document.querySelector(".GameOverScreen").remove();
-                this.startGame();
-            }
-        });
-        gameOverScreen.init(document.body);
-    }
-
-
 }

@@ -291,14 +291,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(1,2)] : true,
     },
     cutsceneSpaces: {
-      [utils.asGridCoord(11,3)] : [
-        {
-          events: [
-            {who: "boss", type:"walk", direction: "up"},
-            {type: "textMessage", text:"Are we working hard or hardly working? (cutscene)"},
-          ]
-        }
-      ],
+
       [utils.asGridCoord(0,2)] : [
         {
           events: [

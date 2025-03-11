@@ -1,46 +1,46 @@
 class OverworldEvent {
-  constructor({map,event}) {
-      this.map = map;
-      this.event = event;
-  }
+    constructor({map,event}) {
+        this.map = map;
+        this.event = event;
+    }
 
-  stand(resolve) {
-      const who = this.map.gameObjects[ this.event.who ];
-      who.startBehavior({
-          map: this.map
-      }, {
-          type: "stand",
-          direction: this.event.direction,
-          time: this.event.time
-      })
+    stand(resolve) {
+        const who = this.map.gameObjects[ this.event.who ];
+        who.startBehavior({
+            map: this.map
+        }, {
+            type: "stand",
+            direction: this.event.direction,
+            time: this.event.time
+        })
 
-      const completeHandler = e => {
-          if (e.detail.whoId === this.event.who) {
-              document.removeEventListener("PersonStandComplete", completeHandler);
-              resolve();
-          }
-      }
-      document.addEventListener("PersonStandComplete", completeHandler)
+        const completeHandler = e => {
+            if (e.detail.whoId === this.event.who) {
+                document.removeEventListener("PersonStandComplete", completeHandler);
+                resolve();
+            }
+        }
+        document.addEventListener("PersonStandComplete", completeHandler)
 
-  }
+    }
 
-  walk(resolve) {
-      const who = this.map.gameObjects[this.event.who];
-      who.startBehavior({
-          map: this.map
-      },{
-          type: "walk",
-          direction: this.event.direction,
-          retry: true
-      })
-      const completeHandler = e => {
-          if(e.detail.whoId === this.event.who) {
-              document.removeEventListener("PersonWalkingComplete", completeHandler);
-              resolve();
-          }
-      }
-      document.addEventListener("PersonWalkingComplete", completeHandler)
-  }
+    walk(resolve) {
+        const who = this.map.gameObjects[this.event.who];
+        who.startBehavior({
+            map: this.map
+        },{
+            type: "walk",
+            direction: this.event.direction,
+            retry: true
+        })
+        const completeHandler = e => {
+            if(e.detail.whoId === this.event.who) {
+                document.removeEventListener("PersonWalkingComplete", completeHandler);
+                resolve();
+            }
+        }
+        document.addEventListener("PersonWalkingComplete", completeHandler)
+    }
 
     textMessage(resolve) {
         //make npc face hero
@@ -121,18 +121,18 @@ class OverworldEvent {
         message.init(document.querySelector(".game-container"));
     }
 
-  changeMap(resolve) {
-      const sceneTransition = new SceneTransition();
-      sceneTransition.init(document.querySelector(".game-container"), () => {
-          this.map.overworld.startMap(window.OverworldMaps[this.event.map] );
-          resolve();
-      });
-      sceneTransition.fadeOut();
-  }
+    changeMap(resolve) {
+        const sceneTransition = new SceneTransition();
+        sceneTransition.init(document.querySelector(".game-container"), () => {
+            this.map.overworld.startMap(window.OverworldMaps[this.event.map] );
+            resolve();
+        });
+        sceneTransition.fadeOut();
+    }
 
-  init() {
-      return new Promise(resolve => {
-          this[this.event.type](resolve)
-      })
-  }
+    init() {
+        return new Promise(resolve => {
+            this[this.event.type](resolve)
+        })
+    }
 }
