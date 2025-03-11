@@ -15,7 +15,7 @@ class OverworldMap {
     this.shootCoolDown = 500;
 
     this.isCutScenePlaying = false;
-    this.toppings = ["cheese", "pepperoni", "sausage", "meatball", "mushroom", "pineapple", "olive", "pepper"];
+    this.toppings = ["cheese", "pepperoni", "ham", "mushroom", "pineapple", "olive", "pepper"];
 
     this.npcSpawnCount = 0;
   }
