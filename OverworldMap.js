@@ -11,10 +11,13 @@ class OverworldMap {
     this.upperImage = new Image();
     this.upperImage.src = config.upperSrc;
 
-    this.isCutScenePlaying = false;
-
     this.canShoot = true;
     this.shootCoolDown = 500;
+
+    this.isCutScenePlaying = false;
+    this.toppings = ["cheese", "pepperoni", "ham", "mushroom", "pineapple", "olive", "pepper"];
+
+    this.npcSpawnCount = 0;
   }
 
   drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
@@ -28,30 +31,17 @@ class OverworldMap {
   // replace 0, 0 utils.withGrid(5) - camera.x, utils.withGrid(5) - camera.y
 
   isSpaceTaken(currentX, currentY, direction) {
-    const {x,y} = utils.nextPosition(currentX,currentY,direction);
-    return this.walls[`${x},${y}`] || false;
-  }
-  shoot() {
-    if (!this.canShoot) return; // Prevent shooting if still on cooldown
+    const { x, y } = utils.nextPosition(currentX, currentY, direction);
 
-    const bullet = new Bullet({
-      x: this.gameObjects["hero"].x,
-      y: this.gameObjects["hero"].y,
-      src: "./sprites/bullet.png",
-      direction: this.gameObjects["hero"].direction,
-    });
+    if (this.walls[`${x},${y}`]) return true;
 
-    this.gameObjects["bullet"] = bullet;
-    bullet.mount(this);
-
-    // Set cooldown
-    this.canShoot = false;
-    setTimeout(() => {
-      this.canShoot = true;
-    }, this.shootCoolDown);
-  }
-  setCanShoot(boolean) {
-    this.canShoot = boolean;
+    for (let key in this.gameObjects) {
+      const obj = this.gameObjects[key];
+      if (obj.x === x && obj.y === y) {
+        return true;
+      }
+    }
+    return false;
   }
 
   mountObjects() {
@@ -59,7 +49,7 @@ class OverworldMap {
       let object = this.gameObjects[key];
       object.id = key;
       object.mount(this);
-    });
+    })
   }
 
   async startCutScene(events) {
@@ -71,7 +61,7 @@ class OverworldMap {
       })
       await eventHandler.init();
     }
-    this.isCutScenePlaying = false; 
+    this.isCutScenePlaying = false;
   }
 
   checkForActionCutScene() {
@@ -119,16 +109,117 @@ class OverworldMap {
     const {x,y} = utils.nextPosition(oldX, oldY, direction);
     this.addWall(x,y)
   }
-  removeGameObject(map, id) {
-    // Directly delete the object by its id if it exists in the map's gameObjects
-    if (map.gameObjects[id]) {
-      delete map.gameObjects[id];
-    }
+  shoot() {
+    if (!this.canShoot) return; // Prevent shooting if still on cooldown
+
+    const bullet = new Bullet({
+      x: this.gameObjects["hero"].x,
+      y: this.gameObjects["hero"].y,
+      src: "./sprites/bullet.png",
+      direction: this.gameObjects["hero"].direction,
+    });
+
+    this.gameObjects["bullet"] = bullet;
+    bullet.mount(this);
+
+    // Set cooldown
+    this.canShoot = false;
+    setTimeout(() => {
+      this.canShoot = true;
+    }, this.shootCoolDown);
+  }
+  setCanShoot(boolean) {
+    this.canShoot = boolean;
+  }
+
+  mountObjects() {
+    Object.keys(this.gameObjects).forEach(key => {
+      let object = this.gameObjects[key];
+      object.id = key;
+      object.mount(this);
+    });
   }
 
 
 
+
+
+
+
+  spawnNPCAtTile() {
+    this.npcSpawnCount++;
+
+    //difficulty increases with ever 2 orders (1 and 2 will have 1 topping, 3 and 4 will have 2 toppings, etc)
+    let numToppings = Math.floor((this.npcSpawnCount - 1) / 2) + 1;
+    if (numToppings > this.toppings.length) {
+      numToppings = this.toppings.length;
+    }
+
+    //select the toppings randomly
+    const selectedToppings = [];
+    for (let i = 0; i < numToppings; i++) {
+      const randomIndex = Math.floor(Math.random() * this.toppings.length);
+      selectedToppings.push(this.toppings[randomIndex]);
+    }
+    const orderText = selectedToppings.join(", ");
+
+    const npc = new Person({
+      x: utils.withGrid(2),
+      y: utils.withGrid(13),
+      src: "./sprites/customer1.png",
+      behaviorLoop: [],
+      talking: [{
+        events: [
+          {
+            type: "textMessage",
+            text: `Hello, can I have a ${orderText} Pizza?`,
+            faceHero: "",
+            order: orderText,
+            who: ""
+          }
+        ]
+      }]
+    });
+
+    //make sure when changing maps the npcSpawnCount is not reset, or we will have duplicate NPC ids
+    const npcId = `${orderText.replace(/,\s*/g, "").toLowerCase()}_${this.npcSpawnCount}`;
+    npc.id = npcId;
+    npc.talking[0].events[0].faceHero = npcId;
+    npc.talking[0].events[0].who = npcId;
+
+    this.gameObjects[npcId] = npc;
+    npc.mount(this);
+
+    const moves = [
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true },
+      { type: "walk", direction: "up", retry: true }
+    ];
+
+    let currentMove = 0;
+    const moveNext = () => {
+      if (currentMove >= moves.length) {
+        return;
+      }
+      npc.startBehavior({ map: this }, moves[currentMove]);
+      const completeHandler = e => {
+        if (e.detail.whoId === npcId) {
+          document.removeEventListener("PersonWalkingComplete", completeHandler);
+          currentMove++;
+          moveNext();
+        }
+      };
+      document.addEventListener("PersonWalkingComplete", completeHandler);
+    };
+    moveNext();
+  }
 }
+
 
 window.OverworldMaps = {
   Shop: {
@@ -136,74 +227,11 @@ window.OverworldMaps = {
     upperSrc: "./backgrounds/hall.png",
     gameObjects: {
       hero: new Person({
-          isPlayerControlled: true,
-             //in shop
-          // x: utils.withGrid(5),
-          // y: utils.withGrid(5),
-            //behind counter
-          x: utils.withGrid(2),
-          y: utils.withGrid(3),
-            //door way
-          // x: utils.withGrid(0),
-          // y: utils.withGrid(2),
+        isPlayerControlled: true,
+        x: utils.withGrid(2),
+        y: utils.withGrid(3),
+        isHero: true,
       }),
-      cheesePizzaNPC: new Person({
-          x: utils.withGrid(2),
-          y: utils.withGrid(14),
-          src: "./sprites/npc1.png",
-          behaviorLoop:[
-            {who: "cheesePizzaNPC",type:"walk",direction:"up"},
-          ],
-          talking: [
-            {
-              events : [ 
-                {type: "textMessage", 
-                 text: "Hello, can I have a Cheese Pizza.", 
-                 faceHero: "cheesePizzaNPC",
-                 who: "cheesePizzaNPC",
-                 order: "Cheese",
-                },
-              ]
-            },
-          ]
-      }),
-
-      pepperoniPizzaNPC: new Person({
-        x: utils.withGrid(6),
-        y: utils.withGrid(6),
-        src: "./sprites/npc7.png",
-        behaviorLoop:[
-            //default behavior for npc 
-        ],
-        talking: [
-          {
-            events : [
-              {type: "textMessage", 
-               text: "Hello, can I have a Pepperoni Pizza.", 
-               faceHero: "pepperoniPizzaNPC",
-               who: "pepperoniPizzaNPC",
-               order: "Pepperoni",
-              },
-            ]
-          },
-        ]
-    }),
-
-      // boss: new Person({
-      //   x: utils.withGrid(11),
-      //   y: utils.withGrid(5),
-      //   src: "./sprites/customer1.png",
-      //   behaviorLoop:[
-      //       //default behavior for npc
-      //   ],
-      //   talking: [
-      //     {
-      //       events : [
-      //         {type: "textMessage", text: "Are we working hard or hardly working? (event array)", faceHero: "boss"},
-      //       ]
-      //     },
-      //   ]
-   // }),
     },
     walls: {
       //right side of door way
@@ -212,7 +240,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(0,1)] : true,
       //side counter 
       [utils.asGridCoord(5,4)] : true,
-      //[utils.asGridCoord(5,3)] : true,
+      [utils.asGridCoord(5,3)] : true,
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,
@@ -266,14 +294,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(1,2)] : true,
     },
     cutsceneSpaces: {
-      [utils.asGridCoord(11,3)] : [
-        {
-          events: [
-            {who: "boss", type:"walk", direction: "up"},
-            {type: "textMessage", text:"Are we working hard or hardly working? (cutscene)"},
-          ]
-        }
-      ],
+
       [utils.asGridCoord(0,2)] : [
         {
           events: [
@@ -293,6 +314,7 @@ window.OverworldMaps = {
         x: utils.withGrid(0),
         y: utils.withGrid(3),
         src: "./sprites/playerGun.png",
+        isHero: true,
       }),
       cheese: new Cheese({
         x: utils.withGrid(2),
@@ -310,20 +332,63 @@ window.OverworldMaps = {
         x: utils.withGrid(9),
         y: utils.withGrid(5),
       }),
-      cheese4: new Cheese({
-        x: utils.withGrid(1),
-        y: utils.withGrid(10),
+      ham1: new Ham({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
       }),
-      // cheese5: new Cheese({
-      //   x: utils.withGrid(6),
-      //   y: utils.withGrid(7),
-      // }),
+      ham2: new Ham({
+        x: utils.withGrid(9),
+        y: utils.withGrid(3),
+      }),
+      ham3: new Ham({
+        x: utils.withGrid(9),
+        y: utils.withGrid(5),
+      }),
+      olive1: new Olive({
+        x: utils.withGrid(10),
+        y: utils.withGrid(6),
+      }),
+      olive2: new Olive({
+        x: utils.withGrid(5),
+        y: utils.withGrid(2),
+      }),
+      pineapple1: new Pineapple({
+        x: utils.withGrid(9),
+        y: utils.withGrid(1),
+      }),
+      pineapple2: new Pineapple({
+        x: utils.withGrid(3),
+        y: utils.withGrid(7),
+      }),
+      pepperoni1: new Pepperoni({
+        x: utils.withGrid(2),
+        y: utils.withGrid(9),
+      }),
+      pepperoni2: new Pepperoni({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      pepper1: new Pepper({
+        x: utils.withGrid(3),
+        y: utils.withGrid(8),
+      }),
+      pepper2: new Pepper({
+        x: utils.withGrid(2),
+        y: utils.withGrid(3),
+      }),
+      mushroom1: new Mushroom({
+        x: utils.withGrid(5),
+        y: utils.withGrid(5),
+      }),
+      mushroom2: new Mushroom({
+        x: utils.withGrid(5),
+        y: utils.withGrid(9),
+      }),
 
     },
 
     walls: {
       //north wall
-      [utils.asGridCoord(0,-1)]:  true,
       [utils.asGridCoord(1, -1)]: true,
       [utils.asGridCoord(2, -1)]: true,
       [utils.asGridCoord(3, -1)]: true,
@@ -401,17 +466,4 @@ window.OverworldMaps = {
     gameObjects: {}
   },
 }
-function generateRandomBehaviorLoop(steps) {
-  const directions = ["up", "down", "left", "right"];
-  let loop = [];
-
-  for (let i = 0; i < steps; i++) {
-    let randomDirection = directions[Math.floor(Math.random() * directions.length)];
-    loop.push({ type: "walk", direction: randomDirection });
-    loop.push({ type: "walk", direction: randomDirection });
-    loop.push({ type: "walk", direction: randomDirection });
-  }
-  return loop;
-}
-
 

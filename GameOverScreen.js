@@ -9,10 +9,11 @@ class GameOverScreen {
         this.element.classList.add("GameOverScreen");
 
         this.element.innerHTML = `
-            <h1 class="title">Game Over</h1>
+            <img src="gameOverLogo.png" class="animated-logo">
             <div class="options">
                 <p class="option selected" data-option="exit">Exit</p>
             </div>
+            <p class="instruction-text">Press Enter to exit</p>
         `;
 
         document.addEventListener("keydown", this.handleInput);
@@ -30,7 +31,6 @@ class GameOverScreen {
     };
 
     exitGame() {
-        // Check if running inside a browser tab
         if (window.self !== window.top) {
             window.location.href = "about:blank"; // Redirect to blank page
         } else {
