@@ -26,13 +26,14 @@ class Overworld {
 
             // Update HUD
             const hero = this.map.gameObjects.hero;
+            const timer = window.orderManager.timer;
             this.hud.update({
                 score: hero.score,
                 health: hero.health,
                 timer: window.orderManager.timer.formatTime(),
             });
 
-            if(hero.health === 0) {
+            if(hero.health === 0 || timer.remainingTime === 0) {
                 this.showGameOverScreen();
             }
 

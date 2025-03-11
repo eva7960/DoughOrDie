@@ -57,9 +57,10 @@ class Person extends GameObject {
 
   startBehavior(state, behavior) {
     this.direction = behavior.direction;
-
+    const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
     if (behavior.type === "walk") {
-      if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
+      if (state.map.isSpaceTaken(this.x, this.y, this.direction)||
+          (nextPosition.x <= 10 && nextPosition.y <= 10)) {
         behavior.retry && setTimeout(() => {
           this.startBehavior(state, behavior)
         }, 10)
