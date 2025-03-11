@@ -25,8 +25,9 @@ class Overworld {
             this.map.drawUpperImage(this.ctx);
 
             // Update HUD
-            const hero = this.map.gameObjects.hero;
-            const timer = window.orderManager.timer;
+            let hero = window.OverworldMaps.Outside.gameObjects["hero"];
+            window.OverworldMaps.Outside.gameObjects["hero"].score = window.OverworldMaps.Shop.gameObjects["hero"].score;
+            let timer = window.orderManager.timer;
             this.hud.update({
                 score: hero.score,
                 health: hero.health,
