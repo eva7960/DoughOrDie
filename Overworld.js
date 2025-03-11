@@ -54,7 +54,7 @@ class Overworld {
             }
 
             const hero = this.map.gameObjects["hero"];
-            let messageText = "";
+            let messageText;
             if (hero && hero.inventory) {
                 messageText = "";
                 let count = 1;
@@ -105,7 +105,12 @@ class Overworld {
     }
 
     startGame() {
-        document.querySelector(".TitleScreen").remove(); // Remove the title screen
+        const titleScreen = document.querySelector(".TitleScreen");
+        if (titleScreen) {
+            titleScreen.remove();
+        } else {
+            console.warn("TitleScreen element not found");
+        }
         this.startMap(window.OverworldMaps.Shop);
         this.bindActionInput();
         this.bindInventoryInput();
@@ -117,9 +122,15 @@ class Overworld {
         this.hud = new HUD({ container: this.element });
 
         //how long until the next NPC spawns
-        setInterval(() => {
+        setTimeout(() => {
             this.map.spawnNPCAtTile();
-        }, 5000);
+
+            // Start the interval after the first NPC has spawned
+            setInterval(() => {
+                this.map.spawnNPCAtTile();
+            }, 20000);
+        }, 3000);
+
 
 
         this.startGameLoop();
