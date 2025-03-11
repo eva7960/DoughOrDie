@@ -105,6 +105,7 @@ class Overworld {
         const titleScreen = new TitleScreen({
             onComplete: () => {
                 this.startGame();
+                window.orderManager.timer.start();
             }
         });
         titleScreen.init(document.body);
