@@ -8,6 +8,7 @@ class Overworld {
 
   startGameLoop() {
     const step = () => {
+      if (this.isGameOver) return;
       this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
       this.map.drawLowerImage(this.ctx);
@@ -100,17 +101,6 @@ class Overworld {
     this.map.overworld = this;
     this.map.mountObjects();
   }
-  drawGameOverScreen(ctx, canvas) {
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "red";
-    ctx.font = "15px Arial";
-    ctx.fillText("Game Over", canvas.width / 2 - 65, canvas.height / 2);
-
-    ctx.fillStyle = "white";
-    ctx.fillText("Press R to Restart", canvas.width / 2 - 65, canvas.height / 2 + 30);
-  }
 
   init() {
     this.showTitleScreen();
@@ -125,7 +115,7 @@ class Overworld {
     this.hud = new HUD({ container: this.element });
 
     this.startGameLoop();
-
+    this.checkGameOver();
     this.map.startCutScene([
       // { type: "textMessage", text: "Get ready for your first day on the job!" },
       // { who: "npc1", type: "walk", direction: "up" },
@@ -135,4 +125,36 @@ class Overworld {
       // { who: "npc1", type: "walk", direction: "up" },
     ]);
   }
+    checkGameOver() {
+        const check = setInterval(() => {
+            const hero = this.map.gameObjects.hero;
+
+            if (hero.health <= 0 || this.timer.remainingTime <= 0) {
+                clearInterval(check);
+
+                // Ensure health is exactly 0
+                hero.health = 0;
+
+                // Stop the game loop
+                cancelAnimationFrame(this.gameLoopId);
+
+                // Show Game Over screen
+                this.showGameOverScreen();
+            }
+        }, 500); // Check every 0.5 seconds for better responsiveness
+    }
+
+
+    showGameOverScreen() {
+        // Hide HUD
+        this.hud.element.style.display = "none";
+
+        const gameOverScreen = new GameOverScreen({
+            onRestart: () => {
+                document.querySelector(".GameOverScreen").remove();
+                this.startGame();
+            }
+        });
+        gameOverScreen.init(document.body);
+    }
 }
