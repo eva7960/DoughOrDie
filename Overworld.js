@@ -27,8 +27,9 @@ class Overworld {
             // Update HUD
             const hero = this.map.gameObjects.hero;
             this.hud.update({
+                score: hero.score,
                 health: hero.health,
-                timer: window.timer ? window.timer.remainingTime : "0"
+                timer: window.orderManager.timer.formatTime(),
             });
 
             requestAnimationFrame(step);
