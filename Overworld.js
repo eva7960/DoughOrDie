@@ -132,7 +132,7 @@ class Overworld {
             // Start the interval after the first NPC has spawned
             setInterval(() => {
                 this.map.spawnNPCAtTile();
-            }, 8000);
+            }, 3000);
         }, 1000);
 
 
