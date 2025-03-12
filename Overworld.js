@@ -47,7 +47,9 @@ class Overworld {
             this.map.checkForActionCutScene();
         });
         new KeyPressListener("Space", () => {
-            this.map.shoot();
+            if(this.map.name === "Outside") {
+                this.map.shoot();
+            }
         });
     }
 

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="6e4a056b-4898-4f95-a1dd-5c7fe519e034" name="Changes" comment="updated with Eva's files" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Eva" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;eva7960&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/eva7960/DoughOrDie.git&quot;,
+    &quot;accountId&quot;: &quot;471b3455-3109-427a-a5c0-7f8eaa0d7f9b&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2tuM4JucqYpgBFWfKTWGpesR6l2" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Abby",
+    "last_opened_file_path": "C:/DoughOrDie",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\DoughOrDie" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\DoughOrDie\backgrounds" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-WS-243.23654.157" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task id="LOCAL-00001" summary="working on mushroom and pepper">
+      <option name="closed" value="true" />
+      <created>1741126129742</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741126129742</updated>
+    </task>
+    <task id="LOCAL-00002" summary="have mushroom and pepper sprites">
+      <option name="closed" value="true" />
+      <created>1741127450967</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741127450967</updated>
+    </task>
+    <task id="LOCAL-00003" summary="all ingreidents are good">
+      <option name="closed" value="true" />
+      <created>1741128782918</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741128782918</updated>
+    </task>
+    <task id="LOCAL-00004" summary="made cheese a little faster">
+      <option name="closed" value="true" />
+      <created>1741129625739</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1741129625739</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6e4a056b-4898-4f95-a1dd-5c7fe519e034" name="Changes" comment="made cheese a little faster" />
+      <created>1741197318527</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1741197318527</updated>
+      <workItem from="1741197322316" duration="1320000" />
+      <workItem from="1741203115847" duration="2619000" />
+      <workItem from="1741206068882" duration="210000" />
+      <workItem from="1741234977313" duration="6931000" />
+      <workItem from="1741247264907" duration="97000" />
+      <workItem from="1741313035348" duration="1428000" />
+      <workItem from="1741630666522" duration="1475000" />
+    </task>
+    <task id="LOCAL-00005" summary="updated shop background">
+      <option name="closed" value="true" />
+      <created>1741197433402</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1741197433402</updated>
+    </task>
+    <task id="LOCAL-00006" summary="updated cheese spritesheet">
+      <option name="closed" value="true" />
+      <created>1741203152875</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1741203152875</updated>
+    </task>
+    <task id="LOCAL-00007" summary="updating shop background">
+      <option name="closed" value="true" />
+      <created>1741205610936</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1741205610936</updated>
+    </task>
+    <task id="LOCAL-00008" summary="updating shop background">
+      <option name="closed" value="true" />
+      <created>1741205630612</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1741205630620</updated>
+    </task>
+    <task id="LOCAL-00009" summary="updating shop background">
+      <option name="closed" value="true" />
+      <created>1741205702821</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1741205702821</updated>
+    </task>
+    <task id="LOCAL-00010" summary="dawg all my stuff is broken lol">
+      <option name="closed" value="true" />
+      <created>1741206123323</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1741206123323</updated>
+    </task>
+    <task id="LOCAL-00011" summary="updating ingredient sheets">
+      <option name="closed" value="true" />
+      <created>1741236007103</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1741236007103</updated>
+    </task>
+    <task id="LOCAL-00012" summary="updating shop background">
+      <option name="closed" value="true" />
+      <created>1741236387652</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1741236387652</updated>
+    </task>
+    <task id="LOCAL-00013" summary="updating shop background">
+      <option name="closed" value="true" />
+      <created>1741236788579</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1741236788579</updated>
+    </task>
+    <task id="LOCAL-00014" summary="shop &amp; ingredients are all fixed">
+      <option name="closed" value="true" />
+      <created>1741238752659</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1741238752659</updated>
+    </task>
+    <task id="LOCAL-00015" summary="shop &amp; ingredients are all fixed">
+      <option name="closed" value="true" />
+      <created>1741238942306</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1741238942306</updated>
+    </task>
+    <task id="LOCAL-00016" summary="updating">
+      <option name="closed" value="true" />
+      <created>1741630787963</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1741630787963</updated>
+    </task>
+    <task id="LOCAL-00017" summary="updating">
+      <option name="closed" value="true" />
+      <created>1741630818073</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1741630818073</updated>
+    </task>
+    <task id="LOCAL-00018" summary="updated with Eva's files">
+      <option name="closed" value="true" />
+      <created>1741632132332</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1741632132332</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="Eva" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="just finished meeting" />
+    <MESSAGE value="working on mushroom and pepper" />
+    <MESSAGE value="have mushroom and pepper sprites" />
+    <MESSAGE value="all ingreidents are good" />
+    <MESSAGE value="made cheese a little faster" />
+    <MESSAGE value="updated shop background" />
+    <MESSAGE value="updated cheese spritesheet" />
+    <MESSAGE value="dawg all my stuff is broken lol" />
+    <MESSAGE value="updating ingredient sheets" />
+    <MESSAGE value="updating shop background" />
+    <MESSAGE value="shop &amp; ingredients are all fixed" />
+    <MESSAGE value="updating" />
+    <MESSAGE value="updated with Eva's files" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated with Eva's files" />
+  </component>
+</project>

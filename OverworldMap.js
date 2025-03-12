@@ -1,5 +1,6 @@
 class OverworldMap {
   constructor(config) {
+    this.name = config.name;
     this.overworld = null;
     this.gameObjects = config.gameObjects;
     this.walls = config.walls || {};
@@ -223,6 +224,7 @@ class OverworldMap {
 
 window.OverworldMaps = {
   Shop: {
+    name: "Shop",
     lowerSrc: "./backgrounds/shop.png",
     upperSrc: "./backgrounds/hall.png",
     gameObjects: {
@@ -306,6 +308,7 @@ window.OverworldMaps = {
     }
   },
   Outside: {
+    name: "Outside",
     lowerSrc: "./backgrounds/grass.png",
     upperSrc: "./backgrounds/outHall.png",
     gameObjects: {
