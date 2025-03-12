@@ -47,7 +47,9 @@ class Overworld {
             this.map.checkForActionCutScene();
         });
         new KeyPressListener("Space", () => {
-            this.map.shoot();
+            if(this.map.name === "Outside") {
+                this.map.shoot();
+            }
         });
     }
 
@@ -123,20 +125,24 @@ class Overworld {
 
         this.hud = new HUD({ container: this.element });
 
-        //how long until the next NPC spawns
-        setTimeout(() => {
+        //spawn NPC when game starts
+        this.map.spawnNPCAtTile();
+
+        //spawn customers in every 8 seconds
+        setInterval(() => {
             this.map.spawnNPCAtTile();
+        }, 8000);
 
-            // Start the interval after the first NPC has spawned
-            setInterval(() => {
-                this.map.spawnNPCAtTile();
-            }, 8000);
-        }, 1000);
-
+        //spawn enemies every 5 seconds
+        setInterval(() => {
+            this.map.spawnEnemy();
+        }, 8000);
 
 
         this.startGameLoop();
     }
+
+
     showGameOverScreen() {
         // Hide HUD
         this.hud.element.style.display = "none";
