@@ -25,12 +25,18 @@ class Overworld {
             this.map.drawUpperImage(this.ctx);
 
             // Update HUD
-            const hero = this.map.gameObjects.hero;
+            let hero = window.OverworldMaps.Outside.gameObjects["hero"];
+            window.OverworldMaps.Outside.gameObjects["hero"].score = window.OverworldMaps.Shop.gameObjects["hero"].score;
+            let timer = window.orderManager.timer;
             this.hud.update({
                 score: hero.score,
                 health: hero.health,
                 timer: window.orderManager.timer.formatTime(),
             });
+
+            if(hero.health === 0 || timer.remainingTime === 0) {
+                this.showGameOverScreen();
+            }
 
             requestAnimationFrame(step);
         };
@@ -129,5 +135,17 @@ class Overworld {
 
 
         this.startGameLoop();
+    }
+    showGameOverScreen() {
+        // Hide HUD
+        this.hud.element.style.display = "none";
+
+        const gameOverScreen = new GameOverScreen({
+            onRestart: () => {
+                document.querySelector(".GameOverScreen").remove();
+                this.startGame();
+            }
+        });
+        gameOverScreen.init(document.body);
     }
 }

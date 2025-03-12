@@ -15,7 +15,7 @@ class OverworldMap {
     this.shootCoolDown = 500;
 
     this.isCutScenePlaying = false;
-    this.toppings = ["cheese", "pepperoni", "sausage", "meatball", "mushroom", "pineapple", "olive", "pepper"];
+    this.toppings = ["cheese", "pepperoni", "ham", "mushroom", "pineapple", "olive", "pepper"];
 
     this.npcSpawnCount = 0;
   }
@@ -240,7 +240,7 @@ window.OverworldMaps = {
       [utils.asGridCoord(0,1)] : true,
       //side counter 
       [utils.asGridCoord(5,4)] : true,
-      //[utils.asGridCoord(5,3)] : true,
+      [utils.asGridCoord(5,3)] : true,
       //front counter
       [utils.asGridCoord(0,4)] : true,
       [utils.asGridCoord(1,4)] : true,

@@ -6,9 +6,7 @@ class Person extends GameObject {
     this.health = 100;
     this.score = 0;
     this.isHero = config.isHero || false;
-    this.inventory = config.inventory || {cheese: 11, pepperoni: 11, sausage: 11, meatball: 11, mushroom: 11, pineapple: 11, olive: 11,
-      pepper: 11,
-    };
+    this.inventory = {};
     this.isPlayerControlled = config.isPlayerControlled || false;
 
     this.directionUpdate = {
@@ -59,7 +57,7 @@ class Person extends GameObject {
 
   startBehavior(state, behavior) {
     this.direction = behavior.direction;
-
+    const nextPosition = utils.nextPosition(this.x, this.y, this.direction);
     if (behavior.type === "walk") {
       if (state.map.isSpaceTaken(this.x, this.y, this.direction)) {
         behavior.retry && setTimeout(() => {
@@ -105,8 +103,5 @@ class Person extends GameObject {
 
   hit() {
     this.health = Math.max(this.health - 10, 0);
-    if (this.health === 0) {
-      utils.emitEvent("GameOver");
-    }
   }
 }
