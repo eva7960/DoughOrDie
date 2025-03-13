@@ -26,16 +26,6 @@ class Person extends GameObject {
     }
   }
 
-  setItem(item, amount) {
-    this.inventory[item] = amount;
-  }
-
-  removeItem(item, amount = 1) {
-    if (this.inventory.hasOwnProperty(item)) {
-      this.inventory[item] = Math.max(0, this.inventory[item] - amount);
-    }
-  }
-
   update(state) {
     if (window.overworld.isGameOver) return;
     if(this.isHero === false) {
