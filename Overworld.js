@@ -22,6 +22,7 @@ class Overworld {
             Object.values(this.map.gameObjects).forEach(object => {
                 object.sprite.draw(this.ctx);
             });
+
             this.map.drawUpperImage(this.ctx);
 
             // Update HUD

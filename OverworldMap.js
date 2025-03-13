@@ -200,10 +200,23 @@ class OverworldMap {
     }
     const orderText = selectedToppings.join(", ");
 
+    //pick NPC sprite
+    let img = "";
+    const n = Math.floor(Math.random() * 4) + 1;
+    if (n === 1) {
+      img = "./sprites/npc1.png";
+    } else if (n === 2) {
+      img = "./sprites/npc2.png";
+    } else if (n === 3) {
+      img = "./sprites/npc3.png";
+    } else if (n === 4) {
+      img = "./sprites/npc4.png";
+    }
+
     const npc = new Person({
       x: utils.withGrid(2),
       y: utils.withGrid(13),
-      src: "./sprites/customer1.png",
+      src: img,
       behaviorLoop: [],
       talking: [{
         events: [
