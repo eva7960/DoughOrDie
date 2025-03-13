@@ -355,74 +355,74 @@ window.OverworldMaps = {
         src: "./sprites/playerGun.png",
         isHero: true,
       }),
-      // cheese: new Cheese({
-      //   x: utils.withGrid(2),
-      //   y: utils.withGrid(9),
-      // }),
-      // cheese1: new Cheese({
-      //   x: utils.withGrid(10),
-      //   y: utils.withGrid(6),
-      // }),
-      // cheese2: new Cheese({
-      //   x: utils.withGrid(6),
-      //   y: utils.withGrid(10),
-      // }),
-      // cheese3: new Cheese({
-      //   x: utils.withGrid(9),
-      //   y: utils.withGrid(5),
-      // }),
-      // ham1: new Ham({
-      //   x: utils.withGrid(5),
-      //   y: utils.withGrid(7),
-      // }),
-      // ham2: new Ham({
-      //   x: utils.withGrid(9),
-      //   y: utils.withGrid(3),
-      // }),
-      // ham3: new Ham({
-      //   x: utils.withGrid(9),
-      //   y: utils.withGrid(5),
-      // }),
-      // olive1: new Olive({
-      //   x: utils.withGrid(10),
-      //   y: utils.withGrid(6),
-      // }),
-      // olive2: new Olive({
-      //   x: utils.withGrid(5),
-      //   y: utils.withGrid(2),
-      // }),
-      // pineapple1: new Pineapple({
-      //   x: utils.withGrid(9),
-      //   y: utils.withGrid(1),
-      // }),
-      // pineapple2: new Pineapple({
-      //   x: utils.withGrid(3),
-      //   y: utils.withGrid(7),
-      // }),
-      // pepperoni1: new Pepperoni({
-      //   x: utils.withGrid(2),
-      //   y: utils.withGrid(9),
-      // }),
-      // pepperoni2: new Pepperoni({
-      //   x: utils.withGrid(5),
-      //   y: utils.withGrid(7),
-      // }),
-      // pepper1: new Pepper({
-      //   x: utils.withGrid(3),
-      //   y: utils.withGrid(8),
-      // }),
-      // pepper2: new Pepper({
-      //   x: utils.withGrid(2),
-      //   y: utils.withGrid(3),
-      // }),
-      // mushroom1: new Mushroom({
-      //   x: utils.withGrid(5),
-      //   y: utils.withGrid(5),
-      // }),
-      // mushroom2: new Mushroom({
-      //   x: utils.withGrid(5),
-      //   y: utils.withGrid(9),
-      // }),
+      cheese: new Cheese({
+        x: utils.withGrid(2),
+        y: utils.withGrid(9),
+      }),
+      cheese1: new Cheese({
+        x: utils.withGrid(10),
+        y: utils.withGrid(6),
+      }),
+      cheese2: new Cheese({
+        x: utils.withGrid(6),
+        y: utils.withGrid(10),
+      }),
+      cheese3: new Cheese({
+        x: utils.withGrid(9),
+        y: utils.withGrid(5),
+      }),
+      ham1: new Ham({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      ham2: new Ham({
+        x: utils.withGrid(9),
+        y: utils.withGrid(3),
+      }),
+      ham3: new Ham({
+        x: utils.withGrid(9),
+        y: utils.withGrid(5),
+      }),
+      olive1: new Olive({
+        x: utils.withGrid(10),
+        y: utils.withGrid(6),
+      }),
+      olive2: new Olive({
+        x: utils.withGrid(5),
+        y: utils.withGrid(2),
+      }),
+      pineapple1: new Pineapple({
+        x: utils.withGrid(9),
+        y: utils.withGrid(1),
+      }),
+      pineapple2: new Pineapple({
+        x: utils.withGrid(3),
+        y: utils.withGrid(7),
+      }),
+      pepperoni1: new Pepperoni({
+        x: utils.withGrid(2),
+        y: utils.withGrid(9),
+      }),
+      pepperoni2: new Pepperoni({
+        x: utils.withGrid(5),
+        y: utils.withGrid(7),
+      }),
+      pepper1: new Pepper({
+        x: utils.withGrid(3),
+        y: utils.withGrid(8),
+      }),
+      pepper2: new Pepper({
+        x: utils.withGrid(2),
+        y: utils.withGrid(3),
+      }),
+      mushroom1: new Mushroom({
+        x: utils.withGrid(5),
+        y: utils.withGrid(5),
+      }),
+      mushroom2: new Mushroom({
+        x: utils.withGrid(5),
+        y: utils.withGrid(9),
+      }),
 
     },
 
