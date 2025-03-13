@@ -19,6 +19,7 @@ class OverworldMap {
     this.toppings = ["cheese", "pepperoni", "ham", "mushroom", "pineapple", "olive", "pepper"];
 
     this.npcSpawnCount = 0;
+    this.enemySpawnCount = 0;
   }
 
   drawLowerImage(ctx) { //REMEMBER TO ADD CAMERA!
@@ -141,11 +142,46 @@ class OverworldMap {
     });
   }
 
-
-
-
-
-
+  spawnEnemy() {
+    const ingredients = ["pepperoni", "mushroom", "olive", "pineapple", "pepper", "ham"];
+      const ingredient = ingredients[Math.floor(Math.random() * ingredients.length)];
+      let enemy;
+      if (ingredient === "pepperoni") {
+        enemy = new Pepperoni({
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
+        });
+      } else if (ingredient === "mushroom") {
+        enemy = new Mushroom({
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
+        });
+      } else if (ingredient === "olive") {
+        enemy = new Olive({
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
+        });
+      } else if (ingredient === "pineapple") {
+        enemy = new Pineapple({
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
+        });
+      } else if (ingredient === "pepper") {
+        enemy = new Pepper({
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
+        });
+      } else if (ingredient === "ham") {
+        enemy = new Ham({
+          x: utils.withGrid(5),
+          y: utils.withGrid(5),
+        });
+      }
+      enemy.id = this.enemySpawnCount.toString();
+      this.gameObjects[enemy.id] = enemy;
+      this.enemySpawnCount++;
+      enemy.mount(this);
+  }
 
   spawnNPCAtTile() {
     this.npcSpawnCount++;

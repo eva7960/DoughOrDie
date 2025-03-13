@@ -15,6 +15,9 @@ class Timer {
         }
         this.interval = setInterval(() => {
             this.remainingTime--;
+            if (this.remainingTime === 0) {
+                this.stop();
+            }
         }, 1000);
     }
 
@@ -22,8 +25,8 @@ class Timer {
         if (this.interval) {
             clearInterval(this.interval);
             this.interval = null;
-            this.initialTime = 60;
-            this.remainingTime = 60;
+            this.initialTime = 100;
+            this.remainingTime = 100;
             clearInterval(this.interval);
         }
     }
