@@ -28,14 +28,13 @@ class Overworld {
             // Update HUD
             let hero = window.OverworldMaps.Outside.gameObjects["hero"];
             window.OverworldMaps.Outside.gameObjects["hero"].score = window.OverworldMaps.Shop.gameObjects["hero"].score;
-            let timer = window.orderManager.timer;
             this.hud.update({
                 score: hero.score,
                 health: hero.health,
                 timer: window.orderManager.timer.formatTime(),
             });
 
-            if(hero.health === 0 || timer.remainingTime === 0) {
+            if(hero.health === 0 || window.orderManager.timer.remainingTime === 0) {
                 this.showGameOverScreen();
             }
 
