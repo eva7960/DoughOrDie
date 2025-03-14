@@ -101,7 +101,8 @@ class Overworld {
 
 
     init() {
-        this.showTitleScreen();
+        this.showShop();
+        //this.showTitleScreen();
     }
 
     showTitleScreen() {
@@ -113,6 +114,19 @@ class Overworld {
         });
         titleScreen.init(document.body);
     }
+
+    showShop() {
+        const shopScreen = new Shop({
+            onComplete: (option) => {
+                console.log(`Selected option: ${option}`); // Log the selected option
+                this.startGame();  // Replace with the action you want to trigger after selection
+            }
+        });
+
+        shopScreen.init(document.body);  // This will initialize and display the Shop screen in the document
+    }
+
+
 
     startGame() {
         document.querySelector(".TitleScreen").remove();
