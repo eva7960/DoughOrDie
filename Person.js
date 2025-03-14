@@ -28,9 +28,7 @@ class Person extends GameObject {
 
   update(state) {
     if (window.overworld.isGameOver) return;
-    if(this.isHero === false) {
-      state.map.deleteWall(0,-1);
-    }
+    state.map.deleteWall(0,-1);
     if (this.movingProgressRemaining > 0) {
       this.updatePosition();
     } else {
