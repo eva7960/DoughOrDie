@@ -17,16 +17,6 @@ class Timer {
             this.remainingTime--;
         }, 1000);
     }
-
-    stop() {
-        if (this.interval) {
-            clearInterval(this.interval);
-            this.interval = null;
-            this.initialTime = 60;
-            this.remainingTime = 60;
-            clearInterval(this.interval);
-        }
-    }
 }
 
   

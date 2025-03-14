@@ -22,19 +22,18 @@ class Overworld {
             Object.values(this.map.gameObjects).forEach(object => {
                 object.sprite.draw(this.ctx);
             });
+
             this.map.drawUpperImage(this.ctx);
 
-            // Update HUD
             let hero = window.OverworldMaps.Outside.gameObjects["hero"];
             window.OverworldMaps.Outside.gameObjects["hero"].score = window.OverworldMaps.Shop.gameObjects["hero"].score;
-            let timer = window.orderManager.timer;
             this.hud.update({
                 score: hero.score,
                 health: hero.health,
                 timer: window.orderManager.timer.formatTime(),
             });
 
-            if(hero.health === 0 || timer.remainingTime === 0) {
+            if(hero.health === 0 || window.orderManager.timer.remainingTime === 0) {
                 this.showGameOverScreen();
             }
 
@@ -125,20 +124,41 @@ class Overworld {
 
         this.hud = new HUD({ container: this.element });
 
-        //how long until the next NPC spawns
-        setTimeout(() => {
+        //spawn NPC when game starts
+        this.map.spawnNPCAtTile();
+
+        //spawn customers in every 8 seconds
+        setInterval(() => {
             this.map.spawnNPCAtTile();
+        }, 8000);
 
-            // Start the interval after the first NPC has spawned
-            setInterval(() => {
-                this.map.spawnNPCAtTile();
-            }, 3000);
-        }, 1000);
+        //spawn enemies every 5 seconds
+        setInterval(() => {
+            if(this.map.name === "Outside") {
+                this.map.spawnEnemy();
+            }
+        }, 5000);
 
-
+        this.upgradeMenu = new UpgradeMenu({ 
+            container: document.querySelector(".game-container"), 
+            player: this.map.gameObjects["hero"],
+            onClose: () => {}
+          });
+        
+        new KeyPressListener("KeyU", () => {
+          if (document.querySelector(".upgrade-menu")) {
+            window.upgradeMenu.close();
+          } else {
+            window.upgradeMenu.open();
+          }
+        });
+        
+        window.upgradeMenu = this.upgradeMenu;
 
         this.startGameLoop();
     }
+
+
     showGameOverScreen() {
         // Hide HUD
         this.hud.element.style.display = "none";
