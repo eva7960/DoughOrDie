@@ -1,4 +1,4 @@
-class TitleScreen {
+class Shop {
     constructor({ onComplete }) {
         this.onComplete = onComplete;
         this.element = null;
@@ -7,18 +7,41 @@ class TitleScreen {
 
     createElement() {
         this.element = document.createElement("div");
-        this.element.classList.add("TitleScreen");
+        this.element.classList.add("ShopScreen");
 
-        this.element.innerHTML = `
-            <img src="./titleLogo.png" class="game-logo animated-logo" alt="Dough or Die Logo">
+        // Set the dimensions to match the canvas size (194x180)
+        this.element.style.width = "194px";
+        this.element.style.height = "180px";
+        this.element.style.position = "absolute";
+        this.element.style.top = "50%";
+        this.element.style.left = "50%";
+        this.element.style.transform = "translate(-50%, -50%)"; // Center the shop screen
 
-            <div class="options">
-                <p class="option ${this.selectedOption === 0 ? "selected" : ""}" data-option="maxHealth">Upgrade max health</p>
-                <p class="option ${this.selectedOption === 1 ? "selected" : ""}" data-option="shopDecorations">Add Shop decorations</p>
-                <p class="option ${this.selectedOption === 2 ? "selected" : ""}" data-option="upgradeGun">Upgrade gun</p>
-            </div>
-            <p class="instructions">Use Arrow keys or W/S to select, Press Enter to confirm</p>
-        `;
+        // Create a div to hold the buttons side by side
+        const buttonContainer = document.createElement("div");
+        buttonContainer.classList.add("button-container");
+
+        // Create the three buttons
+        const options = [
+            "Upgrade max health",
+            "Add Shop decorations",
+            "Upgrade gun"
+        ];
+
+        options.forEach((option, index) => {
+            const button = document.createElement("button");
+            button.classList.add("option"); // Always add the 'option' class
+            if (index === this.selectedOption) {
+                button.classList.add("selected"); // Add 'selected' class if this is the selected option
+            }
+            button.textContent = option;
+            button.dataset.option = option.toLowerCase().replace(/ /g, "");
+            button.addEventListener("click", () => this.handleSelect(index)); // Add click event
+            buttonContainer.appendChild(button);
+        });
+
+
+        this.element.appendChild(buttonContainer);
 
         document.addEventListener("keydown", this.handleInput);
     }
@@ -29,27 +52,32 @@ class TitleScreen {
             this.updateSelection();
         }
         if (event.key === "Enter") {
-            if (this.selectedOption === 0) {
-                console.log("Selected: Upgrade max health");
-                this.onComplete("Upgrade max health"); // You can replace this with an actual action
-            } else if (this.selectedOption === 1) {
-                console.log("Selected: Add Shop decorations");
-                this.onComplete("Add Shop decorations");
-            } else if (this.selectedOption === 2) {
-                console.log("Selected: Upgrade gun");
-                this.onComplete("Upgrade gun");
-            }
+            this.handleSelect(this.selectedOption); // Trigger selection on Enter
         }
     };
 
+    handleSelect(index) {
+        const options = [
+            "Upgrade max health",
+            "Add Shop decorations",
+            "Upgrade gun"
+        ];
+        const selectedOption = options[index];
+        console.log(`Selected: ${selectedOption}`);
+        this.onComplete(selectedOption);  // Call the onComplete callback with the selected option
+    }
+
     updateSelection() {
-        const options = this.element.querySelectorAll(".option");
-        options.forEach((option, index) => {
-            option.classList.toggle("selected", index === this.selectedOption);
+        const buttons = this.element.querySelectorAll(".option");
+        buttons.forEach((button, index) => {
+            button.classList.toggle("selected", index === this.selectedOption);
         });
     }
 
     init(container) {
+        if (this.element) {
+            this.element.remove();  // Remove the previous shop screen if it exists
+        }
         this.createElement();
         container.appendChild(this.element);
     }

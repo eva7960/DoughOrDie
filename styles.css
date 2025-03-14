@@ -22,7 +22,8 @@ body {
     image-render: pixelated;
 }
 
-.TitleScreen, .GameOverScreen {
+/* Base styles for screens */
+.TitleScreen, .GameOverScreen, .ShopScreen {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -37,20 +38,24 @@ body {
     text-align: center;
 }
 
+/* Animated logo */
 .animated-logo {
     width: 75vw;
     max-width: 600px;
     height: auto;
     display: block;
     margin-bottom: 20px;
-    animation: float 2s infinite ease-in-out, flicker 1.5s infinite ease-in-out;  }
+    animation: float 2s infinite ease-in-out, flicker 1.5s infinite ease-in-out;
+}
 
+/* Float animation for logo */
 @keyframes float {
     0% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
     100% { transform: translateY(0); }
 }
 
+/* Flicker effect for logo */
 @keyframes flicker {
     0% { opacity: 0.8; filter: brightness(1); }
     20% { opacity: 1; filter: brightness(1.2); }
@@ -60,6 +65,7 @@ body {
     100% { opacity: 1; filter: brightness(1.1); }
 }
 
+/* Options list styling */
 .options {
     font-size: 28px;
     display: flex;
@@ -67,6 +73,7 @@ body {
     gap: 8px;
 }
 
+/* Option button styling */
 .option {
     cursor: pointer;
     padding: 12px 24px;
@@ -76,6 +83,7 @@ body {
     transition: background 0.2s ease, transform 0.1s ease;
 }
 
+/* Selected option styling */
 .option.selected {
     background: rgb(255, 217, 0);
     color: black;
@@ -83,6 +91,7 @@ body {
     transform: scale(1.1);
 }
 
+/* Instructions text styling */
 .instructions {
     font-size: 18px;
     color: gray;
@@ -90,7 +99,7 @@ body {
     font-style: italic;
 }
 
-
+/* Game over screen */
 .GameOverScreen {
     position: absolute;
     top: 50%;
@@ -106,6 +115,7 @@ body {
     text-align: center;
 }
 
+/* Game over option styling */
 .option {
     font-size: 22px;
     color: white;
@@ -116,6 +126,7 @@ body {
     transition: transform 0.2s ease, background 0.2s ease;
 }
 
+/* Selected game over option styling */
 .option.selected {
     background: rgb(255, 255, 255);
     color: black;
@@ -123,34 +134,50 @@ body {
     transform: scale(1.1);
 }
 
+/* Game over instruction text styling */
 .instruction-text {
     font-size: 14px;
     color: white;
     margin-top: 10px;
 }
 
-.option {
+/* Shop screen styling */
+.ShopScreen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 194px;
+    height: 180px;
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly dark background */
+    border-radius: 10px; /* Optional, for rounded corners */
+}
+
+/* Container for buttons */
+.button-container {
+    display: flex;
+    flex-direction: row; /* Place buttons in a row */
+    gap: 10px; /* Space between buttons */
+}
+
+/* Button styling */
+button.option {
+    padding: 8px 16px;
+    font-size: 14px;
     cursor: pointer;
-    padding: 12px 28px;
-    font-size: 26px;
+    border: 2px solid #ccc;
+    background-color: #fff;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+/* Selected button styling */
+button.option.selected {
+    background-color: #4CAF50; /* Green color when selected */
     color: white;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.4));
-    border-radius: 12px;
-    border: 2px solid rgba(255, 217, 0, 0.6);
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 4px 8px rgba(255, 217, 0, 0.1);
 }
 
-.option.selected {
-    background: linear-gradient(135deg, rgba(255, 217, 0, 0.8), rgba(255, 217, 0, 1));
-    color: black;
-    font-weight: bold;
-    transform: scale(1.1);
-    border-color: rgb(255, 217, 0);
-    box-shadow: 0px 0px 15px rgba(255, 217, 0, 0.9);
+/* Hover effect for buttons */
+button.option:hover {
+    background-color: #f1f1f1;
 }
 
-.option:hover {
-    transform: scale(1.05);
-    background: linear-gradient(135deg, rgba(255, 217, 0, 0.5), rgba(255, 217, 0, 0.7));
-}
