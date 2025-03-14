@@ -114,6 +114,13 @@ class Overworld {
         titleScreen.init(document.body);
     }
 
+    showShop();
+        const shopScreen = new Shop({
+        onComplete: () => {
+            this.showGameOverScreen();
+        }
+    })
+
     startGame() {
         document.querySelector(".TitleScreen").remove();
         this.startMap(window.OverworldMaps.Shop);
