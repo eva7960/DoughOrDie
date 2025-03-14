@@ -108,6 +108,23 @@ class Overworld {
 
     this.hud = new HUD({ container: this.element });
 
+    this.upgradeMenu = new UpgradeMenu({ 
+      container: document.querySelector(".game-container"), 
+      player: this.map.gameObjects["hero"],
+      onClose: () => {}
+    });
+  
+  new KeyPressListener("KeyU", () => {
+    if (document.querySelector(".upgrade-menu")) {
+      window.upgradeMenu.close();
+    } else {
+      window.upgradeMenu.open();
+    }
+  });
+  
+  
+    window.upgradeMenu = this.upgradeMenu;
+
     this.startGameLoop();
 
     //how long until the next NPC spawns 
