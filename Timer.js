@@ -1,7 +1,7 @@
 class Timer {
     constructor() {
-        this.initialTime = 3;
-        this.remainingTime = 3;
+        this.initialTime = 100;
+        this.remainingTime = 100;
         this.interval = null;
     }
 

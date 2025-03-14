@@ -25,7 +25,6 @@ class Overworld {
 
             this.map.drawUpperImage(this.ctx);
 
-            // Update HUD
             let hero = window.OverworldMaps.Outside.gameObjects["hero"];
             window.OverworldMaps.Outside.gameObjects["hero"].score = window.OverworldMaps.Shop.gameObjects["hero"].score;
             this.hud.update({
@@ -131,7 +130,7 @@ class Overworld {
         //spawn customers in every 8 seconds
         setInterval(() => {
             this.map.spawnNPCAtTile();
-        }, 2000);
+        }, 8000);
 
         //spawn enemies every 5 seconds
         setInterval(() => {
@@ -140,6 +139,21 @@ class Overworld {
             }
         }, 5000);
 
+        this.upgradeMenu = new UpgradeMenu({ 
+            container: document.querySelector(".game-container"), 
+            player: this.map.gameObjects["hero"],
+            onClose: () => {}
+          });
+        
+        new KeyPressListener("KeyU", () => {
+          if (document.querySelector(".upgrade-menu")) {
+            window.upgradeMenu.close();
+          } else {
+            window.upgradeMenu.open();
+          }
+        });
+        
+        window.upgradeMenu = this.upgradeMenu;
 
         this.startGameLoop();
     }
