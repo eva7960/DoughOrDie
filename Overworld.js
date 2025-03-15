@@ -25,17 +25,15 @@ class Overworld {
 
             this.map.drawUpperImage(this.ctx);
 
-            // Update HUD
             let hero = window.OverworldMaps.Outside.gameObjects["hero"];
             window.OverworldMaps.Outside.gameObjects["hero"].score = window.OverworldMaps.Shop.gameObjects["hero"].score;
-            let timer = window.orderManager.timer;
             this.hud.update({
                 score: hero.score,
                 health: hero.health,
                 timer: window.orderManager.timer.formatTime(),
             });
 
-            if(hero.health === 0 || timer.remainingTime === 0) {
+            if(hero.health === 0 || window.orderManager.timer.remainingTime === 0) {
                 this.showGameOverScreen();
             }
 
@@ -129,7 +127,12 @@ class Overworld {
 
 
     startGame() {
-        document.querySelector(".TitleScreen").remove();
+        setTimeout(() => {
+            const titleScreen = document.querySelector(".TitleScreen");
+            if (titleScreen) {
+                titleScreen.remove();
+            }
+        }, 100); // Short delay to ensure DOM updates
         this.startMap(window.OverworldMaps.Shop);
         this.bindActionInput();
         this.bindInventoryInput();
@@ -146,7 +149,7 @@ class Overworld {
         //spawn customers in every 8 seconds
         setInterval(() => {
             this.map.spawnNPCAtTile();
-        }, 2000);
+        }, 5000);
 
         //spawn enemies every 5 seconds
         setInterval(() => {
@@ -155,6 +158,21 @@ class Overworld {
             }
         }, 5000);
 
+        this.upgradeMenu = new UpgradeMenu({ 
+            container: document.querySelector(".game-container"), 
+            player: this.map.gameObjects["hero"],
+            onClose: () => {}
+          });
+        
+        new KeyPressListener("KeyU", () => {
+          if (document.querySelector(".upgrade-menu")) {
+            window.upgradeMenu.close();
+          } else {
+            window.upgradeMenu.open();
+          }
+        });
+        
+        window.upgradeMenu = this.upgradeMenu;
 
         this.startGameLoop();
     }
