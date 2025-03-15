@@ -105,27 +105,27 @@ class OverworldMap {
     this.addWall(x,y)
   }
   shoot() {
-    if (!this.canShoot) return; // Prevent shooting if still on cooldown
-
+    if (!this.canShoot) return; 
+  
+    const hero = this.gameObjects["hero"];
     const bullet = new Bullet({
-      x: this.gameObjects["hero"].x,
-      y: this.gameObjects["hero"].y,
+      x: hero.x,
+      y: hero.y,
       src: "./sprites/bullet.png",
-      direction: this.gameObjects["hero"].direction,
+      direction: hero.direction,
+      damage: 10 + (hero.damageBonus || 0)  
     });
-
+  
     this.gameObjects["bullet"] = bullet;
     bullet.mount(this);
     this.shootAudio.play();
-    // Set cooldown
+  
     this.canShoot = false;
     setTimeout(() => {
       this.canShoot = true;
     }, this.shootCoolDown);
   }
-  setCanShoot(boolean) {
-    this.canShoot = boolean;
-  }
+  
 
   mountObjects() {
     Object.keys(this.gameObjects).forEach(key => {
@@ -137,7 +137,7 @@ class OverworldMap {
 
   spawnEnemy() {
     //generate ingredient
-    const ingredients = ["pepperoni", "mushroom", "olive", "pineapple", "pepper", "ham"];
+    const ingredients = ["pepperoni", "mushroom", "olive", "pineapple", "pepper", "ham", "cheese"];
     const ingredient = ingredients[Math.floor(Math.random() * ingredients.length)];
     let enemy;
 
@@ -166,6 +166,12 @@ class OverworldMap {
       });
     } else if (ingredient === "pepper") {
       enemy = new Pepper({
+        x: x,
+        y: y,
+      });
+      
+    } else if (ingredient === "cheese") {
+      enemy = new Cheese({
         x: x,
         y: y,
       });

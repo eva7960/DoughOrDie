@@ -32,6 +32,15 @@ class UpgradeMenu {
               window.OverworldMaps.Shop.gameObjects["hero"].score = activeHero.score;
               window.OverworldMaps.Shop.gameObjects["hero"].health = activeHero.health;
             }
+            if (
+              window.OverworldMaps &&
+              window.OverworldMaps.Outside &&
+              window.OverworldMaps.Outside.gameObjects &&
+              window.OverworldMaps.Outside.gameObjects["hero"]
+            ) {
+              window.OverworldMaps.Outside.gameObjects["hero"].score = activeHero.score;
+              window.OverworldMaps.Outside.gameObjects["hero"].health = activeHero.health;
+            }
             this.player.score = activeHero.score;
             this.player.health = activeHero.health;
             console.log("New Health: " + activeHero.health);
@@ -55,15 +64,7 @@ class UpgradeMenu {
           }
           if (activeHero.score >= 200) {
             activeHero.score -= 200;
-            if (!activeHero.damageBonus) {
-              activeHero.damageBonus = 0;
-            }
-            activeHero.damageBonus += 10;
-            Object.values(window.OverworldMaps.Outside.gameObjects).forEach(obj => {
-              if (obj instanceof Ingredient) {
-                obj.damage += 10;
-              }
-            });
+            activeHero.damageBonus = (activeHero.damageBonus || 0) + 10;
             if (
               window.OverworldMaps &&
               window.OverworldMaps.Shop &&
@@ -72,6 +73,15 @@ class UpgradeMenu {
             ) {
               window.OverworldMaps.Shop.gameObjects["hero"].score = activeHero.score;
               window.OverworldMaps.Shop.gameObjects["hero"].damageBonus = activeHero.damageBonus;
+            }
+            if (
+              window.OverworldMaps &&
+              window.OverworldMaps.Outside &&
+              window.OverworldMaps.Outside.gameObjects &&
+              window.OverworldMaps.Outside.gameObjects["hero"]
+            ) {
+              window.OverworldMaps.Outside.gameObjects["hero"].score = activeHero.score;
+              window.OverworldMaps.Outside.gameObjects["hero"].damageBonus = activeHero.damageBonus;
             }
             this.player.score = activeHero.score;
             console.log("New Damage Bonus: " + activeHero.damageBonus);
@@ -104,6 +114,15 @@ class UpgradeMenu {
             ) {
               window.OverworldMaps.Shop.gameObjects["hero"].score = activeHero.score;
               window.OverworldMaps.Shop.gameObjects["hero"].armor = activeHero.armor;
+            }
+            if (
+              window.OverworldMaps &&
+              window.OverworldMaps.Outside &&
+              window.OverworldMaps.Outside.gameObjects &&
+              window.OverworldMaps.Outside.gameObjects["hero"]
+            ) {
+              window.OverworldMaps.Outside.gameObjects["hero"].score = activeHero.score;
+              window.OverworldMaps.Outside.gameObjects["hero"].armor = activeHero.armor;
             }
             this.player.score = activeHero.score;
             console.log("New Armor: " + activeHero.armor);
