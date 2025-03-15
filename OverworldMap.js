@@ -222,7 +222,7 @@ class OverworldMap {
         events: [
           {
             type: "textMessage",
-            text: `Hello, can I have a ${orderText} Pizza?`,
+            text: `Hello, can I have a ${orderText} pizza?`,
             faceHero: "",
             order: orderText,
             who: ""
