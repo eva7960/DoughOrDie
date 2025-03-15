@@ -27,13 +27,14 @@ class Overworld {
 
             let hero = window.OverworldMaps.Outside.gameObjects["hero"];
             window.OverworldMaps.Outside.gameObjects["hero"].score = window.OverworldMaps.Shop.gameObjects["hero"].score;
+            let timer = window.orderManager.timer
             this.hud.update({
                 score: hero.score,
                 health: hero.health,
-                timer: window.orderManager.timer.formatTime(),
+                timer: timer.formatTime(),
             });
 
-            if(hero.health === 0 || window.orderManager.timer.remainingTime === 0) {
+            if(hero.health === 0 || timer.remainingTime === 0) {
                 this.showGameOverScreen();
             }
 
@@ -99,8 +100,7 @@ class Overworld {
 
 
     init() {
-        this.showShop();
-        //this.showTitleScreen();
+        this.showTitleScreen();
     }
 
     showTitleScreen() {
@@ -112,19 +112,6 @@ class Overworld {
         });
         titleScreen.init(document.body);
     }
-
-    showShop() {
-        const shopScreen = new Shop({
-            onComplete: (option) => {
-                console.log(`Selected option: ${option}`); // Log the selected option
-                this.startGame();  // Replace with the action you want to trigger after selection
-            }
-        });
-
-        shopScreen.init(document.body);  // This will initialize and display the Shop screen in the document
-    }
-
-
 
     startGame() {
         setTimeout(() => {
@@ -158,12 +145,12 @@ class Overworld {
             }
         }, 5000);
 
-        this.upgradeMenu = new UpgradeMenu({ 
-            container: document.querySelector(".game-container"), 
+        this.upgradeMenu = new UpgradeMenu({
+            container: document.querySelector(".game-container"),
             player: this.map.gameObjects["hero"],
             onClose: () => {}
           });
-        
+
         new KeyPressListener("KeyU", () => {
           if (document.querySelector(".upgrade-menu")) {
             window.upgradeMenu.close();
@@ -171,7 +158,7 @@ class Overworld {
             window.upgradeMenu.open();
           }
         });
-        
+
         window.upgradeMenu = this.upgradeMenu;
 
         this.startGameLoop();

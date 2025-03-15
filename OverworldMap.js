@@ -14,6 +14,7 @@ class OverworldMap {
 
     this.canShoot = true;
     this.shootCoolDown = 500;
+    this.shootAudio = new Audio("shoot.mp3");
 
     this.isCutScenePlaying = false;
     this.toppings = ["cheese", "pepperoni", "ham", "mushroom", "pineapple", "olive", "pepper"];
@@ -115,7 +116,7 @@ class OverworldMap {
 
     this.gameObjects["bullet"] = bullet;
     bullet.mount(this);
-
+    this.shootAudio.play();
     // Set cooldown
     this.canShoot = false;
     setTimeout(() => {
