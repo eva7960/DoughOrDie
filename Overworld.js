@@ -113,7 +113,12 @@ class Overworld {
     }
 
     startGame() {
-        document.querySelector(".TitleScreen").remove();
+        setTimeout(() => {
+            const titleScreen = document.querySelector(".TitleScreen");
+            if (titleScreen) {
+                titleScreen.remove();
+            }
+        }, 100); // Short delay to ensure DOM updates
         this.startMap(window.OverworldMaps.Shop);
         this.bindActionInput();
         this.bindInventoryInput();
