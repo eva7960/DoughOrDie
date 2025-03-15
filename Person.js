@@ -7,9 +7,9 @@ class Person extends GameObject {
     this.isHero = config.isHero || false;
     this.armor = 0; 
     this.score = 0;
-    this.score = 1000;
+    //this.score = 1000;
     this.inventory = {};
-    this.inventory = config.inventory || {cheese: 11, pepperoni: 11, sausage: 11, meatball: 11, mushroom: 11, pineapple: 11, olive: 11, pepper: 11, ham: 11};
+    //this.inventory = config.inventory || {cheese: 11, pepperoni: 11, sausage: 11, meatball: 11, mushroom: 11, pineapple: 11, olive: 11, pepper: 11, ham: 11};
 
     this.isPlayerControlled = config.isPlayerControlled || false;
 
