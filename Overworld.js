@@ -130,7 +130,7 @@ class Overworld {
         //spawn customers in every 8 seconds
         setInterval(() => {
             this.map.spawnNPCAtTile();
-        }, 8000);
+        }, 5000);
 
         //spawn enemies every 5 seconds
         setInterval(() => {

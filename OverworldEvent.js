@@ -124,6 +124,11 @@ class OverworldEvent {
     changeMap(resolve) {
         const sceneTransition = new SceneTransition();
         sceneTransition.init(document.querySelector(".game-container"), () => {
+            if(this.event.map === "Outside") {
+                window.OverworldMaps.Outside.gameObjects["hero"].x = utils.withGrid(0);
+                window.OverworldMaps.Outside.gameObjects["hero"].y = utils.withGrid(1);
+            }
+
             this.map.overworld.startMap(window.OverworldMaps[this.event.map] );
             resolve();
         });

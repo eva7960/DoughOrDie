@@ -364,7 +364,7 @@ window.OverworldMaps = {
       hero: new Person({
         isPlayerControlled: true,
         x: utils.withGrid(0),
-        y: utils.withGrid(3),
+        y: utils.withGrid(1 ),
         src: "./sprites/playerGun.png",
         isHero: true,
       }),
