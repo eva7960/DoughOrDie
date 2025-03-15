@@ -114,7 +114,7 @@ class Overworld {
             this.audio = new Audio("background.mp3");
             setInterval(() => {
                 this.map.spawnNPCAtTile();
-            }, 8000);
+            }, 10000);
         }
         this.audio.loop = true;
         this.audio.volume = 0.1;
