@@ -46,14 +46,6 @@ class OverworldMap {
     return false;
   }
 
-  mountObjects() {
-    Object.keys(this.gameObjects).forEach(key => {
-      let object = this.gameObjects[key];
-      object.id = key;
-      object.mount(this);
-    })
-  }
-
   async startCutScene(events) {
     this.isCutScenePlaying = true;
     for (let i = 0; i < events.length; i++) {
@@ -143,44 +135,49 @@ class OverworldMap {
   }
 
   spawnEnemy() {
+    //generate ingredient
     const ingredients = ["pepperoni", "mushroom", "olive", "pineapple", "pepper", "ham"];
-      const ingredient = ingredients[Math.floor(Math.random() * ingredients.length)];
-      let enemy;
-      if (ingredient === "pepperoni") {
-        enemy = new Pepperoni({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "mushroom") {
-        enemy = new Mushroom({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "olive") {
-        enemy = new Olive({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "pineapple") {
-        enemy = new Pineapple({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "pepper") {
-        enemy = new Pepper({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "ham") {
-        enemy = new Ham({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      }
-      enemy.id = this.enemySpawnCount.toString();
-      this.gameObjects[enemy.id] = enemy;
-      this.enemySpawnCount++;
-      enemy.mount(this);
+    const ingredient = ingredients[Math.floor(Math.random() * ingredients.length)];
+    let enemy;
+
+    //generate random coordinates
+    let x = utils.withGrid(Math.floor(Math.random() * (10 - 3 + 1)) + 3);
+    let y = utils.withGrid(Math.floor(Math.random() * (10 - 3 + 1)) + 3);
+    if (ingredient === "pepperoni") {
+      enemy = new Pepperoni({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "mushroom") {
+      enemy = new Mushroom({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "olive") {
+      enemy = new Olive({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "pineapple") {
+      enemy = new Pineapple({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "pepper") {
+      enemy = new Pepper({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "ham") {
+      enemy = new Ham({
+        x: x,
+        y: y,
+      });
+    }
+    enemy.id = this.enemySpawnCount.toString();
+    this.gameObjects[enemy.id] = enemy;
+    this.enemySpawnCount++;
+    enemy.mount(this);
   }
 
   spawnNPCAtTile() {
