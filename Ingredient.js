@@ -66,6 +66,7 @@ class Ingredient {
         if(this.health === 0) {
             window.OverworldMaps.Shop.gameObjects["hero"].addItem(this.name, 1);
             window.OverworldMaps.Outside.gameObjects["hero"].addItem(this.name, 1);
+            console.log(this.id);
             delete window.OverworldMaps.Outside.gameObjects[this.id];
         }
     }

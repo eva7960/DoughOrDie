@@ -43,6 +43,7 @@ class OverworldEvent {
     }
 
     textMessage(resolve) {
+        new Audio("talking.mp3").play();
         //make npc face hero
         if (this.event.faceHero) {
             const obj = this.map.gameObjects[this.event.faceHero];
@@ -123,20 +124,13 @@ class OverworldEvent {
 
     changeMap(resolve) {
         const sceneTransition = new SceneTransition();
-        let backgroundMusic = new Audio("background.mp3");
-        backgroundMusic.stop();
         sceneTransition.init(document.querySelector(".game-container"), () => {
             if(this.event.map === "Outside") {
                 window.OverworldMaps.Outside.gameObjects["hero"].x = utils.withGrid(0);
                 window.OverworldMaps.Outside.gameObjects["hero"].y = utils.withGrid(1);
-                backgroundMusic = new Audio("outside.mp3");
             } else {
-                backgroundMusic = new Audio('background.mp3');
             }
             this.map.overworld.startMap(window.OverworldMaps[this.event.map] );
-            backgroundMusic.loop = true;
-            backgroundMusic.volume = 0.1;
-            backgroundMusic.play();
             resolve();
         });
         sceneTransition.fadeOut();

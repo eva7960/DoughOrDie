@@ -4,6 +4,8 @@ class Overworld {
         this.canvas = this.element.querySelector(".game-canvas");
         this.ctx = this.canvas.getContext("2d");
         this.map = null;
+        this.audio = new Audio("background.mp3");
+
     }
 
 
@@ -97,6 +99,26 @@ class Overworld {
         this.map = new OverworldMap(mapConfig);
         this.map.overworld = this;
         this.map.mountObjects();
+        this.audio.pause();
+        if(this.map.name === "Outside") {
+            this.audio = new Audio("outside.mp3");
+            for (let i = 0; i < 20; i++) {
+                this.map.spawnEnemy();
+            }
+            setInterval(() => {
+                if(this.map.name === "Outside") {
+                    this.map.spawnEnemy();
+                }
+            }, 8000);
+        } else {
+            this.audio = new Audio("background.mp3");
+            setInterval(() => {
+                this.map.spawnNPCAtTile();
+            }, 8000);
+        }
+        this.audio.loop = true;
+        this.audio.volume = 0.1;
+        this.audio.play();
     }
 
 
@@ -131,21 +153,6 @@ class Overworld {
 
         this.hud = new HUD({ container: this.element });
 
-        //spawn NPC when game starts
-        this.map.spawnNPCAtTile();
-
-        //spawn customers in every 8 seconds
-        setInterval(() => {
-            this.map.spawnNPCAtTile();
-        }, 5000);
-
-        //spawn enemies every 5 seconds
-        setInterval(() => {
-            if(this.map.name === "Outside") {
-                this.map.spawnEnemy();
-            }
-        }, 5000);
-
         this.upgradeMenu = new UpgradeMenu({
             container: document.querySelector(".game-container"),
             player: this.map.gameObjects["hero"],
@@ -161,7 +168,7 @@ class Overworld {
         });
 
         window.upgradeMenu = this.upgradeMenu;
-
+        this.map.spawnNPCAtTile();
         this.startGameLoop();
     }
 
@@ -170,12 +177,13 @@ class Overworld {
         // Hide HUD
         this.hud.element.style.display = "none";
 
+        // Create the GameOverScreen with the onExit function
         const gameOverScreen = new GameOverScreen({
-            onRestart: () => {
-                document.querySelector(".GameOverScreen").remove();
+            onExit: () => {
                 this.startGame();
             }
         });
         gameOverScreen.init(document.body);
     }
+
 }
