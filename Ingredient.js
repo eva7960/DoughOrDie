@@ -10,6 +10,8 @@ class Ingredient {
         this.movingProgressRemaining = 0;
         this.speed = speed;
         this.lastDirectionChangeTime = Date.now();
+        //damage ingredents take
+        this.damage = 10; 
         this.directionMap = {
             up: { x: 0, y: -1 },
             down: { x: 0, y: 1 },
@@ -60,10 +62,11 @@ class Ingredient {
         }
     }
     hit() {
-        this.health = Math.max(this.health - 10, 0)
+        this.health = Math.max(this.health - this.damage, 0);
         if(this.health === 0) {
             window.OverworldMaps.Shop.gameObjects["hero"].addItem(this.name, 1);
             window.OverworldMaps.Outside.gameObjects["hero"].addItem(this.name, 1);
+            console.log(this.id);
             delete window.OverworldMaps.Outside.gameObjects[this.id];
         }
     }

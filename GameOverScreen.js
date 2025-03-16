@@ -18,24 +18,19 @@ class GameOverScreen {
 
         document.addEventListener("keydown", this.handleInput);
 
-        // Stop player movement
         window.overworld.isGameOver = true;
         window.overworld.directionInput.heldDirections = [];
     }
 
     handleInput = (event) => {
         if (event.key === "Enter") {
-            console.log("Exit pressed"); // Debugging: Ensure this prints when Enter is pressed
+            console.log("Exit pressed"); 
             this.exitGame();
         }
     };
 
     exitGame() {
-        if (window.self !== window.top) {
-            window.location.href = "about:blank"; // Redirect to blank page
-        } else {
-            window.close(); // Try to close the window
-        }
+        location.reload(); 
     }
 
     init(container) {
