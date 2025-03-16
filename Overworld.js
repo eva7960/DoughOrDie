@@ -86,6 +86,27 @@ class Overworld {
         });
     }
 
+    bindHelpInput() {
+        new KeyPressListener("KeyH", () => {
+            // Prevents opening if another dialogue box is active
+            if (document.querySelector('.TextMessage')) {
+                return;
+            }
+
+            let messageText = "Controls: Use arrow keys to move, Enter to interact with customers, Space to shoot, I to open inventory, and U to open upgrade menu"; // Replace this with actual game instructions
+
+            const message = new TextMessage({
+                text: messageText,
+                onComplete: () => {}
+            });
+
+            message.init(document.querySelector(".game-container"));
+            message.revealingText.warpToDone();
+        });
+
+    }
+
+
     bindHeroPositionCheck() {
         document.addEventListener("PersonWalkingComplete", e => {
             if (e.detail.whoId === "hero") {
@@ -145,6 +166,7 @@ class Overworld {
         }, 100); // Short delay to ensure DOM updates
         this.startMap(window.OverworldMaps.Shop);
         this.bindActionInput();
+        this.bindHelpInput();
         this.bindInventoryInput();
         this.bindHeroPositionCheck();
 
