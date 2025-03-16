@@ -23,7 +23,7 @@ body {
 }
 
 /* Base styles for screens */
-.TitleScreen, .GameOverScreen, .ShopScreen {
+.TitleScreen, .GameOverScreen, .HelpScreen {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -141,43 +141,34 @@ body {
     margin-top: 10px;
 }
 
-/* Shop screen styling */
-.ShopScreen {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 194px;
-    height: 180px;
-    background-color: rgba(0, 0, 0, 0.8); /* Slightly dark background */
-    border-radius: 10px; /* Optional, for rounded corners */
-}
+.HelpScreen {
+    /* Help screen image styling */
 
-/* Container for buttons */
-.button-container {
-    display: flex;
-    flex-direction: row; /* Place buttons in a row */
-    gap: 10px; /* Space between buttons */
-}
+    .help-image {
+        width: 80vw;
+        max-width: 700px;
+        height: auto;
+        display: block;
+        margin-bottom: 20px;
+        animation: fadeIn 0.5s ease-in-out;
+    }
 
-/* Button styling */
-button.option {
-    padding: 8px 16px;
-    font-size: 14px;
-    cursor: pointer;
-    border: 2px solid #ccc;
-    background-color: #fff;
-    transition: background-color 0.3s;
-    border-radius: 5px;
-}
+    /* Fade-in animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
 
-/* Selected button styling */
-button.option.selected {
-    background-color: #4CAF50; /* Green color when selected */
-    color: white;
-}
+    /* Help screen instruction text */
 
-/* Hover effect for buttons */
-button.option:hover {
-    background-color: #f1f1f1;
+    .help-instruction-text {
+        font-size: 18px;
+        color: gray;
+        margin-top: 15px;
+        font-style: italic;
+    }
 }
-

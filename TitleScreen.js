@@ -29,12 +29,15 @@ class TitleScreen {
         }
         if (event.key === "Enter") {
             if (this.selectedOption === 0) {
+                document.removeEventListener("keydown", this.handleInput);
                 this.onComplete(); // Start the game
             } else {
                 window.close(); // Exit the game
             }
         }
     };
+
+
 
     updateSelection() {
         const options = this.element.querySelectorAll(".option");

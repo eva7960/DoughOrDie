@@ -14,6 +14,7 @@ class OverworldMap {
 
     this.canShoot = true;
     this.shootCoolDown = 500;
+    this.shootAudio = new Audio("shoot.mp3");
 
     this.isCutScenePlaying = false;
     this.toppings = ["cheese", "pepperoni", "ham", "mushroom", "pineapple", "olive", "pepper"];
@@ -44,14 +45,6 @@ class OverworldMap {
       }
     }
     return false;
-  }
-
-  mountObjects() {
-    Object.keys(this.gameObjects).forEach(key => {
-      let object = this.gameObjects[key];
-      object.id = key;
-      object.mount(this);
-    })
   }
 
   async startCutScene(events) {
@@ -123,7 +116,7 @@ class OverworldMap {
 
     this.gameObjects["bullet"] = bullet;
     bullet.mount(this);
-
+    this.shootAudio.play();
     // Set cooldown
     this.canShoot = false;
     setTimeout(() => {
@@ -143,44 +136,49 @@ class OverworldMap {
   }
 
   spawnEnemy() {
+    //generate ingredient
     const ingredients = ["pepperoni", "mushroom", "olive", "pineapple", "pepper", "ham"];
-      const ingredient = ingredients[Math.floor(Math.random() * ingredients.length)];
-      let enemy;
-      if (ingredient === "pepperoni") {
-        enemy = new Pepperoni({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "mushroom") {
-        enemy = new Mushroom({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "olive") {
-        enemy = new Olive({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "pineapple") {
-        enemy = new Pineapple({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "pepper") {
-        enemy = new Pepper({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      } else if (ingredient === "ham") {
-        enemy = new Ham({
-          x: utils.withGrid(5),
-          y: utils.withGrid(5),
-        });
-      }
-      enemy.id = this.enemySpawnCount.toString();
-      this.gameObjects[enemy.id] = enemy;
-      this.enemySpawnCount++;
-      enemy.mount(this);
+    const ingredient = ingredients[Math.floor(Math.random() * ingredients.length)];
+    let enemy;
+
+    //generate random coordinates
+    let x = utils.withGrid(Math.floor(Math.random() * (10 - 3 + 1)) + 3);
+    let y = utils.withGrid(Math.floor(Math.random() * (10 - 3 + 1)) + 3);
+    if (ingredient === "pepperoni") {
+      enemy = new Pepperoni({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "mushroom") {
+      enemy = new Mushroom({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "olive") {
+      enemy = new Olive({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "pineapple") {
+      enemy = new Pineapple({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "pepper") {
+      enemy = new Pepper({
+        x: x,
+        y: y,
+      });
+    } else if (ingredient === "ham") {
+      enemy = new Ham({
+        x: x,
+        y: y,
+      });
+    }
+    enemy.id = this.enemySpawnCount.toString();
+    this.gameObjects[enemy.id] = enemy;
+    this.enemySpawnCount++;
+    enemy.mount(this);
   }
 
   spawnNPCAtTile() {
@@ -201,28 +199,17 @@ class OverworldMap {
     const orderText = selectedToppings.join(", ");
 
     //pick NPC sprite
-    let img = "";
-    const n = Math.floor(Math.random() * 4) + 1;
-    if (n === 1) {
-      img = "./sprites/npc1.png";
-    } else if (n === 2) {
-      img = "./sprites/npc2.png";
-    } else if (n === 3) {
-      img = "./sprites/npc3.png";
-    } else if (n === 4) {
-      img = "./sprites/npc4.png";
-    }
-
+    const img = ["./sprites/npc1.png", "./sprites/npc2.png", "./sprites/npc3.png", "./sprites/npc4.png", "./sprites/npc5.png", "./sprites/npc6.png"];
     const npc = new Person({
       x: utils.withGrid(2),
       y: utils.withGrid(13),
-      src: img,
+      src: img[Math.floor(Math.random() * img.length)],
       behaviorLoop: [],
       talking: [{
         events: [
           {
             type: "textMessage",
-            text: `Hello, can I have a ${orderText} Pizza?`,
+            text: `Hello, can I have a ${orderText} pizza?`,
             faceHero: "",
             order: orderText,
             who: ""
@@ -350,7 +337,6 @@ window.OverworldMaps = {
         {
           events: [
             {type: "changeMap", map: "Outside"},
-            //{type: "textMessage", text:"Get ready to hunt for your ingredients!"},
           ]
         }
       ],
@@ -364,78 +350,11 @@ window.OverworldMaps = {
       hero: new Person({
         isPlayerControlled: true,
         x: utils.withGrid(0),
-        y: utils.withGrid(3),
+        y: utils.withGrid(1 ),
         src: "./sprites/playerGun.png",
         isHero: true,
       }),
-      cheese: new Cheese({
-        x: utils.withGrid(2),
-        y: utils.withGrid(9),
-      }),
-      cheese1: new Cheese({
-        x: utils.withGrid(10),
-        y: utils.withGrid(6),
-      }),
-      cheese2: new Cheese({
-        x: utils.withGrid(6),
-        y: utils.withGrid(10),
-      }),
-      cheese3: new Cheese({
-        x: utils.withGrid(9),
-        y: utils.withGrid(5),
-      }),
-      ham1: new Ham({
-        x: utils.withGrid(5),
-        y: utils.withGrid(7),
-      }),
-      ham2: new Ham({
-        x: utils.withGrid(9),
-        y: utils.withGrid(3),
-      }),
-      ham3: new Ham({
-        x: utils.withGrid(9),
-        y: utils.withGrid(5),
-      }),
-      olive1: new Olive({
-        x: utils.withGrid(10),
-        y: utils.withGrid(6),
-      }),
-      olive2: new Olive({
-        x: utils.withGrid(5),
-        y: utils.withGrid(2),
-      }),
-      pineapple1: new Pineapple({
-        x: utils.withGrid(9),
-        y: utils.withGrid(1),
-      }),
-      pineapple2: new Pineapple({
-        x: utils.withGrid(3),
-        y: utils.withGrid(7),
-      }),
-      pepperoni1: new Pepperoni({
-        x: utils.withGrid(2),
-        y: utils.withGrid(9),
-      }),
-      pepperoni2: new Pepperoni({
-        x: utils.withGrid(5),
-        y: utils.withGrid(7),
-      }),
-      pepper1: new Pepper({
-        x: utils.withGrid(3),
-        y: utils.withGrid(8),
-      }),
-      pepper2: new Pepper({
-        x: utils.withGrid(2),
-        y: utils.withGrid(3),
-      }),
-      mushroom1: new Mushroom({
-        x: utils.withGrid(5),
-        y: utils.withGrid(5),
-      }),
-      mushroom2: new Mushroom({
-        x: utils.withGrid(5),
-        y: utils.withGrid(9),
-      }),
+
 
     },
 

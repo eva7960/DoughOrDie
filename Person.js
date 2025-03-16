@@ -5,8 +5,12 @@ class Person extends GameObject {
     this.isStanding = false;
     this.health = 100;
     this.score = 0;
+    //this.score = 1000;
     this.isHero = config.isHero || false;
+    this.armor = 0; 
     this.inventory = {};
+    //this.inventory = config.inventory || {cheese: 11, pepperoni: 11, sausage: 11, meatball: 11, mushroom: 11, pineapple: 11, olive: 11, pepper: 11, ham: 11};
+
     this.isPlayerControlled = config.isPlayerControlled || false;
 
     this.directionUpdate = {
@@ -90,6 +94,6 @@ class Person extends GameObject {
   }
 
   hit() {
-    this.health = Math.max(this.health - 10, 0);
+    this.health = Math.max(this.health - (10 - this.armor), 0);
   }
 }
