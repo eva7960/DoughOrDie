@@ -4,12 +4,15 @@ class Overworld {
         this.canvas = this.element.querySelector(".game-canvas");
         this.ctx = this.canvas.getContext("2d");
         this.map = null;
+        this.audio = new Audio("background.mp3");
+
     }
 
 
     startGameLoop() {
         const step = () => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
 
             Object.values(this.map.gameObjects).forEach(object => {
                 object.update({
@@ -22,16 +25,16 @@ class Overworld {
             Object.values(this.map.gameObjects).forEach(object => {
                 object.sprite.draw(this.ctx);
             });
+
             this.map.drawUpperImage(this.ctx);
 
-            // Update HUD
             let hero = window.OverworldMaps.Outside.gameObjects["hero"];
             window.OverworldMaps.Outside.gameObjects["hero"].score = window.OverworldMaps.Shop.gameObjects["hero"].score;
-            let timer = window.orderManager.timer;
+            let timer = window.orderManager.timer
             this.hud.update({
                 score: hero.score,
                 health: hero.health,
-                timer: window.orderManager.timer.formatTime(),
+                timer: timer.formatTime(),
             });
 
             if(hero.health === 0 || timer.remainingTime === 0) {
@@ -47,7 +50,9 @@ class Overworld {
             this.map.checkForActionCutScene();
         });
         new KeyPressListener("Space", () => {
-            this.map.shoot();
+            if(this.map.name === "Outside") {
+                this.map.shoot();
+            }
         });
     }
 
@@ -94,6 +99,26 @@ class Overworld {
         this.map = new OverworldMap(mapConfig);
         this.map.overworld = this;
         this.map.mountObjects();
+        this.audio.pause();
+        if(this.map.name === "Outside") {
+            this.audio = new Audio("outside.mp3");
+            for (let i = 0; i < 15; i++) {
+                this.map.spawnEnemy();
+            }
+            setInterval(() => {
+                if(this.map.name === "Outside") {
+                    this.map.spawnEnemy();
+                }
+            }, 8000);
+        } else {
+            this.audio = new Audio("background.mp3");
+            setInterval(() => {
+                this.map.spawnNPCAtTile();
+            }, 10000);
+        }
+        this.audio.loop = true;
+        this.audio.volume = 0.1;
+        this.audio.play();
     }
 
 
@@ -105,13 +130,19 @@ class Overworld {
         const titleScreen = new TitleScreen({
             onComplete: () => {
                 this.startGame();
+                window.orderManager.timer.start();
             }
         });
         titleScreen.init(document.body);
     }
 
     startGame() {
-        document.querySelector(".TitleScreen").remove();
+        setTimeout(() => {
+            const titleScreen = document.querySelector(".TitleScreen");
+            if (titleScreen) {
+                titleScreen.remove();
+            }
+        }, 100); // Short delay to ensure DOM updates
         this.startMap(window.OverworldMaps.Shop);
         this.bindActionInput();
         this.bindInventoryInput();
@@ -122,30 +153,37 @@ class Overworld {
 
         this.hud = new HUD({ container: this.element });
 
-        //how long until the next NPC spawns
-        setTimeout(() => {
-            this.map.spawnNPCAtTile();
+        this.upgradeMenu = new UpgradeMenu({
+            container: document.querySelector(".game-container"),
+            player: this.map.gameObjects["hero"],
+            onClose: () => {}
+          });
 
-            // Start the interval after the first NPC has spawned
-            setInterval(() => {
-                this.map.spawnNPCAtTile();
-            }, 8000);
-        }, 1000);
+        new KeyPressListener("KeyU", () => {
+          if (document.querySelector(".upgrade-menu")) {
+            window.upgradeMenu.close();
+          } else {
+            window.upgradeMenu.open();
+          }
+        });
 
-
-
+        window.upgradeMenu = this.upgradeMenu;
+        this.map.spawnNPCAtTile();
         this.startGameLoop();
     }
+
+
     showGameOverScreen() {
         // Hide HUD
         this.hud.element.style.display = "none";
 
+        // Create the GameOverScreen with the onExit function
         const gameOverScreen = new GameOverScreen({
-            onRestart: () => {
-                document.querySelector(".GameOverScreen").remove();
+            onExit: () => {
                 this.startGame();
             }
         });
         gameOverScreen.init(document.body);
     }
+
 }
