@@ -66,6 +66,7 @@ class OverworldEvent {
                         hero.score += 100;
                     }
                     window.orderManager.completeOrder(this.event.who);
+                    new Audio("cash.mp3").play();
                     messageText = `Thank you! This ${this.event.order} pizza looks amazing!`;
                 } else {
                     const missingDisplay = missingIngredients.map(i => i.charAt(0).toUpperCase() + i.slice(1));
