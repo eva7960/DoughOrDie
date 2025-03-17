@@ -267,7 +267,7 @@ class OverworldMap {
 window.OverworldMaps = {
   Shop: {
     name: "Shop",
-    lowerSrc: "./backgrounds/shop.png",
+    lowerSrc: "./backgrounds/shop2.png",
     upperSrc: "./backgrounds/hall.png",
     gameObjects: {
       hero: new Person({
