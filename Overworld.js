@@ -13,7 +13,6 @@ class Overworld {
         const step = () => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-
             Object.values(this.map.gameObjects).forEach(object => {
                 object.update({
                     arrow: this.directionInput.direction,
@@ -53,6 +52,9 @@ class Overworld {
             if(this.map.name === "Outside") {
                 this.map.shoot();
             }
+        });
+        new KeyPressListener("KeyH", () => {
+            this.showHelpScreen();
         });
     }
 
@@ -207,5 +209,20 @@ class Overworld {
         });
         gameOverScreen.init(document.body);
     }
+
+    showHelpScreen() {
+        // Hide HUD (if needed)
+        // this.hud.element.style.display = "none";
+
+        // Create the HelpScreen with an onExit function
+        const helpScreen = new HelpScreen({
+            onExit: () => {
+                this.hud.element.style.display = "block"; // Restore HUD
+            }
+        });
+
+        helpScreen.init(document.body);
+    }
+
 
 }
