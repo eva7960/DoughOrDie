@@ -360,8 +360,6 @@ window.OverworldMaps = {
         src: "./sprites/playerGun.png",
         isHero: true,
       }),
-
-
     },
 
     walls: {

@@ -125,7 +125,7 @@ class Overworld {
         this.audio.pause();
         if(this.map.name === "Outside") {
             this.audio = new Audio("outside.mp3");
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < 20; i++) {
                 this.map.spawnEnemy();
             }
             setInterval(() => {
