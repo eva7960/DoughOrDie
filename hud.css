@@ -23,3 +23,9 @@
   flex: 1;
   text-align: center;
 }
+
+.hud-help {
+  flex: 1;
+  text-align: center;
+  font-size: 6px;
+}
