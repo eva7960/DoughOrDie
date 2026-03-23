@@ -29,5 +29,3 @@ An 8-bit style web game where you run a pizza shop and shoot pizza ingredients t
 ## How to Run
 Just click this link! https://eva7960.github.io/DoughOrDie/
 
-## 👤 Author
-**eva7960** — [GitHub Profile](https://github.com/eva7960)
