@@ -11,6 +11,9 @@ An 8-bit style web game where you run a pizza shop and shoot pizza ingredients t
 -WASD to move
 -Enter to talk to customers
 -Space to shoot
+-H to open the help menu
+-I to open your inventory
+-U to open the upgrades menu
 
 ## Built With
 - JavaScript (87.5%)
